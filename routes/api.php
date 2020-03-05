@@ -1,6 +1,6 @@
 <?php
 
-use App\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,7 +20,4 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-Route::get("/users", function() {
-    $users = factory(User::class, 100)->make();
-    return $users;
-});
+Route::apiResource("/users", "Admin\Api\UserController");

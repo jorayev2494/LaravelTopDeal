@@ -22,6 +22,9 @@ class CreateUsersTable extends Migration
             $table->string('phone', 100)->nullable();
             $table->string('fax', 100)->nullable();
             
+            $table->string('country', 100)->nullable()->default("Ukraine");
+            
+            
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
