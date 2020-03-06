@@ -17,5 +17,13 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-// Route::get('/{any}', 'ApplicationController')->where('any', '.*');
-Route::view('/{any}', 'admin')->where('any', '.*');
+
+// Route::get('/admin/{any}', 'ApplicationController')->where('any', '.*');
+// Route::view('/{any}', 'admin')->where('any', '.*');
+
+// Admin
+Route::group(['prefix' => 'admin'], function() {
+    Route::view('/{any?}', 'admin')->where('any', '.*');
+});
+    
+Route::get('/', "IndexController");

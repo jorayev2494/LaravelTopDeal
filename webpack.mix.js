@@ -61,3 +61,10 @@ mix.js('resources/js/app.js', 'public/admin/js')
 //     });
 // }   
 // #endregion
+
+
+
+// #region Public Assets
+mix.js('resources/js/public.js', 'public/public/js/public.js');
+    // .sass('resources/sass/app.scss', 'public/css');
+// #endregion
