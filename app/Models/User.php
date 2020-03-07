@@ -57,7 +57,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        "dob"               => \App\Casts\UserDobCast::class,
+        "dob"               => UserDobCast::class,
         "created_at"        => CarbonDateTimeCast::class,
         "updated_at"        => CarbonDateTimeCast::class,
         "email_verified_at" => CarbonDateTimeCast::class,

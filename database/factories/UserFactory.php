@@ -53,7 +53,7 @@ $factory->define(User::class, function (Faker $faker) {
         'last_name'         =>  $faker->lastName,
         'email'             =>  $email,
         'phone'             =>  $faker->e164PhoneNumber,
-        "dob"               =>  $dateNow->subYears(rand(1, 10)),
+        "dob"               =>  $dateNow->subYears(rand(1, 10))->subMonths(rand(1, 10)),
         "gender"            =>  $faker->boolean ? "male" : "female",
         "contact_options"   =>  $contactOptions,
         'country_id'        =>  $activeCountries[rand(0, $activeCountries->count() - 1)],
