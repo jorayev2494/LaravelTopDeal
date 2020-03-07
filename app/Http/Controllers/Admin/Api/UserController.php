@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -14,7 +15,12 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return User::all();
+        
+        // return [
+        //     "status" => 200,
+        //     "data" => User::all(),
+        // ];
     }
 
     /**
@@ -36,7 +42,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        return User::find($id) ?? new User();
     }
 
     /**
@@ -48,7 +54,12 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $updateUser = User::find($id);
+
+        if ($updateUser)
+            $updateUser->update($updateUser);
+
+        return $updateUser;
     }
 
     /**
@@ -59,6 +70,17 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $deleteUser = User::find($id);
+
+        if (!$deleteUser) 
+            return;
+
+        $deleteUser->delete();
+
+        return [
+            "status" => 200,
+            "data" => null,
+            "message" => "success"
+        ];
     }
 }

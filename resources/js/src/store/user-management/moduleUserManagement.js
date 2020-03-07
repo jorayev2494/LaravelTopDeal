@@ -14,11 +14,10 @@ import actions from './moduleUserManagementActions.js'
 import getters from './moduleUserManagementGetters.js'
 
 export default {
-  isRegistered: false,
-  namespaced: true,
-  state: state,
-  mutations: mutations,
-  actions: actions,
-  getters: getters
+    isRegistered: false,
+    namespaced: true,
+    state: state,
+    mutations: mutations,
+    actions: actions,
+    getters: getters
 }
-

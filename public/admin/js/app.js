@@ -115681,7 +115681,7 @@ var data = {
   users: [{
     "id": 268,
     "username": "adoptionism744",
-    "avatar": __webpack_require__(/*! @assets/images/portrait/small/avatar-s-3.jpg */ "./resources/assets/images/portrait/small/avatar-s-3.jpg"),
+    "avatar": __webpack_require__(/*! @assets/images/portrait/small/avatar-s-16.jpg */ "./resources/assets/images/portrait/small/avatar-s-16.jpg"),
     "email": "angelo@sashington.com",
     "name": "Angelo Sashington",
     "dob": "28 January 1998",

@@ -20,4 +20,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-Route::apiResource("/users", "Admin\Api\UserController");
+
+Route::group(['prefix' => 'admin', 'as' => "admin."], function() {
+    Route::apiResource("/users", "Admin\Api\UserController");
+});

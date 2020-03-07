@@ -22,26 +22,40 @@ export default {
     // },
 
     fetchUsers({commit}) {
-        return new Promise((resolve, reject) => {
-            axios.get("/api/users").then((response) => {
+        // return new Promise((resolve, reject) => {
+        //     axios.get(`/api/user-management/users`).then((response) => {
+        //         resolve(response)
+        //     })
+        //     .catch((error) => {
+        //         reject(error)
+        //     })
+        // })
+
+        // return new Promise((resolve, reject) => {
+            axios.get("/api/admin/users").then((response) => {
                 commit('SET_USERS', response.data)
-                resolve(response)
+                // resolve(response)
             })
             .catch((error) => {
-                reject(error)
-            })
-        })
+                // reject(error)
+                console.error('Server Error: ', error);
+            });
+        // })
     },
 
     fetchUser({}, userId) {
+        // axios.get(`/api/admin/users/${userId}`).then((response) => {
+        // }).catch((err) => {
+        // });
+
         return new Promise((resolve, reject) => {
-            axios.get(`/api/user-management/users/${userId}`).then((response) => {
+            axios.get(`/api/admin/users/${userId}`).then((response) => {
                 resolve(response)
             })
             .catch((error) => {
                 reject(error)
             })
-        })
+        });
 
         // return new Promise((resolve, reject) => {
         //     axios.get(`/api/users/${userId}`).then((response) => {

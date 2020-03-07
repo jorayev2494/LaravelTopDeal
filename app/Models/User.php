@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Casts\JsonCast;
+use App\Casts\UserDobCast;
+use CarbonDateTimeCast;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -10,17 +13,30 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    // Passwords
+    public const ADMIN_PASSWORD     = 476674;
+    public const DEFAULT_PASSWORD   = "laravel";
+
+    // 
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
+        'avatar',
+        'login',
         'name',
         'last_name',
         'email',
         'phone',
-        'country',
+        'dob',
+        'gender',
+        'country_id',
+        'contact_options',
+        'location',
+        'fax',
         'password',
     ];
 
@@ -30,7 +46,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
+        "country_id"
     ];
 
     /**
@@ -39,6 +57,22 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        "dob"               => \App\Casts\UserDobCast::class,
+        "created_at"        => CarbonDateTimeCast::class,
+        "updated_at"        => CarbonDateTimeCast::class,
+        "email_verified_at" => CarbonDateTimeCast::class,
+        "contact_options"   => JsonCast::class,
+        "location"          => JsonCast::class,
+        "social_links"      => "array",
     ];
+
+    protected $with = ["country"];
+
+    #region RelationShips
+    public function country()
+    {
+        return $this->hasOne('App\Models\Country', 'id', 'country_id');
+    }
+    #endregion
+
 }

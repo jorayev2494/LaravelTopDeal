@@ -83,7 +83,9 @@ Vue.use(VeeValidate);
 // })
 
 // Vuejs - Vue wrapper for hammerjs
-import { VueHammer } from 'vue2-hammer'
+import {
+    VueHammer
+} from 'vue2-hammer'
 Vue.use(VueHammer)
 
 // PrismJS

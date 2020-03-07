@@ -16,6 +16,6 @@ class UsersTableSeeder extends Seeder
         // factory(User::class, "admin")->create();
 
         // Add Users
-        factory(User::class, 50)->create();
+        factory(User::class, 30)->create();
     }
 }

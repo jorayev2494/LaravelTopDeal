@@ -9,11 +9,20 @@
 
 
 export default {
-  SET_USERS(state, users) {
-    state.users = users
-  },
-  REMOVE_RECORD(state, itemId) {
-      const userIndex = state.users.findIndex((u) => u.id == itemId)
-      state.users.splice(userIndex, 1)
-  },
+    /**
+     * Set Users in State
+     * @param {*} state Vuex State
+     * @param {*} users Users
+     */
+    SET_USERS(state, users) {
+        // state.users = users;
+
+        users.forEach(user => user.country = user.country.slug);
+
+        state.users = users;
+    },
+    REMOVE_RECORD(state, itemId) {
+        const userIndex = state.users.findIndex((u) => u.id == itemId)
+        state.users.splice(userIndex, 1)
+    },
 }
