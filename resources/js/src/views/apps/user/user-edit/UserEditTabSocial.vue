@@ -76,20 +76,26 @@
                 data_local: JSON.parse(JSON.stringify(this.data)),
             }
         },
-        computed: {
-            validateForm() {
-                return !this.errors.any()
-            }
-        },
         methods: {
             save_changes() {
-                if (!this.validateForm) return
-
-                // Here will go your API call for updating data
-                // You can get data in "this.data_local"
+                this.$store.dispatch("userManagement/socialUpdate", this.data_local)
+                    .then(()   => { this.showUpdateSuccess() })
+                    .catch(err => { console.error(err)       })
             },
             reset_data() {
                 this.data_local = Object.assign({}, this.data)
+            },
+            showUpdateSuccess() {
+                this.$vs.notify({
+                    color: 'success',
+                    title: 'User Updated',
+                    text: 'The selected user was successfully updated'
+                })
+            }
+        },
+        computed: {
+            validateForm() {
+                return !this.errors.any()
             }
         },
     }

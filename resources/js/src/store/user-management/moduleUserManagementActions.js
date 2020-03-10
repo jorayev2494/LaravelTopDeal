@@ -67,15 +67,76 @@ export default {
         // })
     },
 
+    /**
+     * Update User Account
+     * @param {*} param0 
+     * @param {*} user 
+     */
+    accountUpdate({commit}, user) {
+        user.update = "account";
+        delete user.avatar;
+        axios.post(`/api/admin/users/${user.id}`, user).then((response) => {
+            console.log("Server Response: ", response);
+        }).catch((err) => { });
+    },
+
+    /**
+     * 
+     * @param {Upload User Account with Avatar} param0 
+     * @param {*} data 
+     */
+    accountUpdateFormData({commit}, data) {
+        // user.update = "account";
+        data.formData.set("update", "account");
+        // Config Header ContentType
+        var headers = {'Content-Type': 'multipart/form-data' };
+        //  Send in Server: FormData
+        axios.post(`/api/admin/users/${data.user.id}`, data.formData, headers).then((response) => {
+            console.log("Server Response from Form Data: ", response);
+        }).catch((err) => { });
+    },
+
+    /**
+     * Update User Information
+     * @param {*} param0 
+     * @param {*} user 
+     */
+    informationUpdate({commit}, user) {
+        user.update = "information";
+        
+        axios.put(`/api/admin/users/${user.id}`, user).then((response) => {
+            console.log("User Information Updates: ", response.data);
+        }).catch((err) => { });
+    },
+
+    /**
+     * Update User Social
+     * @param {*} param0 
+     * @param {*} user 
+     */
+    socialUpdate({commit}, user) {
+        user.update = "social";
+        
+        axios.put(`/api/admin/users/${user.id}`, user).then((response) => {
+            console.log("User Information Social: ", response.data);
+        }).catch((err) => { });
+    },
+
     removeRecord({commit}, userId) {
-        return new Promise((resolve, reject) => {
-            axios.delete(`/api/user-management/users/${userId}`).then((response) => {
+        // return new Promise((resolve, reject) => {
+        //     axios.delete(`/api/user-management/users/${userId}`).then((response) => {
+        //         commit('REMOVE_RECORD', userId)
+        //         resolve(response)
+        //     })
+        //     .catch((error) => {
+        //         reject(error)
+        //     })
+        // })
+
+        // return new Promise((resolve, reject) => {
+            axios.delete(`/api/admin/users/${userId}`).then((response) => {
                 commit('REMOVE_RECORD', userId)
-                resolve(response)
-            })
-            .catch((error) => {
-                reject(error)
-            })
-        })
+            }).catch((error) => { })
+        // })
     }
 }

@@ -7,7 +7,6 @@ class CarbonDateTimeCast implements CastsAttributes
 {
     public function get($model, string $key, $value, array $attributes)
     {
-        dd($value);
         return Carbon::parse($value)->format("d M Y");
     }
 

@@ -71,7 +71,7 @@
                     <!-- /Information - Col 2 -->
                     <div class="vx-col w-full flex" id="account-manage-buttons">
                         <vs-button icon-pack="feather" icon="icon-edit" class="mr-4"
-                            :to="{name: 'app-user-edit', params: { userId: $route.params.userId }}">Edit</vs-button>
+                            :to="{ name: 'admin-app-user-edit', params: { userId: $route.params.userId } }">Edit</vs-button>
                         <vs-button type="border" color="danger" icon-pack="feather" icon="icon-trash"
                             @click="confirmDeleteRecord">Delete</vs-button>
                     </div>
@@ -115,7 +115,7 @@
                 <div class="vx-col lg:w-1/2 w-full">
                     <vx-card title="Social Links" class="mb-base">
                         <table>
-                            <!-- <tr>
+                            <tr>
                                 <td class="font-semibold">Twitter</td>
                                 <td>{{ user_data.social_links.twitter }}</td>
                             </tr>
@@ -138,7 +138,7 @@
                             <tr>
                                 <td class="font-semibold">Slack</td>
                                 <td>{{ user_data.social_links.slack }}</td>
-                            </tr> -->
+                            </tr>
                         </table>
                     </vx-card>
                 </div>
@@ -199,7 +199,7 @@
                     type: 'confirm',
                     color: 'danger',
                     title: `Confirm Delete`,
-                    text: `You are about to delete "${this.user_data.username}"`,
+                    text: `You are about to delete "${this.user_data.login}"`,
                     accept: this.deleteRecord,
                     acceptText: "Delete"
                 })
@@ -209,12 +209,12 @@
                 this.$router.push({
                     name: 'app-user-list'
                 });
-                this.showDeleteSuccess()
+                // this.showDeleteSuccess()
 
                 /* UnComment below lines for enabling true flow if deleting user */
-                // this.$store.dispatch("userManagement/removeRecord", this.user_data.id)
-                //   .then(()   => { this.$router.push({name:'app-user-list'}); this.showDeleteSuccess() })
-                //   .catch(err => { console.error(err)       })
+                this.$store.dispatch("userManagement/removeRecord", this.user_data.id)
+                    .then(()   => { this.$router.push({ name: 'admin-app-user-list' }); this.showDeleteSuccess() })
+                    .catch(err => { console.error(err)       })
             },
             showDeleteSuccess() {
                 this.$vs.notify({

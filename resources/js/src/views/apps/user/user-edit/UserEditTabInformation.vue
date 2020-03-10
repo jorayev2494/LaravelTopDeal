@@ -30,7 +30,7 @@
                     </div>
 
                     <vs-input class="w-full mt-4" label="Phone" v-model="data_local.phone"
-                        v-validate="{regex: '^\\+?([0-9]+)$' }" name="phone" />
+                        v-validate="{ regex: '^\\+?([0-9]+)$' }" name="phone" />
                     <span class="text-danger text-sm" v-show="errors.has('phone')">{{ errors.first('phone') }}</span>
 
                     <vs-input class="w-full mt-4" label="Website" v-model="data_local.website"
@@ -68,7 +68,7 @@
                                 Message
                             </vs-checkbox>
 
-                            <vs-checkbox v-model="data_local.contact_options" vs-value="Phone" class=" mb-2">
+                            <vs-checkbox v-model="data_local.contact_options" vs-value="phone" class=" mb-2">
                                 Phone
                             </vs-checkbox>
                         </div>
@@ -180,14 +180,25 @@
         },
         methods: {
             save_changes() {
-                alert(event.target);
-                if (!this.validateForm) return
+                // if (!this.validateForm) return
+
+                this.$store.dispatch("userManagement/informationUpdate", this.data_local)
+                    .then(()   => { this.showUpdateSuccess() })
+                    .catch(err => { console.error(err)       })
+
 
                 // Here will go your API call for updating data
                 // You can get data in "this.data_local"
             },
             reset_data() {
                 this.data_local = Object.assign({}, this.data)
+            },
+            showUpdateSuccess() {
+                this.$vs.notify({
+                    color: 'success',
+                    title: 'User Updated',
+                    text: 'The selected user was successfully deleted'
+                })
             }
         },
         computed: {
@@ -199,9 +210,6 @@
             vSelect,
             flatPickr
         },
-        mounted() {
-            console.log("dawd: ", this.data_local);
-        }
     }
 
 </script>

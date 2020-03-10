@@ -32,7 +32,7 @@ class CreateUsersTable extends Migration
             
             $table->json('contact_options')->nullable();
             
-            $table->string('website', 255)->nullable();
+            $table->string('website', 250)->nullable();
             
             $table->string('fax', 100)->nullable();
             

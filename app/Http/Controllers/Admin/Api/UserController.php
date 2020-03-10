@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers\Admin\Api;
 
+use App\Http\Controllers\Admin\Traits\UserUpdateTrait;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Users\UserAccountUpdateRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+
+    use UserUpdateTrait;
+
     /**
      * Display a listing of the resource.
      *
@@ -52,14 +57,22 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        $updateUser = User::find($id);
-
-        if ($updateUser)
-            $updateUser->update($updateUser);
-
-        return $updateUser;
+        switch ($request->update) {
+            case 'account':
+                return $this->updateAccount($request, $user);
+                break;
+            case 'information':
+                return $this->updateInformation($request, $user);
+                break;
+            case 'social':
+                return $this->updateSocial($request, $user)->social_links;
+                break;
+            default:
+                return;
+                break;
+        }
     }
 
     /**

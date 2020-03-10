@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::group(['prefix' => 'admin', 'as' => "admin."], function() {
-    Route::apiResource("/users", "Admin\Api\UserController");
+Route::group(['prefix' => 'admin', "namespace" => "Admin\Api", "as" => "admin."], function() {
+    Route::apiResource("/users", "UserController");
+    Route::post("/users/{user}", "UserController@update");                                          // Update with Avatar
 });

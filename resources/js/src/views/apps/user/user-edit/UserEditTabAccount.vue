@@ -14,18 +14,17 @@
         <div class="vx-row">
             <div class="vx-col w-full">
                 <div class="flex items-start flex-col sm:flex-row">
-                    <img :src="data.avatar" class="mr-8 rounded h-24 w-24" />
-                    <!-- <vs-avatar :src="data.avatar" size="80px" class="mr-4" /> -->
+                    <!-- <img :src="data_local.avatar" class="mr-8 rounded h-24 w-24" /> -->
+                    <vs-avatar :src="data_local.avatar" size="80px" class="mr-4" />
                     <div>
-                        <p class="text-lg font-medium mb-2 mt-4 sm:mt-0">{{ data.name  }}</p>
-                        <input type="file" class="hidden" ref="update_avatar_input" @change="update_avatar"
-                            accept="image/*">
+                        <p class="text-lg font-medium mb-2 mt-4 sm:mt-0">{{ data_local.name  }}</p>
+                        <input type="file" class="hidden" ref="update_avatar_input" @change="avatarChanged($event)" accept="image/*">
 
                         <!-- Toggle comment of below buttons as one for actual flow & currently shown is only for demo -->
-                        <vs-button class="mr-4 mb-4">Change Avatar</vs-button>
+                        <vs-button class="mr-4 mb-4" @click="update_avatar()">Change Avatar</vs-button>
                         <!-- <vs-button type="border" class="mr-4" @click="$refs.update_avatar_input.click()">Change Avatar</vs-button> -->
 
-                        <vs-button type="border" color="danger">Remove Avatar</vs-button>
+                        <vs-button type="border" v-on:click="remove_avatar()" color="danger">Remove Avatar</vs-button>
                     </div>
                 </div>
             </div>
@@ -109,7 +108,8 @@
         <div class="vx-row">
             <div class="vx-col w-full">
                 <div class="mt-8 flex flex-wrap items-center justify-end">
-                    <vs-button class="ml-auto mt-2" @click="save_changes" :disabled="!validateForm">Save Changes
+                    <vs-button class="ml-auto mt-2" @click="save_changes" :disabled="!validateForm">
+                        Save Changes
                     </vs-button>
                     <vs-button class="ml-4 mt-2" type="border" color="warning" @click="reset_data">Reset</vs-button>
                 </div>
@@ -133,7 +133,8 @@
 
                 data_local: JSON.parse(JSON.stringify(this.data)),
 
-                statusOptions: [{
+                statusOptions: [
+                    {
                         label: "Active",
                         value: "active"
                     },
@@ -146,7 +147,8 @@
                         value: "deactivated"
                     },
                 ],
-                roleOptions: [{
+                roleOptions: [
+                    {
                         label: "Admin",
                         value: "admin"
                     },
@@ -159,6 +161,8 @@
                         value: "staff"
                     },
                 ],
+                formData: new FormData(),
+                isUploadedAvatar: false,
             }
         },
         methods: {
@@ -166,19 +170,64 @@
                 return str.slice(0, 1).toUpperCase() + str.slice(1, str.length)
             },
             save_changes() {
-                if (!this.validateForm) return
+                // if (!this.validateForm) return
+
+                // this.$store.dispatch("userManagement/removeRecord", this.params.data.id)
+                //     .then(()   => { this.showDeleteSuccess() })
+                //     .catch(err => { console.error(err)       })
+
+                if (this.isUploadedAvatar) 
+                {
+                    this.formData.set("name", this.data_local.name);
+                    this.formData.set("login", this.data_local.login);
+                    this.formData.set("email", this.data_local.email);
+
+                    var params = {
+                        user: this.data,
+                        formData: this.formData,
+                    };
+
+                    this.$store.dispatch("userManagement/accountUpdateFormData", params)
+                        .then(()   => { this.showUpdateSuccess() })
+                        .catch(err => { console.error(err)       })
+                } 
+                else
+                {
+                    this.$store.dispatch("userManagement/accountUpdate", this.data_local)
+                        .then(()   => { this.showUpdateSuccess() })
+                        .catch(err => { console.error(err)       })
+                }
 
                 // Here will go your API call for updating data
                 // You can get data in "this.data_local"
 
             },
+            showUpdateSuccess() {
+                this.$vs.notify({
+                    color:  'success',
+                    title:  'User Updated',
+                    text:   'The selected user was successfully deleted'
+                })
+            },
+            update_avatar() { 
+                this.$refs["update_avatar_input"].click();
+            },
+            avatarChanged(event) {
+                if (event.target.files.length) {
+                    var file = event.target.files[0];
+                    this.data_local.avatar = URL.createObjectURL(file);
+
+                    this.formData.append("avatar", file);
+                    this.isUploadedAvatar = true;
+                }
+            },
+            remove_avatar() {
+                this.data_local.avatar = this.data.avatar; 
+                this.isUploadedAvatar = false;
+            },
             reset_data() {
                 this.data_local = JSON.parse(JSON.stringify(this.data))
-            },
-            update_avatar() {
-                // You can update avatar Here
-                // For reference you can check dataList example
-                // We haven't integrated it here, because data isn't saved in DB
+                this.isUploadedAvatar = false;
             }
         },
         computed: {

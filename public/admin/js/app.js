@@ -118313,7 +118313,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       }
     }, {
       path: '/admin/apps/eCommerce/checkout',
-      name: 'ecommerce-checkout',
+      name: 'admin-ecommerce-checkout',
       component: function component() {
         return Promise.all(/*! import() */[__webpack_require__.e(15), __webpack_require__.e(87)]).then(__webpack_require__.bind(null, /*! ./views/apps/eCommerce/ECommerceCheckout.vue */ "./resources/js/src/views/apps/eCommerce/ECommerceCheckout.vue"));
       },
@@ -118346,7 +118346,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       redirect: '/apps/eCommerce/item/5546604'
     }, {
       path: '/admin/apps/eCommerce/item/:item_id',
-      name: 'ecommerce-item-detail-view',
+      name: 'admin-ecommerce-item-detail-view',
       component: function component() {
         return Promise.all(/*! import() */[__webpack_require__.e(14), __webpack_require__.e(8), __webpack_require__.e(18), __webpack_require__.e(93)]).then(__webpack_require__.bind(null, /*! ./views/apps/eCommerce/ECommerceItemDetailView.vue */ "./resources/js/src/views/apps/eCommerce/ECommerceItemDetailView.vue"));
       },
@@ -118371,7 +118371,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       }
     }, {
       path: '/admin/apps/user/user-list',
-      name: 'app-user-list',
+      name: 'admin-app-user-list',
       component: function component() {
         return Promise.all(/*! import() */[__webpack_require__.e(6), __webpack_require__.e(16), __webpack_require__.e(38)]).then(__webpack_require__.bind(null, /*! @/views/apps/user/user-list/UserList.vue */ "./resources/js/src/views/apps/user/user-list/UserList.vue"));
       },
@@ -118390,7 +118390,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       }
     }, {
       path: '/admin/apps/user/user-view/:userId',
-      name: 'app-user-view',
+      name: 'admin-app-user-view',
       component: function component() {
         return __webpack_require__.e(/*! import() */ 84).then(__webpack_require__.bind(null, /*! @/views/apps/user/UserView.vue */ "./resources/js/src/views/apps/user/UserView.vue"));
       },
@@ -118409,7 +118409,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       }
     }, {
       path: '/admin/apps/user/user-edit/:userId',
-      name: 'app-user-edit',
+      name: 'admin-app-user-edit',
       component: function component() {
         return Promise.all(/*! import() */[__webpack_require__.e(4), __webpack_require__.e(59)]).then(__webpack_require__.bind(null, /*! @/views/apps/user/user-edit/UserEdit.vue */ "./resources/js/src/views/apps/user/user-edit/UserEdit.vue"));
       },
@@ -118431,7 +118431,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     // =============================================================================
     {
       path: '/admin/ui-elements/data-list/list-view',
-      name: 'data-list-list-view',
+      name: 'admin-data-list-list-view',
       component: function component() {
         return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(9), __webpack_require__.e(97)]).then(__webpack_require__.bind(null, /*! @/views/ui-elements/data-list/list-view/DataListListView.vue */ "./resources/js/src/views/ui-elements/data-list/list-view/DataListListView.vue"));
       },
@@ -118450,7 +118450,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       }
     }, {
       path: '/admin/ui-elements/data-list/thumb-view',
-      name: 'data-list-thumb-view',
+      name: 'admin-data-list-thumb-view',
       component: function component() {
         return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(9), __webpack_require__.e(98)]).then(__webpack_require__.bind(null, /*! @/views/ui-elements/data-list/thumb-view/DataListThumbView.vue */ "./resources/js/src/views/ui-elements/data-list/thumb-view/DataListThumbView.vue"));
       },
@@ -118469,7 +118469,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       }
     }, {
       path: '/admin/ui-elements/grid/vuesax',
-      name: 'grid-vuesax',
+      name: 'admin-grid-vuesax',
       component: function component() {
         return __webpack_require__.e(/*! import() */ 29).then(__webpack_require__.bind(null, /*! @/views/ui-elements/grid/vuesax/GridVuesax.vue */ "./resources/js/src/views/ui-elements/grid/vuesax/GridVuesax.vue"));
       },
@@ -118488,7 +118488,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       }
     }, {
       path: '/admin/ui-elements/grid/tailwind',
-      name: 'grid-tailwind',
+      name: 'admin-grid-tailwind',
       component: function component() {
         return __webpack_require__.e(/*! import() */ 41).then(__webpack_require__.bind(null, /*! @/views/ui-elements/grid/tailwind/GridTailwind.vue */ "./resources/js/src/views/ui-elements/grid/tailwind/GridTailwind.vue"));
       },
@@ -118507,7 +118507,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       }
     }, {
       path: '/admin/ui-elements/colors',
-      name: 'colors',
+      name: 'admin-colors',
       component: function component() {
         return __webpack_require__.e(/*! import() */ 25).then(__webpack_require__.bind(null, /*! ./views/ui-elements/colors/Colors.vue */ "./resources/js/src/views/ui-elements/colors/Colors.vue"));
       },
@@ -118524,7 +118524,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       }
     }, {
       path: '/admin/ui-elements/card/basic',
-      name: 'basic-cards',
+      name: 'admin-basic-cards',
       component: function component() {
         return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(2), __webpack_require__.e(74)]).then(__webpack_require__.bind(null, /*! ./views/ui-elements/card/CardBasic.vue */ "./resources/js/src/views/ui-elements/card/CardBasic.vue"));
       },
@@ -118543,7 +118543,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       }
     }, {
       path: '/admin/ui-elements/card/statistics',
-      name: 'statistics-cards',
+      name: 'admin-statistics-cards',
       component: function component() {
         return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(85)]).then(__webpack_require__.bind(null, /*! ./views/ui-elements/card/CardStatistics.vue */ "./resources/js/src/views/ui-elements/card/CardStatistics.vue"));
       },
@@ -118562,7 +118562,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       }
     }, {
       path: '/admin/ui-elements/card/analytics',
-      name: 'analytics-cards',
+      name: 'admin-analytics-cards',
       component: function component() {
         return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(3), __webpack_require__.e(96)]).then(__webpack_require__.bind(null, /*! ./views/ui-elements/card/CardAnalytics.vue */ "./resources/js/src/views/ui-elements/card/CardAnalytics.vue"));
       },

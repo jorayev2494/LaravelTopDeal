@@ -80,8 +80,7 @@
                 <!-- ACTION - DROPDOWN -->
                 <vs-dropdown vs-trigger-click class="cursor-pointer">
 
-                    <div
-                        class="p-3 shadow-drop rounded-lg d-theme-dark-light-bg cursor-pointer flex items-end justify-center text-lg font-medium w-32">
+                    <div class="p-3 shadow-drop rounded-lg d-theme-dark-light-bg cursor-pointer flex items-end justify-center text-lg font-medium w-32">
                         <span class="mr-2 leading-none">Actions</span>
                         <feather-icon icon="ChevronDownIcon" svgClasses="h-4 w-4" />
                     </div>

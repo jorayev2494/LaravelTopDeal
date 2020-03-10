@@ -145,7 +145,7 @@ const router = new Router({
                 },
                 {
                     path: '/admin/apps/eCommerce/checkout',
-                    name: 'ecommerce-checkout',
+                    name: 'admin-ecommerce-checkout',
                     component: () => import('./views/apps/eCommerce/ECommerceCheckout.vue'),
                     meta: {
                         breadcrumb: [
@@ -172,7 +172,7 @@ const router = new Router({
                 },
                 {
                     path: '/admin/apps/eCommerce/item/:item_id',
-                    name: 'ecommerce-item-detail-view',
+                    name: 'admin-ecommerce-item-detail-view',
                     component: () => import('./views/apps/eCommerce/ECommerceItemDetailView.vue'),
                     meta: {
                         breadcrumb: [
@@ -188,7 +188,7 @@ const router = new Router({
                 },
                 {
                     path: '/admin/apps/user/user-list',
-                    name: 'app-user-list',
+                    name: 'admin-app-user-list',
                     component: () => import('@/views/apps/user/user-list/UserList.vue'),
                     meta: {
                         breadcrumb: [
@@ -202,7 +202,7 @@ const router = new Router({
                 },
                 {
                     path: '/admin/apps/user/user-view/:userId',
-                    name: 'app-user-view',
+                    name: 'admin-app-user-view',
                     component: () => import('@/views/apps/user/UserView.vue'),
                     meta: {
                         breadcrumb: [
@@ -216,7 +216,7 @@ const router = new Router({
                 },
                 {
                     path: '/admin/apps/user/user-edit/:userId',
-                    name: 'app-user-edit',
+                    name: 'admin-app-user-edit',
                     component: () => import('@/views/apps/user/user-edit/UserEdit.vue'),
                     meta: {
                         breadcrumb: [
@@ -233,7 +233,7 @@ const router = new Router({
         // =============================================================================
                 {
                     path: '/admin/ui-elements/data-list/list-view',
-                    name: 'data-list-list-view',
+                    name: 'admin-data-list-list-view',
                     component: () => import('@/views/ui-elements/data-list/list-view/DataListListView.vue'),
                     meta: {
                         breadcrumb: [
@@ -247,7 +247,7 @@ const router = new Router({
                 },
                 {
                     path: '/admin/ui-elements/data-list/thumb-view',
-                    name: 'data-list-thumb-view',
+                    name: 'admin-data-list-thumb-view',
                     component: () => import('@/views/ui-elements/data-list/thumb-view/DataListThumbView.vue'),
                     meta: {
                         breadcrumb: [
@@ -261,7 +261,7 @@ const router = new Router({
                 },
                 {
                     path: '/admin/ui-elements/grid/vuesax',
-                    name: 'grid-vuesax',
+                    name: 'admin-grid-vuesax',
                     component: () => import('@/views/ui-elements/grid/vuesax/GridVuesax.vue'),
                     meta: {
                         breadcrumb: [
@@ -275,7 +275,7 @@ const router = new Router({
                 },
                 {
                     path: '/admin/ui-elements/grid/tailwind',
-                    name: 'grid-tailwind',
+                    name: 'admin-grid-tailwind',
                     component: () => import('@/views/ui-elements/grid/tailwind/GridTailwind.vue'),
                     meta: {
                         breadcrumb: [
@@ -289,7 +289,7 @@ const router = new Router({
                 },
                 {
                     path: '/admin/ui-elements/colors',
-                    name: 'colors',
+                    name: 'admin-colors',
                     component: () => import('./views/ui-elements/colors/Colors.vue'),
                     meta: {
                         breadcrumb: [
@@ -302,7 +302,7 @@ const router = new Router({
                 },
                 {
                     path: '/admin/ui-elements/card/basic',
-                    name: 'basic-cards',
+                    name: 'admin-basic-cards',
                     component: () => import('./views/ui-elements/card/CardBasic.vue'),
                     meta: {
                         breadcrumb: [
@@ -316,7 +316,7 @@ const router = new Router({
                 },
                 {
                     path: '/admin/ui-elements/card/statistics',
-                    name: 'statistics-cards',
+                    name: 'admin-statistics-cards',
                     component: () => import('./views/ui-elements/card/CardStatistics.vue'),
                     meta: {
                         breadcrumb: [
@@ -330,7 +330,7 @@ const router = new Router({
                 },
                 {
                     path: '/admin/ui-elements/card/analytics',
-                    name: 'analytics-cards',
+                    name: 'admin-analytics-cards',
                     component: () => import('./views/ui-elements/card/CardAnalytics.vue'),
                     meta: {
                         breadcrumb: [
