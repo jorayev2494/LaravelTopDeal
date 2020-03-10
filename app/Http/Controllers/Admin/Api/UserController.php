@@ -88,7 +88,9 @@ class UserController extends Controller
         if (!$deleteUser) 
             return;
 
-        $deleteUser->delete();
+        $isDeleted = $this->removeAvatar($deleteUser->avatar);    
+        if ($isDeleted)
+            $deleteUser->delete();
 
         return [
             "status" => 200,
