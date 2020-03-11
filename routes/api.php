@@ -23,5 +23,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'admin', "namespace" => "Admin\Api", "as" => "admin."], function() {
     Route::apiResource("/users", "UserController");
-    Route::post("/users/{user}", "UserController@update");                                          // Update with Avatar
+    Route::post("/users/{user}", ["uses" => "UserController@update", "as" => "users.account"]);                                          // Update with Avatar
 });
+
+Route::post("/register", ["uses" => "Auth\RegisterController@register", "as" => "register"]);
+Route::post("/login", ["uses" => "Auth\LoginController@login", "as" => "login"]);
+// Route::group(['airlock' => 'auth', 'middleware' => 'auth:airlock', 'namespace' => 'Auth'], function() {
+    // Route::post("/register", ["uses" => "RegisterController@register", "as" => ".register"]);
+// });
+

@@ -36,8 +36,8 @@ class CreateUsersTable extends Migration
             
             $table->string('fax', 100)->nullable();
             
-            $table->json('location');
-            $table->json('social_links');
+            $table->json('location')->nullable();
+            $table->json('social_links')->nullable();
             
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
