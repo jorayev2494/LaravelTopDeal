@@ -15,7 +15,7 @@
         </div>
         <div class="flex flex-wrap justify-between mb-3">
             <vs-button type="border" @click="registerUser">Register</vs-button>
-            <vs-button :disabled="!validateForm" @click="loginJWT">Login</vs-button>
+            <vs-button :disabled="!validateForm" @click="loginAirlock()">Login</vs-button>
         </div>
     </div>
 </template>
@@ -26,7 +26,7 @@
             return {
                 email: 'admin@admin.com',
                 password: 'adminadmin',
-                checkbox_remember_me: false
+                checkbox_remember_me: !false
             }
         },
         computed: {
@@ -54,7 +54,37 @@
                 }
                 return true
             },
-            loginJWT() {
+            // loginJWT() {
+
+            //     if (!this.checkLogin()) return
+
+            //     // Loading
+            //     this.$vs.loading()
+
+            //     const payload = {
+            //         checkbox_remember_me: this.checkbox_remember_me,
+            //         userDetails: {
+            //             email: this.email,
+            //             password: this.password
+            //         }
+            //     }
+
+            //     this.$store.dispatch('auth/loginJWT', payload)
+            //         .then(() => {
+            //             this.$vs.loading.close()
+            //         })
+            //         .catch(error => {
+            //             this.$vs.loading.close()
+            //             this.$vs.notify({
+            //                 title: 'Error',
+            //                 text: error.message,
+            //                 iconPack: 'feather',
+            //                 icon: 'icon-alert-circle',
+            //                 color: 'danger'
+            //             })
+            //         })
+            // },
+            loginAirlock() {
 
                 if (!this.checkLogin()) return
 
@@ -69,24 +99,22 @@
                     }
                 }
 
-                this.$store.dispatch('auth/loginJWT', payload)
-                    .then(() => {
-                        this.$vs.loading.close()
+                this.$store.dispatch('auth/loginAirlock', payload).then(() => {
+                    this.$vs.loading.close()
+                }).catch(error => {
+                    this.$vs.loading.close()
+                    this.$vs.notify({
+                        title: 'Error',
+                        text: error.message,
+                        iconPack: 'feather',
+                        icon: 'icon-alert-circle',
+                        color: 'danger'
                     })
-                    .catch(error => {
-                        this.$vs.loading.close()
-                        this.$vs.notify({
-                            title: 'Error',
-                            text: error.message,
-                            iconPack: 'feather',
-                            icon: 'icon-alert-circle',
-                            color: 'danger'
-                        })
-                    })
+                })
             },
             registerUser() {
                 if (!this.checkLogin()) return
-                this.$router.push('/pages/register').catch(() => {})
+                this.$router.push({ name: 'admin-page-register' }).catch(() => {})
             }
         }
     }

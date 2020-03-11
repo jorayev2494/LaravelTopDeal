@@ -39,6 +39,7 @@ const router = new Router({
     // MAIN LAYOUT ROUTES
     // =============================================================================
             path: '/admin',
+            name: 'admin',
             component: () => import('./layouts/main/Main.vue'),
             children: [
         // =============================================================================
@@ -1283,15 +1284,15 @@ const router = new Router({
         // =============================================================================
                 {
                     path: '/admin/callback',
-                    name: 'auth-callback',
+                    name: 'admin-auth-callback',
                     component: () => import('@/views/Callback.vue'),
                     meta: {
                         rule: 'editor'
                     }
                 },
                 {
-                    path: '/admin/admin/pages/login',
-                    name: 'page-login',
+                    path: '/admin/pages/login',
+                    name: 'admin-page-login',
                     component: () => import('@/views/pages/login/Login.vue'),
                     meta: {
                         rule: 'editor'
@@ -1299,7 +1300,7 @@ const router = new Router({
                 },
                 {
                     path: '/admin/pages/register',
-                    name: 'page-register',
+                    name: 'admin-page-register',
                     component: () => import('@/views/pages/register/Register.vue'),
                     meta: {
                         rule: 'editor'
@@ -1307,7 +1308,7 @@ const router = new Router({
                 },
                 {
                     path: '/admin/pages/forgot-password',
-                    name: 'page-forgot-password',
+                    name: 'admin-page-forgot-password',
                     component: () => import('@/views/pages/ForgotPassword.vue'),
                     meta: {
                         rule: 'editor'
@@ -1315,7 +1316,7 @@ const router = new Router({
                 },
                 {
                     path: '/admin/pages/reset-password',
-                    name: 'page-reset-password',
+                    name: 'admin-page-reset-password',
                     component: () => import('@/views/pages/ResetPassword.vue'),
                     meta: {
                         rule: 'editor'
@@ -1323,7 +1324,7 @@ const router = new Router({
                 },
                 {
                     path: '/admin/pages/lock-screen',
-                    name: 'page-lock-screen',
+                    name: 'admin-page-lock-screen',
                     component: () => import('@/views/pages/LockScreen.vue'),
                     meta: {
                         rule: 'editor'
@@ -1331,7 +1332,7 @@ const router = new Router({
                 },
                 {
                     path: '/admin/pages/comingsoon',
-                    name: 'page-coming-soon',
+                    name: 'admin-page-coming-soon',
                     component: () => import('@/views/pages/ComingSoon.vue'),
                     meta: {
                         rule: 'editor'
@@ -1339,7 +1340,7 @@ const router = new Router({
                 },
                 {
                     path: '/admin/pages/error-404',
-                    name: 'page-error-404',
+                    name: 'admin-page-error-404',
                     component: () => import('@/views/pages/Error404.vue'),
                     meta: {
                         rule: 'editor'
@@ -1347,7 +1348,7 @@ const router = new Router({
                 },
                 {
                     path: '/admin/pages/error-500',
-                    name: 'page-error-500',
+                    name: 'admin-page-error-500',
                     component: () => import('@/views/pages/Error500.vue'),
                     meta: {
                         rule: 'editor'
@@ -1355,7 +1356,7 @@ const router = new Router({
                 },
                 {
                     path: '/admin/pages/not-authorized',
-                    name: 'page-not-authorized',
+                    name: 'admin-page-not-authorized',
                     component: () => import('@/views/pages/NotAuthorized.vue'),
                     meta: {
                         rule: 'editor'
@@ -1363,7 +1364,7 @@ const router = new Router({
                 },
                 {
                     path: '/admin/pages/maintenance',
-                    name: 'page-maintenance',
+                    name: 'admin-page-maintenance',
                     component: () => import('@/views/pages/Maintenance.vue'),
                     meta: {
                         rule: 'editor'

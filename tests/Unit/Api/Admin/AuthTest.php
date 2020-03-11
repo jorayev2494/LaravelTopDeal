@@ -56,7 +56,7 @@ class AuthTest extends TestCase
         $registeredUser = factory(User::class)->create(["email" => "emadil@email.com"]);
 
         $response = $this->postJson("/api/login", array_merge($registeredUser->only(["email"]), [
-                "password"  => User::DEFAULT_PASSWORD
+            "password"  => User::DEFAULT_PASSWORD
         ]))->assertStatus(200);
 
         $response->assertJsonStructure(["token"]);

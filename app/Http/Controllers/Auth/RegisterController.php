@@ -50,10 +50,8 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        // dd($data);
-
-        return Validator::make($data, [
-            // 'avatar'        => ['required', 'file'],
+        Validator::make($data, [
+            'avatar'        => ['nullable', 'file'],
             'name'          => ['required', 'string', 'max:255'],
             'last_name'     => ['required', 'string', 'max:255'],
             'email'         => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
@@ -73,7 +71,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $avatar = '/storage/users/avatars/ltBtNWs8SXQQBLBL9maDnHLss3w1vXDTW74z62eX.jpeg';
         $login  = Str::before($data["email"], "@");
+
+        // Exists Avatar
+        if(!array_key_exists("avatar", $data)) {
+            $data = array_merge($data, [
+                "avatar" => $avatar,
+            ]);
+        }
         
         return User::create([
             'avatar'        => $data['avatar'],

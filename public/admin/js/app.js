@@ -116720,6 +116720,93 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/src/http/requests/auth/airlock/index.js":
+/*!**************************************************************!*\
+  !*** ./resources/js/src/http/requests/auth/airlock/index.js ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _axios_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../axios/index.js */ "./resources/js/src/http/axios/index.js");
+/* harmony import */ var _store_store_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../store/store.js */ "./resources/js/src/store/store.js");
+
+ // Token Refresh
+
+var isAlreadyFetchingAccessToken = false;
+var subscribers = [];
+
+function onAccessTokenFetched(access_token) {
+  subscribers = subscribers.filter(function (callback) {
+    return callback(access_token);
+  });
+}
+
+function addSubscriber(callback) {
+  subscribers.push(callback);
+}
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  // init() {
+  //     axios.interceptors.response.use(function (response) {
+  //         return response
+  //     }, function (error) {
+  //         // const { config, response: { status } } = error
+  //         const {
+  //             config,
+  //             response
+  //         } = error
+  //         const originalRequest = config
+  //         // if (status === 401) {
+  //         if (response && response.status === 401) {
+  //             if (!isAlreadyFetchingAccessToken) {
+  //                 isAlreadyFetchingAccessToken = true
+  //                 store.dispatch("auth/fetchAccessToken")
+  //                     .then((access_token) => {
+  //                         isAlreadyFetchingAccessToken = false
+  //                         onAccessTokenFetched(access_token)
+  //                     })
+  //             }
+  //             const retryOriginalRequest = new Promise((resolve) => {
+  //                 addSubscriber(access_token => {
+  //                     originalRequest.headers.Authorization = 'Bearer ' + access_token
+  //                     resolve(axios(originalRequest))
+  //                 })
+  //             })
+  //             return retryOriginalRequest
+  //         }
+  //         return Promise.reject(error)
+  //     })
+  // },
+  login: function login(email, pwd) {
+    return _axios_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/login", {
+      email: email,
+      password: pwd
+    });
+  },
+  registerUser: function registerUser(name, last_name, email, phone, password, password_confirmation, country_id, gender, fax) {
+    return _axios_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/register", {
+      name: name,
+      last_name: last_name,
+      email: email,
+      phone: phone,
+      password: password,
+      password_confirmation: password_confirmation,
+      country_id: country_id,
+      gender: gender,
+      fax: fax
+    });
+  },
+  refreshToken: function refreshToken() {
+    return _axios_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/auth/refresh-token", {
+      accessToken: localStorage.getItem("accessToKen")
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/src/http/requests/auth/index.js":
 /*!******************************************************!*\
   !*** ./resources/js/src/http/requests/auth/index.js ***!
@@ -118194,6 +118281,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     // MAIN LAYOUT ROUTES
     // =============================================================================
     path: '/admin',
+    name: 'admin',
     component: function component() {
       return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(17), __webpack_require__.e(21)]).then(__webpack_require__.bind(null, /*! ./layouts/main/Main.vue */ "./resources/js/src/layouts/main/Main.vue"));
     },
@@ -119839,7 +119927,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     // =============================================================================
     {
       path: '/admin/callback',
-      name: 'auth-callback',
+      name: 'admin-auth-callback',
       component: function component() {
         return __webpack_require__.e(/*! import() */ 86).then(__webpack_require__.bind(null, /*! @/views/Callback.vue */ "./resources/js/src/views/Callback.vue"));
       },
@@ -119847,8 +119935,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
         rule: 'editor'
       }
     }, {
-      path: '/admin/admin/pages/login',
-      name: 'page-login',
+      path: '/admin/pages/login',
+      name: 'admin-page-login',
       component: function component() {
         return __webpack_require__.e(/*! import() */ 56).then(__webpack_require__.bind(null, /*! @/views/pages/login/Login.vue */ "./resources/js/src/views/pages/login/Login.vue"));
       },
@@ -119857,7 +119945,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       }
     }, {
       path: '/admin/pages/register',
-      name: 'page-register',
+      name: 'admin-page-register',
       component: function component() {
         return __webpack_require__.e(/*! import() */ 62).then(__webpack_require__.bind(null, /*! @/views/pages/register/Register.vue */ "./resources/js/src/views/pages/register/Register.vue"));
       },
@@ -119866,7 +119954,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       }
     }, {
       path: '/admin/pages/forgot-password',
-      name: 'page-forgot-password',
+      name: 'admin-page-forgot-password',
       component: function component() {
         return __webpack_require__.e(/*! import() */ 102).then(__webpack_require__.bind(null, /*! @/views/pages/ForgotPassword.vue */ "./resources/js/src/views/pages/ForgotPassword.vue"));
       },
@@ -119875,7 +119963,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       }
     }, {
       path: '/admin/pages/reset-password',
-      name: 'page-reset-password',
+      name: 'admin-page-reset-password',
       component: function component() {
         return __webpack_require__.e(/*! import() */ 106).then(__webpack_require__.bind(null, /*! @/views/pages/ResetPassword.vue */ "./resources/js/src/views/pages/ResetPassword.vue"));
       },
@@ -119884,7 +119972,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       }
     }, {
       path: '/admin/pages/lock-screen',
-      name: 'page-lock-screen',
+      name: 'admin-page-lock-screen',
       component: function component() {
         return __webpack_require__.e(/*! import() */ 104).then(__webpack_require__.bind(null, /*! @/views/pages/LockScreen.vue */ "./resources/js/src/views/pages/LockScreen.vue"));
       },
@@ -119893,7 +119981,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       }
     }, {
       path: '/admin/pages/comingsoon',
-      name: 'page-coming-soon',
+      name: 'admin-page-coming-soon',
       component: function component() {
         return Promise.all(/*! import() */[__webpack_require__.e(124), __webpack_require__.e(101)]).then(__webpack_require__.bind(null, /*! @/views/pages/ComingSoon.vue */ "./resources/js/src/views/pages/ComingSoon.vue"));
       },
@@ -119902,7 +119990,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       }
     }, {
       path: '/admin/pages/error-404',
-      name: 'page-error-404',
+      name: 'admin-page-error-404',
       component: function component() {
         return __webpack_require__.e(/*! import() */ 116).then(__webpack_require__.bind(null, /*! @/views/pages/Error404.vue */ "./resources/js/src/views/pages/Error404.vue"));
       },
@@ -119911,7 +119999,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       }
     }, {
       path: '/admin/pages/error-500',
-      name: 'page-error-500',
+      name: 'admin-page-error-500',
       component: function component() {
         return __webpack_require__.e(/*! import() */ 117).then(__webpack_require__.bind(null, /*! @/views/pages/Error500.vue */ "./resources/js/src/views/pages/Error500.vue"));
       },
@@ -119920,7 +120008,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       }
     }, {
       path: '/admin/pages/not-authorized',
-      name: 'page-not-authorized',
+      name: 'admin-page-not-authorized',
       component: function component() {
         return __webpack_require__.e(/*! import() */ 118).then(__webpack_require__.bind(null, /*! @/views/pages/NotAuthorized.vue */ "./resources/js/src/views/pages/NotAuthorized.vue"));
       },
@@ -119929,7 +120017,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       }
     }, {
       path: '/admin/pages/maintenance',
-      name: 'page-maintenance',
+      name: 'admin-page-maintenance',
       component: function component() {
         return __webpack_require__.e(/*! import() */ 105).then(__webpack_require__.bind(null, /*! @/views/pages/Maintenance.vue */ "./resources/js/src/views/pages/Maintenance.vue"));
       },
@@ -120107,10 +120195,11 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _http_requests_auth_jwt_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../http/requests/auth/jwt/index.js */ "./resources/js/src/http/requests/auth/jwt/index.js");
-/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/app */ "./node_modules/firebase/app/dist/index.cjs.js");
-/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(firebase_app__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/auth */ "./node_modules/firebase/auth/dist/index.esm.js");
-/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/router */ "./resources/js/src/router.js");
+/* harmony import */ var _http_requests_auth_airlock_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../http/requests/auth/airlock/index.js */ "./resources/js/src/http/requests/auth/airlock/index.js");
+/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/app */ "./node_modules/firebase/app/dist/index.cjs.js");
+/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(firebase_app__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! firebase/auth */ "./node_modules/firebase/auth/dist/index.esm.js");
+/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/router */ "./resources/js/src/router.js");
 /*=========================================================================================
   File Name: moduleAuthActions.js
   Description: Auth Module Actions
@@ -120123,43 +120212,45 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-/* harmony default export */ __webpack_exports__["default"] = ({
-  loginAttempt: function loginAttempt(_ref, payload) {
-    var dispatch = _ref.dispatch;
-    // New payload for login action
-    var newPayload = {
-      userDetails: payload.userDetails,
-      notify: payload.notify,
-      closeAnimation: payload.closeAnimation
-    }; // If remember_me is enabled change firebase Persistence
 
-    if (!payload.checkbox_remember_me) {
-      // Change firebase Persistence
-      firebase_app__WEBPACK_IMPORTED_MODULE_1___default.a.auth().setPersistence(firebase_app__WEBPACK_IMPORTED_MODULE_1___default.a.auth.Auth.Persistence.SESSION) // If success try to login
-      .then(function () {
-        dispatch('login', newPayload);
-      }) // If error notify
-      .catch(function (err) {
-        // Close animation if passed as payload
-        if (payload.closeAnimation) payload.closeAnimation();
-        payload.notify({
-          time: 2500,
-          title: 'Error',
-          text: err.message,
-          iconPack: 'feather',
-          icon: 'icon-alert-circle',
-          color: 'danger'
-        });
-      });
-    } else {
-      // Try to login
-      dispatch('login', newPayload);
-    }
-  },
-  login: function login(_ref2, payload) {
-    var commit = _ref2.commit,
-        state = _ref2.state,
-        dispatch = _ref2.dispatch;
+/* harmony default export */ __webpack_exports__["default"] = ({
+  // loginAttempt({ dispatch }, payload) {
+  //     // New payload for login action
+  //     const newPayload = {
+  //         userDetails: payload.userDetails,
+  //         notify: payload.notify,
+  //         closeAnimation: payload.closeAnimation
+  //     }
+  //     // If remember_me is enabled change firebase Persistence
+  //     if (!payload.checkbox_remember_me) {
+  //         // Change firebase Persistence
+  //         firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+  //             // If success try to login
+  //             .then(function() {
+  //                 dispatch('login', newPayload)
+  //             })
+  //             // If error notify
+  //             .catch(function(err) {
+  //                 // Close animation if passed as payload
+  //                 if(payload.closeAnimation) payload.closeAnimation()
+  //                 payload.notify({
+  //                     time: 2500,
+  //                     title: 'Error',
+  //                     text: err.message,
+  //                     iconPack: 'feather',
+  //                     icon: 'icon-alert-circle',
+  //                     color: 'danger'
+  //                 })
+  //             })
+  //     } else {
+  //         // Try to login
+  //         dispatch('login', newPayload)
+  //     }
+  // },
+  login: function login(_ref, payload) {
+    var commit = _ref.commit,
+        state = _ref.state,
+        dispatch = _ref.dispatch;
 
     // If user is already logged in notify and exit
     if (state.isUserLoggedIn()) {
@@ -120174,209 +120265,185 @@ __webpack_require__.r(__webpack_exports__);
       });
       return false;
     } // Try to sigin
+    // firebase.auth().signInWithEmailAndPassword(payload.userDetails.email, payload.userDetails.password).then((result) => {
+    //         // Set FLAG username update required for updating username
+    //         let isUsernameUpdateRequired = false
+    //         // if username is provided and updateUsername FLAG is true
+    //             // set local username update FLAG to true
+    //             // try to update username
+    //         if(payload.updateUsername && payload.userDetails.displayName) {
+    //             isUsernameUpdateRequired = true
+    //             dispatch('updateUsername', {
+    //                 user: result.user,
+    //                 username: payload.userDetails.displayName,
+    //                 notify: payload.notify,
+    //                 isReloadRequired: true
+    //             })
+    //         }
+    //         // Close animation if passed as payload
+    //         if(payload.closeAnimation) payload.closeAnimation()
+    //         // if username update is not required
+    //           // just reload the page to get fresh data
+    //           // set new user data in localstorage
+    //         if(!isUsernameUpdateRequired) {
+    //           router.push(router.currentRoute.query.to || '/')
+    //           commit('UPDATE_USER_INFO', result.user.providerData[0], {root: true})
+    //         }
+    //     }, (err) => {
+    //     // Close animation if passed as payload
+    //     if(payload.closeAnimation) payload.closeAnimation()
+    //     payload.notify({
+    //         time: 2500,
+    //         title: 'Error',
+    //         text: err.message,
+    //         iconPack: 'feather',
+    //         icon: 'icon-alert-circle',
+    //         color: 'danger'
+    //     })
+    // })
 
-
-    firebase_app__WEBPACK_IMPORTED_MODULE_1___default.a.auth().signInWithEmailAndPassword(payload.userDetails.email, payload.userDetails.password).then(function (result) {
-      // Set FLAG username update required for updating username
-      var isUsernameUpdateRequired = false; // if username is provided and updateUsername FLAG is true
-      // set local username update FLAG to true
-      // try to update username
-
-      if (payload.updateUsername && payload.userDetails.displayName) {
-        isUsernameUpdateRequired = true;
-        dispatch('updateUsername', {
-          user: result.user,
-          username: payload.userDetails.displayName,
-          notify: payload.notify,
-          isReloadRequired: true
-        });
-      } // Close animation if passed as payload
-
-
-      if (payload.closeAnimation) payload.closeAnimation(); // if username update is not required
-      // just reload the page to get fresh data
-      // set new user data in localstorage
-
-      if (!isUsernameUpdateRequired) {
-        _router__WEBPACK_IMPORTED_MODULE_3__["default"].push(_router__WEBPACK_IMPORTED_MODULE_3__["default"].currentRoute.query.to || '/');
-        commit('UPDATE_USER_INFO', result.user.providerData[0], {
-          root: true
-        });
-      }
-    }, function (err) {
-      // Close animation if passed as payload
-      if (payload.closeAnimation) payload.closeAnimation();
-      payload.notify({
-        time: 2500,
-        title: 'Error',
-        text: err.message,
-        iconPack: 'feather',
-        icon: 'icon-alert-circle',
-        color: 'danger'
-      });
-    });
   },
   // Google Login
-  loginWithGoogle: function loginWithGoogle(_ref3, payload) {
-    var commit = _ref3.commit,
-        state = _ref3.state;
-
-    if (state.isUserLoggedIn()) {
-      payload.notify({
-        title: 'Login Attempt',
-        text: 'You are already logged in!',
-        iconPack: 'feather',
-        icon: 'icon-alert-circle',
-        color: 'warning'
-      });
-      return false;
-    }
-
-    var provider = new firebase_app__WEBPACK_IMPORTED_MODULE_1___default.a.auth.GoogleAuthProvider();
-    firebase_app__WEBPACK_IMPORTED_MODULE_1___default.a.auth().signInWithPopup(provider).then(function (result) {
-      _router__WEBPACK_IMPORTED_MODULE_3__["default"].push(_router__WEBPACK_IMPORTED_MODULE_3__["default"].currentRoute.query.to || '/');
-      commit('UPDATE_USER_INFO', result.user.providerData[0], {
-        root: true
-      });
-    }).catch(function (err) {
-      payload.notify({
-        time: 2500,
-        title: 'Error',
-        text: err.message,
-        iconPack: 'feather',
-        icon: 'icon-alert-circle',
-        color: 'danger'
-      });
-    });
-  },
+  // loginWithGoogle({commit, state}, payload) {
+  //     if (state.isUserLoggedIn()) {
+  //         payload.notify({
+  //             title: 'Login Attempt',
+  //             text: 'You are already logged in!',
+  //             iconPack: 'feather',
+  //             icon: 'icon-alert-circle',
+  //             color: 'warning'
+  //         })
+  //         return false
+  //     }
+  //     const provider = new firebase.auth.GoogleAuthProvider()
+  //     firebase.auth().signInWithPopup(provider)
+  //       .then((result) => {
+  //           router.push(router.currentRoute.query.to || '/')
+  //           commit('UPDATE_USER_INFO', result.user.providerData[0], {root: true})
+  //       }).catch((err) => {
+  //           payload.notify({
+  //               time: 2500,
+  //               title: 'Error',
+  //               text: err.message,
+  //               iconPack: 'feather',
+  //               icon: 'icon-alert-circle',
+  //               color: 'danger'
+  //           })
+  //       })
+  // },
   // Facebook Login
-  loginWithFacebook: function loginWithFacebook(_ref4, payload) {
-    var commit = _ref4.commit,
-        state = _ref4.state;
-
-    if (state.isUserLoggedIn()) {
-      payload.notify({
-        title: 'Login Attempt',
-        text: 'You are already logged in!',
-        iconPack: 'feather',
-        icon: 'icon-alert-circle',
-        color: 'warning'
-      });
-      return false;
-    }
-
-    var provider = new firebase_app__WEBPACK_IMPORTED_MODULE_1___default.a.auth.FacebookAuthProvider();
-    firebase_app__WEBPACK_IMPORTED_MODULE_1___default.a.auth().signInWithPopup(provider).then(function (result) {
-      _router__WEBPACK_IMPORTED_MODULE_3__["default"].push(_router__WEBPACK_IMPORTED_MODULE_3__["default"].currentRoute.query.to || '/');
-      commit('UPDATE_USER_INFO', result.user.providerData[0], {
-        root: true
-      });
-    }).catch(function (err) {
-      payload.notify({
-        time: 2500,
-        title: 'Error',
-        text: err.message,
-        iconPack: 'feather',
-        icon: 'icon-alert-circle',
-        color: 'danger'
-      });
-    });
-  },
+  // loginWithFacebook({commit, state}, payload) {
+  //     if (state.isUserLoggedIn()) {
+  //         payload.notify({
+  //             title: 'Login Attempt',
+  //             text: 'You are already logged in!',
+  //             iconPack: 'feather',
+  //             icon: 'icon-alert-circle',
+  //             color: 'warning'
+  //         })
+  //         return false
+  //     }
+  //     const provider = new firebase.auth.FacebookAuthProvider()
+  //     firebase.auth().signInWithPopup(provider)
+  //         .then((result) => {
+  //             router.push(router.currentRoute.query.to || '/')
+  //             commit('UPDATE_USER_INFO', result.user.providerData[0], {root: true})
+  //         }).catch((err) => {
+  //             payload.notify({
+  //                 time: 2500,
+  //                 title: 'Error',
+  //                 text: err.message,
+  //                 iconPack: 'feather',
+  //                 icon: 'icon-alert-circle',
+  //                 color: 'danger'
+  //             })
+  //         })
+  // },
   // Twitter Login
-  loginWithTwitter: function loginWithTwitter(_ref5, payload) {
-    var commit = _ref5.commit,
-        state = _ref5.state;
-
-    if (state.isUserLoggedIn()) {
-      payload.notify({
-        title: 'Login Attempt',
-        text: 'You are already logged in!',
-        iconPack: 'feather',
-        icon: 'icon-alert-circle',
-        color: 'warning'
-      });
-      return false;
-    }
-
-    var provider = new firebase_app__WEBPACK_IMPORTED_MODULE_1___default.a.auth.TwitterAuthProvider();
-    firebase_app__WEBPACK_IMPORTED_MODULE_1___default.a.auth().signInWithPopup(provider).then(function (result) {
-      _router__WEBPACK_IMPORTED_MODULE_3__["default"].push(_router__WEBPACK_IMPORTED_MODULE_3__["default"].currentRoute.query.to || '/');
-      commit('UPDATE_USER_INFO', result.user.providerData[0], {
-        root: true
-      });
-    }).catch(function (err) {
-      payload.notify({
-        time: 2500,
-        title: 'Error',
-        text: err.message,
-        iconPack: 'feather',
-        icon: 'icon-alert-circle',
-        color: 'danger'
-      });
-    });
-  },
+  // loginWithTwitter({commit, state}, payload) {
+  //     if (state.isUserLoggedIn()) {
+  //         payload.notify({
+  //             title: 'Login Attempt',
+  //             text: 'You are already logged in!',
+  //             iconPack: 'feather',
+  //             icon: 'icon-alert-circle',
+  //             color: 'warning'
+  //         })
+  //         return false
+  //     }
+  //     const provider = new firebase.auth.TwitterAuthProvider()
+  //     firebase.auth().signInWithPopup(provider)
+  //         .then((result) => {
+  //             router.push(router.currentRoute.query.to || '/')
+  //             commit('UPDATE_USER_INFO', result.user.providerData[0], {root: true})
+  //         }).catch((err) => {
+  //             payload.notify({
+  //                 time: 2500,
+  //                 title: 'Error',
+  //                 text: err.message,
+  //                 iconPack: 'feather',
+  //                 icon: 'icon-alert-circle',
+  //                 color: 'danger'
+  //             })
+  //         })
+  // },
   // Github Login
-  loginWithGithub: function loginWithGithub(_ref6, payload) {
-    var commit = _ref6.commit,
-        state = _ref6.state;
-
-    if (state.isUserLoggedIn()) {
-      payload.notify({
-        title: 'Login Attempt',
-        text: 'You are already logged in!',
-        iconPack: 'feather',
-        icon: 'icon-alert-circle',
-        color: 'warning'
-      });
-      return false;
-    }
-
-    var provider = new firebase_app__WEBPACK_IMPORTED_MODULE_1___default.a.auth.GithubAuthProvider();
-    firebase_app__WEBPACK_IMPORTED_MODULE_1___default.a.auth().signInWithPopup(provider).then(function (result) {
-      _router__WEBPACK_IMPORTED_MODULE_3__["default"].push(_router__WEBPACK_IMPORTED_MODULE_3__["default"].currentRoute.query.to || '/');
-      commit('UPDATE_USER_INFO', result.user.providerData[0], {
-        root: true
-      });
-    }).catch(function (err) {
-      payload.notify({
-        time: 2500,
-        title: 'Error',
-        text: err.message,
-        iconPack: 'feather',
-        icon: 'icon-alert-circle',
-        color: 'danger'
-      });
-    });
-  },
-  registerUser: function registerUser(_ref7, payload) {
-    var dispatch = _ref7.dispatch;
-    // create user using firebase
-    firebase_app__WEBPACK_IMPORTED_MODULE_1___default.a.auth().createUserWithEmailAndPassword(payload.userDetails.email, payload.userDetails.password).then(function () {
-      payload.notify({
-        title: 'Account Created',
-        text: 'You are successfully registered!',
-        iconPack: 'feather',
-        icon: 'icon-check',
-        color: 'success'
-      });
-      var newPayload = {
-        userDetails: payload.userDetails,
-        notify: payload.notify,
-        updateUsername: true
-      };
-      dispatch('login', newPayload);
-    }, function (error) {
-      payload.notify({
-        title: 'Error',
-        text: error.message,
-        iconPack: 'feather',
-        icon: 'icon-alert-circle',
-        color: 'danger'
-      });
-    });
-  },
-  updateUsername: function updateUsername(_ref8, payload) {
-    var commit = _ref8.commit;
+  // loginWithGithub({commit, state}, payload) {
+  //     if (state.isUserLoggedIn()) {
+  //         payload.notify({
+  //             title: 'Login Attempt',
+  //             text: 'You are already logged in!',
+  //             iconPack: 'feather',
+  //             icon: 'icon-alert-circle',
+  //             color: 'warning'
+  //         })
+  //         return false
+  //     }
+  //     const provider = new firebase.auth.GithubAuthProvider()
+  //     firebase.auth().signInWithPopup(provider)
+  //         .then((result) => {
+  //             router.push(router.currentRoute.query.to || '/')
+  //             commit('UPDATE_USER_INFO', result.user.providerData[0], {root: true})
+  //         }).catch((err) => {
+  //             payload.notify({
+  //                 time: 2500,
+  //                 title: 'Error',
+  //                 text: err.message,
+  //                 iconPack: 'feather',
+  //                 icon: 'icon-alert-circle',
+  //                 color: 'danger'
+  //             })
+  //         })
+  // },
+  // registerUser({dispatch}, payload) {
+  //     // create user using firebase
+  //     firebase.auth().createUserWithEmailAndPassword(payload.userDetails.email, payload.userDetails.password)
+  //         .then(() => {
+  //             payload.notify({
+  //                 title: 'Account Created',
+  //                 text: 'You are successfully registered!',
+  //                 iconPack: 'feather',
+  //                 icon: 'icon-check',
+  //                 color: 'success'
+  //             })
+  //             const newPayload = {
+  //                 userDetails: payload.userDetails,
+  //                 notify: payload.notify,
+  //                 updateUsername: true
+  //             }
+  //             dispatch('login', newPayload)
+  //         }, (error) => {
+  //             payload.notify({
+  //                 title: 'Error',
+  //                 text: error.message,
+  //                 iconPack: 'feather',
+  //                 icon: 'icon-alert-circle',
+  //                 color: 'danger'
+  //             })
+  //         })
+  // },
+  updateUsername: function updateUsername(_ref2, payload) {
+    var commit = _ref2.commit;
     payload.user.updateProfile({
       displayName: payload.displayName
     }).then(function () {
@@ -120390,7 +120457,7 @@ __webpack_require__.r(__webpack_exports__);
       // Reload current page
 
       if (payload.isReloadRequired) {
-        _router__WEBPACK_IMPORTED_MODULE_3__["default"].push(_router__WEBPACK_IMPORTED_MODULE_3__["default"].currentRoute.query.to || '/');
+        _router__WEBPACK_IMPORTED_MODULE_4__["default"].push(_router__WEBPACK_IMPORTED_MODULE_4__["default"].currentRoute.query.to || '/');
       }
     }).catch(function (err) {
       payload.notify({
@@ -120404,14 +120471,14 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   // JWT
-  loginJWT: function loginJWT(_ref9, payload) {
-    var commit = _ref9.commit;
+  loginJWT: function loginJWT(_ref3, payload) {
+    var commit = _ref3.commit;
     return new Promise(function (resolve, reject) {
       _http_requests_auth_jwt_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].login(payload.userDetails.email, payload.userDetails.password).then(function (response) {
         // If there's user data in response
         if (response.data.userData) {
           // Navigate User to homepage
-          _router__WEBPACK_IMPORTED_MODULE_3__["default"].push(_router__WEBPACK_IMPORTED_MODULE_3__["default"].currentRoute.query.to || '/'); // Set accessToken
+          _router__WEBPACK_IMPORTED_MODULE_4__["default"].push(_router__WEBPACK_IMPORTED_MODULE_4__["default"].currentRoute.query.to || '/'); // Set accessToken
 
           localStorage.setItem("accessToken", response.data.accessToken); // Update user details
 
@@ -120431,8 +120498,8 @@ __webpack_require__.r(__webpack_exports__);
       });
     });
   },
-  registerUserJWT: function registerUserJWT(_ref10, payload) {
-    var commit = _ref10.commit;
+  registerUserJWT: function registerUserJWT(_ref4, payload) {
+    var commit = _ref4.commit;
     var _payload$userDetails = payload.userDetails,
         displayName = _payload$userDetails.displayName,
         email = _payload$userDetails.email,
@@ -120448,7 +120515,7 @@ __webpack_require__.r(__webpack_exports__);
 
       _http_requests_auth_jwt_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].registerUser(displayName, email, password).then(function (response) {
         // Redirect User
-        _router__WEBPACK_IMPORTED_MODULE_3__["default"].push(_router__WEBPACK_IMPORTED_MODULE_3__["default"].currentRoute.query.to || '/'); // Update data in localStorage
+        _router__WEBPACK_IMPORTED_MODULE_4__["default"].push(_router__WEBPACK_IMPORTED_MODULE_4__["default"].currentRoute.query.to || '/'); // Update data in localStorage
 
         localStorage.setItem("accessToken", response.data.accessToken);
         commit('UPDATE_USER_INFO', response.data.userData, {
@@ -120460,6 +120527,73 @@ __webpack_require__.r(__webpack_exports__);
       });
     });
   },
+  // #region My Airlock Auth 
+
+  /**
+   * My Register
+   * @param {*} param0 
+   * @param {*} payload 
+   */
+  registerUserAirlock: function registerUserAirlock(_ref5, payload) {
+    var commit = _ref5.commit;
+    var _payload$userDetails2 = payload.userDetails,
+        name = _payload$userDetails2.name,
+        last_name = _payload$userDetails2.last_name,
+        email = _payload$userDetails2.email,
+        phone = _payload$userDetails2.phone,
+        password = _payload$userDetails2.password,
+        password_confirmation = _payload$userDetails2.password_confirmation,
+        country_id = _payload$userDetails2.country_id,
+        gender = _payload$userDetails2.gender,
+        fax = _payload$userDetails2.fax; // Check confirm password
+
+    if (password !== password_confirmation) {
+      reject({
+        message: "Password doesn't match. Please try again."
+      });
+    }
+
+    _http_requests_auth_airlock_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].registerUser(name, last_name, email, phone, password, password_confirmation, country_id, gender, fax).then(function (response) {
+      // Redirect User
+      console.log("Response Register Airlock: ", response);
+      _router__WEBPACK_IMPORTED_MODULE_4__["default"].push(_router__WEBPACK_IMPORTED_MODULE_4__["default"].currentRoute.query.to || "/admin"); // Update data in localStorage
+
+      localStorage.setItem("accessToken", response.data.accessToken); // commit('UPDATE_USER_INFO', response.data.userData, {root: true})
+      // Set bearer token in axios
+
+      commit("SET_BEARER", response.data.accessToken);
+    }).catch(function (error) {
+      reject(error);
+    });
+  },
+  // Login
+  loginAirlock: function loginAirlock(_ref6, payload) {
+    var commit = _ref6.commit;
+    _http_requests_auth_airlock_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].login(payload.userDetails.email, payload.userDetails.password).then(function (response) {
+      // If there's user data in response
+      if (response.data.userData) {
+        console.log("Response: ", response); // Navigate User to homepage
+
+        _router__WEBPACK_IMPORTED_MODULE_4__["default"].push(_router__WEBPACK_IMPORTED_MODULE_4__["default"].currentRoute.query.to || '/admin'); // Set accessToken
+
+        localStorage.setItem("accessToken", response.data.accessToken); // Update user details
+
+        commit('UPDATE_USER_INFO', response.data.userData, {
+          root: true
+        }); // Set bearer token in axios
+
+        commit("SET_BEARER", response.data.accessToken); // resolve(response)
+      } else {
+        console.error('Error: ', response);
+        reject({
+          message: "Wrong Email or Password"
+        });
+      }
+    }).catch(function (error) {
+      reject(error);
+    });
+  },
+  // #endregion
   fetchAccessToken: function fetchAccessToken() {
     return new Promise(function (resolve) {
       _http_requests_auth_jwt_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].refreshToken().then(function (response) {
@@ -120551,6 +120685,144 @@ __webpack_require__.r(__webpack_exports__);
     if (_auth_authService__WEBPACK_IMPORTED_MODULE_0__["default"].isAuthenticated() || firebaseCurrentUser) isAuthenticated = true;else isAuthenticated = false;
     return localStorage.getItem('userInfo') && isAuthenticated;
   }
+});
+
+/***/ }),
+
+/***/ "./resources/js/src/store/country/moduleCountry.js":
+/*!*********************************************************!*\
+  !*** ./resources/js/src/store/country/moduleCountry.js ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _moduleCountryState_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./moduleCountryState.js */ "./resources/js/src/store/country/moduleCountryState.js");
+/* harmony import */ var _moduleCountryGetters_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./moduleCountryGetters.js */ "./resources/js/src/store/country/moduleCountryGetters.js");
+/* harmony import */ var _moduleCountryMutations_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./moduleCountryMutations.js */ "./resources/js/src/store/country/moduleCountryMutations.js");
+/* harmony import */ var _moduleCountryActions_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./moduleCountryActions.js */ "./resources/js/src/store/country/moduleCountryActions.js");
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: _moduleCountryState_js__WEBPACK_IMPORTED_MODULE_0__["default"],
+  getters: _moduleCountryGetters_js__WEBPACK_IMPORTED_MODULE_1__["default"],
+  mutations: _moduleCountryMutations_js__WEBPACK_IMPORTED_MODULE_2__["default"],
+  actions: _moduleCountryActions_js__WEBPACK_IMPORTED_MODULE_3__["default"]
+});
+
+/***/ }),
+
+/***/ "./resources/js/src/store/country/moduleCountryActions.js":
+/*!****************************************************************!*\
+  !*** ./resources/js/src/store/country/moduleCountryActions.js ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  /**
+   * Load Countries from Server
+   * @param {*} param0 
+   * @param {*} payload 
+   */
+  fetchCountries: function () {
+    var _fetchCountries = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(_ref, payload) {
+      var commit;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              commit = _ref.commit;
+              _context.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/countries").then(function (response) {
+                commit("SET_COUNTRIES", response.data);
+              }).catch(function (err) {});
+
+            case 3:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    function fetchCountries(_x, _x2) {
+      return _fetchCountries.apply(this, arguments);
+    }
+
+    return fetchCountries;
+  }()
+});
+
+/***/ }),
+
+/***/ "./resources/js/src/store/country/moduleCountryGetters.js":
+/*!****************************************************************!*\
+  !*** ./resources/js/src/store/country/moduleCountryGetters.js ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  GET_COUNTRIES: function GET_COUNTRIES(state) {
+    return state.countries;
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/src/store/country/moduleCountryMutations.js":
+/*!******************************************************************!*\
+  !*** ./resources/js/src/store/country/moduleCountryMutations.js ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  /**
+   * Ser Store Countries
+   * @param {*} state 
+   * @param {*} payload 
+   */
+  SET_COUNTRIES: function SET_COUNTRIES(state, payload) {
+    state.countries = payload;
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/src/store/country/moduleCountryState.js":
+/*!**************************************************************!*\
+  !*** ./resources/js/src/store/country/moduleCountryState.js ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  countries: []
 });
 
 /***/ }),
@@ -121785,16 +122057,31 @@ __webpack_require__.r(__webpack_exports__);
  // /////////////////////////////////////////////
 // Helper
 // /////////////////////////////////////////////
+// // *From Auth - Data will be received from auth provider
+// const userDefaults = {
+//     uid: 0, // From Auth
+//     displayName: "John Doe", // From Auth
+//     about: "Dessert chocolate cake lemon drops jujubes. Biscuit cupcake ice cream bear claw brownie brownie marshmallow.",
+//     photoURL: require("@assets/images/portrait/small/avatar-s-11.jpg"), // From Auth
+//     status: "online",
+//     userRole: "admin"
+// }
 // *From Auth - Data will be received from auth provider
 
 var userDefaults = {
-  uid: 0,
-  // From Auth
-  displayName: "John Doe",
-  // From Auth
-  about: "Dessert chocolate cake lemon drops jujubes. Biscuit cupcake ice cream bear claw brownie brownie marshmallow.",
   photoURL: __webpack_require__(/*! @assets/images/portrait/small/avatar-s-11.jpg */ "./resources/assets/images/portrait/small/avatar-s-11.jpg"),
   // From Auth
+  id: 0,
+  // From Auth
+  name: "John Doe",
+  // From Auth
+  last_name: "John Doe",
+  // From Auth
+  email: "null@null.com",
+  // From Auth
+  gender: null,
+  // From Auth
+  // about       : "Dessert chocolate cake lemon drops jujubes. Biscuit cupcake ice cream bear claw brownie brownie marshmallow.",
   status: "online",
   userRole: "admin"
 };
@@ -121859,6 +122146,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./actions */ "./resources/js/src/store/actions.js");
 /* harmony import */ var _auth_moduleAuth_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./auth/moduleAuth.js */ "./resources/js/src/store/auth/moduleAuth.js");
 /* harmony import */ var _eCommerce_moduleECommerce_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./eCommerce/moduleECommerce.js */ "./resources/js/src/store/eCommerce/moduleECommerce.js");
+/* harmony import */ var _country_moduleCountry_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./country/moduleCountry.js */ "./resources/js/src/store/country/moduleCountry.js");
 /*=========================================================================================
   File Name: store.js
   Description: Vuex store
@@ -121879,6 +122167,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 // import moduleEmail from './email/moduleEmail.js'
 
 
+ // #region My Modules
+
+ // #endregion
 
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   getters: _getters__WEBPACK_IMPORTED_MODULE_3__["default"],
@@ -121891,7 +122182,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     // chat: moduleChat,
     // email: moduleEmail,
     auth: _auth_moduleAuth_js__WEBPACK_IMPORTED_MODULE_6__["default"],
-    eCommerce: _eCommerce_moduleECommerce_js__WEBPACK_IMPORTED_MODULE_7__["default"]
+    eCommerce: _eCommerce_moduleECommerce_js__WEBPACK_IMPORTED_MODULE_7__["default"],
+    // My Modules
+    country: _country_moduleCountry_js__WEBPACK_IMPORTED_MODULE_8__["default"]
   } // strict: process.env.NODE_ENV !== 'production'
 
 }));

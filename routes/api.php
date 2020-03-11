@@ -19,9 +19,11 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
+#region Public URL - s
+Route::get('/countries', ["uses" => "Api\CountryController", "as" => "countries"]);
+#endregion
 
-
-Route::group(['prefix' => 'admin', "namespace" => "Admin\Api", "as" => "admin."], function() {
+Route::group(['prefix' => 'admin', ['middleware' => ['auth:airlock']], "namespace" => "Admin\Api", "as" => "admin."], function() {
     Route::apiResource("/users", "UserController");
     Route::post("/users/{user}", ["uses" => "UserController@update", "as" => "users.account"]);                                          // Update with Avatar
 });
@@ -36,8 +38,11 @@ Route::group(['middleware' => ['auth:airlock']], function() {
 });
 
 
-Route::post("/register", ["uses" => "Auth\RegisterController@register", "as" => "register"]);
-Route::post("/login", ["uses" => "Auth\LoginController@token", "as" => "login"]);
+Route::group(['middleware' => 'guest'], function() {
+    Route::post("/register", ["uses" => "Auth\RegisterController@register", "as" => "register"]);
+    Route::post("/login", ["uses" => "Auth\LoginController@token", "as" => "login"]);
+});
+
 // Route::group(['airlock' => 'auth', 'middleware' => 'auth:airlock', 'namespace' => 'Auth'], function() {
     // Route::post("/register", ["uses" => "RegisterController@register", "as" => ".register"]);
 // });

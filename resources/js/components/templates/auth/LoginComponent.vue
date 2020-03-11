@@ -43,14 +43,18 @@
                             <column id="column-login" class="col-sm-8 pull-right">
                                 <div class="row">
                                     <div class="social_login pull-right" id="so_sociallogin">
-                                        <a href="#" class="btn btn-social-icon btn-sm btn-facebook"><i
-                                                class="fa fa-facebook fa-fw" aria-hidden="true"></i></a>
-                                        <a href="#" class="btn btn-social-icon btn-sm btn-twitter"><i
-                                                class="fa fa-twitter fa-fw" aria-hidden="true"></i></a>
-                                        <a href="#" class="btn btn-social-icon btn-sm btn-google-plus"><i
-                                                class="fa fa-google fa-fw" aria-hidden="true"></i></a>
-                                        <a href="#" class="btn btn-social-icon btn-sm btn-linkdin"><i
-                                                class="fa fa-linkedin fa-fw" aria-hidden="true"></i></a>
+                                        <a href="#" class="btn btn-social-icon btn-sm btn-facebook">
+                                            <i class="fa fa-facebook fa-fw" aria-hidden="true"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-social-icon btn-sm btn-twitter">
+                                            <i class="fa fa-twitter fa-fw" aria-hidden="true"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-social-icon btn-sm btn-google-plus">
+                                            <i class="fa fa-google fa-fw" aria-hidden="true"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-social-icon btn-sm btn-linkdin">
+                                            <i class="fa fa-linkedin fa-fw" aria-hidden="true"></i>
+                                        </a>
                                     </div>
                                 </div>
                             </column>
