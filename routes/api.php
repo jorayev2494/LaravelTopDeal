@@ -26,8 +26,18 @@ Route::group(['prefix' => 'admin', "namespace" => "Admin\Api", "as" => "admin."]
     Route::post("/users/{user}", ["uses" => "UserController@update", "as" => "users.account"]);                                          // Update with Avatar
 });
 
+
+Route::group(['middleware' => ['auth:airlock']], function() {
+    Route::get('/user', function (Request $request) {
+        return response()->json(['user' => $request->user()], 200);
+    })->name("user");
+
+    Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+});
+
+
 Route::post("/register", ["uses" => "Auth\RegisterController@register", "as" => "register"]);
-Route::post("/login", ["uses" => "Auth\LoginController@login", "as" => "login"]);
+Route::post("/login", ["uses" => "Auth\LoginController@token", "as" => "login"]);
 // Route::group(['airlock' => 'auth', 'middleware' => 'auth:airlock', 'namespace' => 'Auth'], function() {
     // Route::post("/register", ["uses" => "RegisterController@register", "as" => ".register"]);
 // });
