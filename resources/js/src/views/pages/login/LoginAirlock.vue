@@ -54,38 +54,8 @@
                 }
                 return true
             },
-            // loginJWT() {
-
-            //     if (!this.checkLogin()) return
-
-            //     // Loading
-            //     this.$vs.loading()
-
-            //     const payload = {
-            //         checkbox_remember_me: this.checkbox_remember_me,
-            //         userDetails: {
-            //             email: this.email,
-            //             password: this.password
-            //         }
-            //     }
-
-            //     this.$store.dispatch('auth/loginJWT', payload)
-            //         .then(() => {
-            //             this.$vs.loading.close()
-            //         })
-            //         .catch(error => {
-            //             this.$vs.loading.close()
-            //             this.$vs.notify({
-            //                 title: 'Error',
-            //                 text: error.message,
-            //                 iconPack: 'feather',
-            //                 icon: 'icon-alert-circle',
-            //                 color: 'danger'
-            //             })
-            //         })
-            // },
+            // Login Airlock
             loginAirlock() {
-
                 if (!this.checkLogin()) return
 
                 // Loading

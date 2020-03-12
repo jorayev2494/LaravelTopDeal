@@ -112409,7 +112409,7 @@ var userInfo = JSON.parse(localStorage.getItem("userInfo"));
 if (userInfo && userInfo.userRole) initialRole = userInfo.userRole;
 /* harmony default export */ __webpack_exports__["default"] = (new vue_acl__WEBPACK_IMPORTED_MODULE_1__["AclCreate"]({
   initial: initialRole,
-  notfound: "/pages/not-authorized",
+  notfound: "/admin/pages/not-authorized",
   router: _router__WEBPACK_IMPORTED_MODULE_2__["default"],
   acceptLocalRules: true,
   globalRules: {
@@ -112446,13 +112446,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
@@ -112468,153 +112470,75 @@ var webAuth = new auth0_js__WEBPACK_IMPORTED_MODULE_0__["default"].WebAuth({
   clientID: _auth_config_json__WEBPACK_IMPORTED_MODULE_2__.clientId,
   responseType: 'id_token',
   scope: 'openid profile email'
-}); // class AuthService extends EventEmitter {
-//     // idToken = null;
-//     // profile = null;
-//     // tokenExpiry = null;
-//     // Starts the user login flow
-//     login(customState) {
-//         webAuth.authorize({
-//             appState: customState
-//         });
-//     }
-//     // Handles the callback request from Auth0
-//     handleAuthentication() {
-//         return new Promise((resolve, reject) => {
-//             webAuth.parseHash((err, authResult) => {
-//                 if (err) {
-//                     alert(err.error + '. Detailed error can be found in console.');
-//                     reject(err);
-//                 } else {
-//                     this.localLogin(authResult);
-//                     resolve(authResult.idToken);
-//                 }
-//             });
-//         });
-//     }
-//     localLogin(authResult) {
-//         this.idToken = authResult.idToken;
-//         this.profile = authResult.idTokenPayload;
-//         // Convert the JWT expiry time from seconds to milliseconds
-//         this.tokenExpiry = new Date(this.profile.exp * 1000);
-//         localStorage.setItem(tokenExpiryKey, this.tokenExpiry);
-//         localStorage.setItem(localStorageKey, 'true');
-//         store.commit("UPDATE_USER_INFO", {
-//             displayName: this.profile.name,
-//             email: this.profile.email,
-//             photoURL: this.profile.picture,
-//             providerId: this.profile.sub.substr(0, this.profile.sub.indexOf('|')),
-//             uid: this.profile.sub
-//         })
-//         this.emit(loginEvent, {
-//             loggedIn: true,
-//             profile: authResult.idTokenPayload,
-//             state: authResult.appState || {}
-//         });
-//     }
-//     renewTokens() {
-//         // reject can be used as parameter in promise for using reject
-//         return new Promise((resolve) => {
-//             if (localStorage.getItem(localStorageKey) !== "true") {
-//                 // return reject("Not logged in");
-//             }
-//             webAuth.checkSession({}, (err, authResult) => {
-//                 if (err) {
-//                     // reject(err);
-//                 } else {
-//                     this.localLogin(authResult);
-//                     resolve(authResult);
-//                 }
-//             });
-//         });
-//     }
-//     logOut() {
-//         localStorage.removeItem(localStorageKey);
-//         localStorage.removeItem(tokenExpiryKey);
-//         localStorage.removeItem('userInfo');
-//         this.idToken = null;
-//         this.tokenExpiry = null;
-//         this.profile = null;
-//         webAuth.logout({
-//             returnTo: window.location.origin + process.env.BASE_URL
-//         });
-//         this.emit(loginEvent, { loggedIn: false });
-//     }
-//     isAuthenticated() {
-//         return (
-//             new Date(Date.now()) < new Date(localStorage.getItem(tokenExpiryKey)) &&
-//             localStorage.getItem(localStorageKey) === 'true'
-//         );
-//     }
-// }
-
-var idToken = 1;
-var profile = "admin";
-var tokenExpiry = 4445464686886;
+});
 
 var AuthService = /*#__PURE__*/function (_EventEmitter) {
   _inherits(AuthService, _EventEmitter);
 
   function AuthService() {
+    var _getPrototypeOf2;
+
+    var _this;
+
     _classCallCheck(this, AuthService);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(AuthService).apply(this, arguments));
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(AuthService)).call.apply(_getPrototypeOf2, [this].concat(args)));
+
+    _defineProperty(_assertThisInitialized(_this), "idToken", null);
+
+    _defineProperty(_assertThisInitialized(_this), "profile", null);
+
+    _defineProperty(_assertThisInitialized(_this), "tokenExpiry", null);
+
+    return _this;
   }
 
   _createClass(AuthService, [{
-    key: "login",
-    // idToken = null;
-    // profile = null;
-    // tokenExpiry = null;
-    // Starts the user login flow
-    value: function login(customState) {
-      webAuth.authorize({
-        appState: customState
-      });
-    } // Handles the callback request from Auth0
-
-  }, {
-    key: "handleAuthentication",
-    value: function handleAuthentication() {
-      var _this = this;
-
-      return new Promise(function (resolve, reject) {
-        webAuth.parseHash(function (err, authResult) {
-          if (err) {
-            alert(err.error + '. Detailed error can be found in console.');
-            reject(err);
-          } else {
-            _this.localLogin(authResult);
-
-            resolve(authResult.idToken);
-          }
-        });
-      });
-    }
-  }, {
-    key: "localLogin",
-    value: function localLogin(authResult) {
-      idToken = authResult.idToken;
-      profile = authResult.idTokenPayload; // Convert the JWT expiry time from seconds to milliseconds
-
-      tokenExpiry = new Date(profile.exp * 1000);
-      localStorage.setItem(tokenExpiryKey, tokenExpiry);
-      localStorage.setItem(localStorageKey, 'true');
-      _store_store_js__WEBPACK_IMPORTED_MODULE_3__["default"].commit("UPDATE_USER_INFO", {
-        displayName: profile.name,
-        email: profile.email,
-        photoURL: profile.picture,
-        providerId: profile.sub.substr(0, profile.sub.indexOf('|')),
-        uid: profile.sub
-      });
-      this.emit(loginEvent, {
-        loggedIn: true,
-        profile: authResult.idTokenPayload,
-        state: authResult.appState || {}
-      });
-    }
-  }, {
     key: "renewTokens",
+    // Starts the user login flow
+    // login(customState) {
+    //     webAuth.authorize({
+    //         appState: customState
+    //     });
+    // }
+    // Handles the callback request from Auth0
+    // handleAuthentication() {
+    //     return new Promise((resolve, reject) => {
+    //         webAuth.parseHash((err, authResult) => {
+    //             if (err) {
+    //                 alert(err.error + '. Detailed error can be found in console.');
+    //                 reject(err);
+    //             } else {
+    //                 this.localLogin(authResult);
+    //                 resolve(authResult.idToken);
+    //             }
+    //         });
+    //     });
+    // }
+    // localLogin(authResult) {
+    //     this.idToken = authResult.idToken;
+    //     this.profile = authResult.idTokenPayload;
+    //     // Convert the JWT expiry time from seconds to milliseconds
+    //     this.tokenExpiry = new Date(this.profile.exp * 1000);
+    //     localStorage.setItem(tokenExpiryKey, this.tokenExpiry);
+    //     localStorage.setItem(localStorageKey, 'true');
+    //     store.commit("UPDATE_USER_INFO", {
+    //         displayName: this.profile.name,
+    //         email: this.profile.email,
+    //         photoURL: this.profile.picture,
+    //         providerId: this.profile.sub.substr(0, this.profile.sub.indexOf('|')),
+    //         uid: this.profile.sub
+    //     })
+    //     this.emit(loginEvent, {
+    //         loggedIn: true,
+    //         profile: authResult.idTokenPayload,
+    //         state: authResult.appState || {}
+    //     });
+    // }
     value: function renewTokens() {
       var _this2 = this;
 
@@ -112632,23 +112556,19 @@ var AuthService = /*#__PURE__*/function (_EventEmitter) {
           }
         });
       });
-    }
-  }, {
-    key: "logOut",
-    value: function logOut() {
-      localStorage.removeItem(localStorageKey);
-      localStorage.removeItem(tokenExpiryKey);
-      localStorage.removeItem('userInfo');
-      idToken = null;
-      tokenExpiry = null;
-      profile = null;
-      webAuth.logout({
-        returnTo: window.location.origin + process.env.BASE_URL
-      });
-      this.emit(loginEvent, {
-        loggedIn: false
-      });
-    }
+    } // logOut() {
+    //     localStorage.removeItem(localStorageKey);
+    //     localStorage.removeItem(tokenExpiryKey);
+    //     localStorage.removeItem('userInfo');
+    //     this.idToken = null;
+    //     this.tokenExpiry = null;
+    //     this.profile = null;
+    //     webAuth.logout({
+    //         returnTo: window.location.origin + process.env.BASE_URL
+    //     });
+    //     this.emit(loginEvent, { loggedIn: false });
+    // }
+
   }, {
     key: "isAuthenticated",
     value: function isAuthenticated() {
@@ -112679,9 +112599,13 @@ __webpack_require__.r(__webpack_exports__);
 
 var domain = "http://127.0.0.1:8080";
 /* harmony default export */ __webpack_exports__["default"] = (axios__WEBPACK_IMPORTED_MODULE_0___default.a.create({
-  domain: domain // You can add your headers here
+  domain: domain,
+  headers: {
+    'Accept': 'application/json'
+  } // You can add your headers here
+  // axios.defaults.headers.common['Authorization'] = 'Bearer ' + accessToken
 
-}));
+})); // .defaults.headers.
 
 /***/ }),
 
@@ -116802,6 +116726,9 @@ function addSubscriber(callback) {
     return _axios_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/auth/refresh-token", {
       accessToken: localStorage.getItem("accessToKen")
     });
+  },
+  logout: function logout() {
+    return _axios_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/logout");
   }
 });
 
@@ -118293,11 +118220,12 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       redirect: '/admin/dashboard/analytics'
     }, {
       path: '/admin/dashboard/analytics',
-      name: 'dashboard-analytics',
+      name: 'admin-dashboard-analytics',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(3), __webpack_require__.e(73)]).then(__webpack_require__.bind(null, /*! ./views/DashboardAnalytics.vue */ "./resources/js/src/views/DashboardAnalytics.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(3), __webpack_require__.e(71)]).then(__webpack_require__.bind(null, /*! ./views/DashboardAnalytics.vue */ "./resources/js/src/views/DashboardAnalytics.vue"));
       },
       meta: {
+        requiresAuth: true,
         rule: 'editor'
       }
     }, {
@@ -118499,7 +118427,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/apps/user/user-edit/:userId',
       name: 'admin-app-user-edit',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(4), __webpack_require__.e(59)]).then(__webpack_require__.bind(null, /*! @/views/apps/user/user-edit/UserEdit.vue */ "./resources/js/src/views/apps/user/user-edit/UserEdit.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(4), __webpack_require__.e(58)]).then(__webpack_require__.bind(null, /*! @/views/apps/user/user-edit/UserEdit.vue */ "./resources/js/src/views/apps/user/user-edit/UserEdit.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -118614,7 +118542,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/ui-elements/card/basic',
       name: 'admin-basic-cards',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(2), __webpack_require__.e(74)]).then(__webpack_require__.bind(null, /*! ./views/ui-elements/card/CardBasic.vue */ "./resources/js/src/views/ui-elements/card/CardBasic.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(2), __webpack_require__.e(72)]).then(__webpack_require__.bind(null, /*! ./views/ui-elements/card/CardBasic.vue */ "./resources/js/src/views/ui-elements/card/CardBasic.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -118765,7 +118693,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/components/avatar',
       name: 'component-avatar',
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 63).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/avatar/Avatar.vue */ "./resources/js/src/views/components/vuesax/avatar/Avatar.vue"));
+        return __webpack_require__.e(/*! import() */ 61).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/avatar/Avatar.vue */ "./resources/js/src/views/components/vuesax/avatar/Avatar.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -118784,7 +118712,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/components/breadcrumb',
       name: 'component-breadcrumb',
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 58).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/breadcrumb/Breadcrumb.vue */ "./resources/js/src/views/components/vuesax/breadcrumb/Breadcrumb.vue"));
+        return __webpack_require__.e(/*! import() */ 57).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/breadcrumb/Breadcrumb.vue */ "./resources/js/src/views/components/vuesax/breadcrumb/Breadcrumb.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -118822,7 +118750,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/components/button-group',
       name: 'component-button-group',
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 75).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/button-group/ButtonGroup.vue */ "./resources/js/src/views/components/vuesax/button-group/ButtonGroup.vue"));
+        return __webpack_require__.e(/*! import() */ 73).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/button-group/ButtonGroup.vue */ "./resources/js/src/views/components/vuesax/button-group/ButtonGroup.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -118860,7 +118788,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/components/collapse',
       name: 'component-collapse',
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 64).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/collapse/Collapse.vue */ "./resources/js/src/views/components/vuesax/collapse/Collapse.vue"));
+        return __webpack_require__.e(/*! import() */ 62).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/collapse/Collapse.vue */ "./resources/js/src/views/components/vuesax/collapse/Collapse.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -118879,7 +118807,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/components/dialogs',
       name: 'component-dialog',
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 70).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/dialogs/Dialogs.vue */ "./resources/js/src/views/components/vuesax/dialogs/Dialogs.vue"));
+        return __webpack_require__.e(/*! import() */ 68).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/dialogs/Dialogs.vue */ "./resources/js/src/views/components/vuesax/dialogs/Dialogs.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -118898,7 +118826,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/components/divider',
       name: 'component-divider',
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 60).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/divider/Divider.vue */ "./resources/js/src/views/components/vuesax/divider/Divider.vue"));
+        return __webpack_require__.e(/*! import() */ 59).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/divider/Divider.vue */ "./resources/js/src/views/components/vuesax/divider/Divider.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -118936,7 +118864,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/components/list',
       name: 'component-list',
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 65).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/list/List.vue */ "./resources/js/src/views/components/vuesax/list/List.vue"));
+        return __webpack_require__.e(/*! import() */ 63).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/list/List.vue */ "./resources/js/src/views/components/vuesax/list/List.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -119031,7 +118959,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/components/popup',
       name: 'component-popup',
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 61).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/popup/Popup.vue */ "./resources/js/src/views/components/vuesax/popup/Popup.vue"));
+        return __webpack_require__.e(/*! import() */ 60).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/popup/Popup.vue */ "./resources/js/src/views/components/vuesax/popup/Popup.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -119050,7 +118978,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/components/progress',
       name: 'component-progress',
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 81).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/progress/Progress.vue */ "./resources/js/src/views/components/vuesax/progress/Progress.vue"));
+        return __webpack_require__.e(/*! import() */ 79).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/progress/Progress.vue */ "./resources/js/src/views/components/vuesax/progress/Progress.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -119107,7 +119035,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/components/tabs',
       name: 'component-tabs',
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 66).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/tabs/Tabs.vue */ "./resources/js/src/views/components/vuesax/tabs/Tabs.vue"));
+        return __webpack_require__.e(/*! import() */ 64).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/tabs/Tabs.vue */ "./resources/js/src/views/components/vuesax/tabs/Tabs.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -119126,7 +119054,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/components/tooltip',
       name: 'component-tooltip',
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 67).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/tooltip/Tooltip.vue */ "./resources/js/src/views/components/vuesax/tooltip/Tooltip.vue"));
+        return __webpack_require__.e(/*! import() */ 65).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/tooltip/Tooltip.vue */ "./resources/js/src/views/components/vuesax/tooltip/Tooltip.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -119145,7 +119073,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/components/upload',
       name: 'component-upload',
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 71).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/upload/Upload.vue */ "./resources/js/src/views/components/vuesax/upload/Upload.vue"));
+        return __webpack_require__.e(/*! import() */ 69).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/upload/Upload.vue */ "./resources/js/src/views/components/vuesax/upload/Upload.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -119227,7 +119155,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/forms/form-elements/radio',
       name: 'form-element-radio',
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 79).then(__webpack_require__.bind(null, /*! ./views/forms/form-elements/radio/Radio.vue */ "./resources/js/src/views/forms/form-elements/radio/Radio.vue"));
+        return __webpack_require__.e(/*! import() */ 77).then(__webpack_require__.bind(null, /*! ./views/forms/form-elements/radio/Radio.vue */ "./resources/js/src/views/forms/form-elements/radio/Radio.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -119323,7 +119251,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/forms/form-wizard',
       name: 'extra-component-form-wizard',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(15), __webpack_require__.e(72)]).then(__webpack_require__.bind(null, /*! @/views/forms/form-wizard/FormWizard.vue */ "./resources/js/src/views/forms/form-wizard/FormWizard.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(15), __webpack_require__.e(70)]).then(__webpack_require__.bind(null, /*! @/views/forms/form-wizard/FormWizard.vue */ "./resources/js/src/views/forms/form-wizard/FormWizard.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -119440,7 +119368,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/pages/knowledge-base',
       name: 'page-knowledge-base',
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 80).then(__webpack_require__.bind(null, /*! @/views/pages/KnowledgeBase.vue */ "./resources/js/src/views/pages/KnowledgeBase.vue"));
+        return __webpack_require__.e(/*! import() */ 78).then(__webpack_require__.bind(null, /*! @/views/pages/KnowledgeBase.vue */ "./resources/js/src/views/pages/KnowledgeBase.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -119506,7 +119434,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/pages/search',
       name: 'page-search',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(76)]).then(__webpack_require__.bind(null, /*! @/views/pages/Search.vue */ "./resources/js/src/views/pages/Search.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(74)]).then(__webpack_require__.bind(null, /*! @/views/pages/Search.vue */ "./resources/js/src/views/pages/Search.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -119585,7 +119513,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/charts-and-maps/maps/google-map',
       name: 'extra-component-maps-google-map',
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 68).then(__webpack_require__.bind(null, /*! @/views/charts-and-maps/maps/google-map/GoogleMap.vue */ "./resources/js/src/views/charts-and-maps/maps/google-map/GoogleMap.vue"));
+        return __webpack_require__.e(/*! import() */ 66).then(__webpack_require__.bind(null, /*! @/views/charts-and-maps/maps/google-map/GoogleMap.vue */ "./resources/js/src/views/charts-and-maps/maps/google-map/GoogleMap.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -119626,7 +119554,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/extensions/quill-editor',
       name: 'extra-component-quill-editor',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(13), __webpack_require__.e(123), __webpack_require__.e(69)]).then(__webpack_require__.bind(null, /*! @/views/components/extra-components/quill-editor/QuillEditor.vue */ "./resources/js/src/views/components/extra-components/quill-editor/QuillEditor.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(13), __webpack_require__.e(123), __webpack_require__.e(67)]).then(__webpack_require__.bind(null, /*! @/views/components/extra-components/quill-editor/QuillEditor.vue */ "./resources/js/src/views/components/extra-components/quill-editor/QuillEditor.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -119759,7 +119687,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/extensions/clipboard',
       name: 'extra-component-clipboard',
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 77).then(__webpack_require__.bind(null, /*! @/views/components/extra-components/clipboard/Clipboard.vue */ "./resources/js/src/views/components/extra-components/clipboard/Clipboard.vue"));
+        return __webpack_require__.e(/*! import() */ 75).then(__webpack_require__.bind(null, /*! @/views/components/extra-components/clipboard/Clipboard.vue */ "./resources/js/src/views/components/extra-components/clipboard/Clipboard.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -119778,7 +119706,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/extensions/context-menu',
       name: 'extra-component-context-menu',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(125), __webpack_require__.e(78)]).then(__webpack_require__.bind(null, /*! @/views/components/extra-components/context-menu/ContextMenu.vue */ "./resources/js/src/views/components/extra-components/context-menu/ContextMenu.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(125), __webpack_require__.e(76)]).then(__webpack_require__.bind(null, /*! @/views/components/extra-components/context-menu/ContextMenu.vue */ "./resources/js/src/views/components/extra-components/context-menu/ContextMenu.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -119835,7 +119763,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/extensions/tree',
       name: 'extra-component-tree',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(126), __webpack_require__.e(57)]).then(__webpack_require__.bind(null, /*! @/views/components/extra-components/tree/Tree.vue */ "./resources/js/src/views/components/extra-components/tree/Tree.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(126), __webpack_require__.e(56)]).then(__webpack_require__.bind(null, /*! @/views/components/extra-components/tree/Tree.vue */ "./resources/js/src/views/components/extra-components/tree/Tree.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -119938,7 +119866,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/pages/login',
       name: 'admin-page-login',
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 56).then(__webpack_require__.bind(null, /*! @/views/pages/login/Login.vue */ "./resources/js/src/views/pages/login/Login.vue"));
+        return __webpack_require__.e(/*! import() */ 80).then(__webpack_require__.bind(null, /*! @/views/pages/login/Login.vue */ "./resources/js/src/views/pages/login/Login.vue"));
       },
       meta: {
         rule: 'editor'
@@ -119947,7 +119875,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/pages/register',
       name: 'admin-page-register',
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 62).then(__webpack_require__.bind(null, /*! @/views/pages/register/Register.vue */ "./resources/js/src/views/pages/register/Register.vue"));
+        return __webpack_require__.e(/*! import() */ 81).then(__webpack_require__.bind(null, /*! @/views/pages/register/Register.vue */ "./resources/js/src/views/pages/register/Register.vue"));
       },
       meta: {
         rule: 'editor'
@@ -120040,37 +119968,47 @@ router.afterEach(function () {
   }
 });
 router.beforeEach(function (to, from, next) {
-  firebase_app__WEBPACK_IMPORTED_MODULE_3___default.a.auth().onAuthStateChanged(function () {
-    // get firebase current user
-    var firebaseCurrentUser = firebase_app__WEBPACK_IMPORTED_MODULE_3___default.a.auth().currentUser; // if (
-    //     to.path === "/pages/login" ||
-    //     to.path === "/pages/forgot-password" ||
-    //     to.path === "/pages/error-404" ||
-    //     to.path === "/pages/error-500" ||
-    //     to.path === "/pages/register" ||
-    //     to.path === "/callback" ||
-    //     to.path === "/pages/comingsoon" ||
-    //     (auth.isAuthenticated() || firebaseCurrentUser)
-    // ) {
-    //     return next();
-    // }
-    // If auth required, check login. If login fails redirect to login page
+  var currentUser = window.localStorage.getItem("userInfo");
+  var accessToken = window.localStorage.getItem("accessToken"); // if (
+  //     to.path === "/admin/pages/login"            ||
+  //     to.path === "/admin/pages/forgot-password"  ||
+  //     to.path === "/admin/pages/error-404"        ||
+  //     to.path === "/admin/pages/error-500"        ||
+  //     to.path === "/admin/pages/register"         ||
+  //     to.path === "/admin/callback"               ||
+  //     to.path === "/admin/pages/comingsoon"       ||
+  //     (accessToken || currentUser)
+  // ) {
+  //     return next();
+  // }
+  // Logined User
 
-    if (to.meta.authRequired) {
-      if (!(_auth_authService__WEBPACK_IMPORTED_MODULE_2__["default"].isAuthenticated() || firebaseCurrentUser)) {
-        router.push({
-          path: '/pages/login',
-          query: {
-            to: to.path
-          }
-        });
-      }
+  if (currentUser != null && accessToken != null) {
+    if (to.name == "admin-page-login" || to.name == "admin-page-register" || to.name == "admin-page-forgot-password" || to.name == "admin-page-reset-password") {
+      router.push({
+        path: '/admin',
+        query: {
+          to: to.path
+        }
+      });
     }
+  } // #region Middleware
+  // Auth Required: If auth required, check login. If login fails redirect to login page
 
-    return next(); // Specify the current path as the customState parameter, meaning it
-    // will be returned to the application after auth
-    // auth.login({ target: to.path });
-  });
+
+  if (to.meta.requiresAuth) {
+    if (!(currentUser && accessToken)) {
+      router.push({
+        path: '/admin/pages/login',
+        query: {
+          to: to.path
+        }
+      });
+    }
+  } // #endregion
+
+
+  return next();
 });
 /* harmony default export */ __webpack_exports__["default"] = (router);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../node_modules/process/browser.js */ "./node_modules/process/browser.js")))
@@ -120545,54 +120483,96 @@ __webpack_require__.r(__webpack_exports__);
         password_confirmation = _payload$userDetails2.password_confirmation,
         country_id = _payload$userDetails2.country_id,
         gender = _payload$userDetails2.gender,
-        fax = _payload$userDetails2.fax; // Check confirm password
+        fax = _payload$userDetails2.fax;
+    return new Promise(function (resolve, reject) {
+      // Check confirm password
+      if (password !== password_confirmation) {
+        reject({
+          message: "Password doesn't match. Please try again."
+        });
+      }
 
-    if (password !== password_confirmation) {
-      reject({
-        message: "Password doesn't match. Please try again."
+      _http_requests_auth_airlock_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].registerUser(name, last_name, email, phone, password, password_confirmation, country_id, gender, fax).then(function (response) {
+        // Redirect User
+        console.log("Response Register Airlock: ", response);
+        _router__WEBPACK_IMPORTED_MODULE_4__["default"].push(_router__WEBPACK_IMPORTED_MODULE_4__["default"].currentRoute.query.to || "/admin"); // Update data in localStorage
+
+        localStorage.setItem("accessToken", response.data.accessToken); // commit('UPDATE_USER_INFO', response.data.userData, {root: true})
+        // Set bearer token in axios
+
+        commit("SET_BEARER", response.data.accessToken);
+        resolve(response);
+      }).catch(function (error) {
+        reject(error);
       });
-    }
-
-    _http_requests_auth_airlock_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].registerUser(name, last_name, email, phone, password, password_confirmation, country_id, gender, fax).then(function (response) {
-      // Redirect User
-      console.log("Response Register Airlock: ", response);
-      _router__WEBPACK_IMPORTED_MODULE_4__["default"].push(_router__WEBPACK_IMPORTED_MODULE_4__["default"].currentRoute.query.to || "/admin"); // Update data in localStorage
-
-      localStorage.setItem("accessToken", response.data.accessToken); // commit('UPDATE_USER_INFO', response.data.userData, {root: true})
-      // Set bearer token in axios
-
-      commit("SET_BEARER", response.data.accessToken);
-    }).catch(function (error) {
-      reject(error);
     });
   },
   // Login
   loginAirlock: function loginAirlock(_ref6, payload) {
     var commit = _ref6.commit;
-    _http_requests_auth_airlock_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].login(payload.userDetails.email, payload.userDetails.password).then(function (response) {
-      // If there's user data in response
-      if (response.data.userData) {
-        console.log("Response: ", response); // Navigate User to homepage
+    return new Promise(function (resolve, reject) {
+      _http_requests_auth_airlock_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].login(payload.userDetails.email, payload.userDetails.password).then(function (response) {
+        // If there's user data in response
+        if (response.data.userData) {
+          // Navigate User to homepage
+          _router__WEBPACK_IMPORTED_MODULE_4__["default"].push(_router__WEBPACK_IMPORTED_MODULE_4__["default"].currentRoute.query.to || '/admin'); // Set accessToken
 
-        _router__WEBPACK_IMPORTED_MODULE_4__["default"].push(_router__WEBPACK_IMPORTED_MODULE_4__["default"].currentRoute.query.to || '/admin'); // Set accessToken
+          localStorage.setItem("accessToken", response.data.accessToken); // Update user details
 
-        localStorage.setItem("accessToken", response.data.accessToken); // Update user details
+          commit('UPDATE_USER_INFO', response.data.userData, {
+            root: true
+          }); // Set bearer token in axios
 
-        commit('UPDATE_USER_INFO', response.data.userData, {
-          root: true
-        }); // Set bearer token in axios
-
-        commit("SET_BEARER", response.data.accessToken); // resolve(response)
-      } else {
-        console.error('Error: ', response);
-        reject({
-          message: "Wrong Email or Password"
-        });
-      }
-    }).catch(function (error) {
-      reject(error);
+          commit("SET_BEARER", response.data.accessToken);
+          resolve(response);
+        } else {
+          reject({
+            message: "Wrong Email or Password"
+          });
+        }
+      }).catch(function (error) {
+        reject(error);
+      });
     });
   },
+  // Logout
+  logoutAirlock: function logoutAirlock(_ref7, payload) {
+    var commit = _ref7.commit;
+    return new Promise(function (resolve, reject) {
+      _http_requests_auth_airlock_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].logout().then(function (response) {
+        if (response.data.message == "logouted") {
+          // Set bearer token in axios
+          commit("SET_BEARER", null); // Update user details
+          // commit('UPDATE_USER_INFO', null);
+          // Remove AccessToken from LocaleStorage
+
+          localStorage.removeItem('accessToken'); // Remove UserInfo from LocaleStorage
+
+          localStorage.removeItem('userInfo');
+          resolve(response.message);
+        } else {
+          reject({
+            data: response.data,
+            message: "Error logouted"
+          });
+        }
+      }).catch(function (error) {
+        reject(error);
+      });
+    });
+  },
+  // logOut() {
+  //     localStorage.removeItem(localStorageKey);
+  //     localStorage.removeItem(tokenExpiryKey);
+  //     localStorage.removeItem('userInfo');
+  //     idToken = null;
+  //     tokenExpiry = null;
+  //     profile = null;
+  //     webAuth.logout({
+  //         returnTo: window.location.origin + process.env.BASE_URL
+  //     });
+  //     this.emit(loginEvent, { loggedIn: false });
+  // }
   // #endregion
   fetchAccessToken: function fetchAccessToken() {
     return new Promise(function (resolve) {
@@ -122019,8 +121999,8 @@ var mutations = {
 
       if (payload[property] != null) {
         // If some of user property is null - user default property defined in state.AppActiveUser
-        state.AppActiveUser[property] = payload[property]; // Update key in localStorage
-
+        // state.AppActiveUser[property] = payload[property]
+        // Update key in localStorage
         userInfo[property] = payload[property];
       }
     } // Store data in localStorage
@@ -122069,21 +122049,20 @@ __webpack_require__.r(__webpack_exports__);
 // *From Auth - Data will be received from auth provider
 
 var userDefaults = {
-  photoURL: __webpack_require__(/*! @assets/images/portrait/small/avatar-s-11.jpg */ "./resources/assets/images/portrait/small/avatar-s-11.jpg"),
+  photoURL: null,
+  // require("@assets/images/portrait/small/avatar-s-11.jpg"), // From Auth
+  // id              : 0,        // From Auth
+  name: null,
   // From Auth
-  id: 0,
+  last_name: null,
   // From Auth
-  name: "John Doe",
-  // From Auth
-  last_name: "John Doe",
-  // From Auth
-  email: "null@null.com",
+  email: null,
   // From Auth
   gender: null,
   // From Auth
   // about       : "Dessert chocolate cake lemon drops jujubes. Biscuit cupcake ice cream bear claw brownie brownie marshmallow.",
-  status: "online",
-  userRole: "admin"
+  status: null,
+  userRole: null
 };
 var userInfoLocalStorage = JSON.parse(localStorage.getItem("userInfo")) || {}; // Set default values for active-user
 // More data can be added by auth provider or other plugins/packages

@@ -47,13 +47,14 @@ const router = new Router({
         // =============================================================================
                 {
                     path: '/',
-                    redirect: '/admin/dashboard/analytics'
+                    redirect: '/admin/dashboard/analytics',
                 },
                 {
                     path: '/admin/dashboard/analytics',
-                    name: 'dashboard-analytics',
+                    name: 'admin-dashboard-analytics',
                     component: () => import('./views/DashboardAnalytics.vue'),
                     meta: {
+                        requiresAuth: true,
                         rule: 'editor',
                     }
                 },
@@ -1389,37 +1390,46 @@ router.afterEach(() => {
 })
 
 router.beforeEach((to, from, next) => {
-    firebase.auth().onAuthStateChanged(() => {
 
-        // get firebase current user
-        const firebaseCurrentUser = firebase.auth().currentUser
+    const currentUser = window.localStorage.getItem("userInfo");
+    const accessToken = window.localStorage.getItem("accessToken");
 
-        // if (
-        //     to.path === "/pages/login" ||
-        //     to.path === "/pages/forgot-password" ||
-        //     to.path === "/pages/error-404" ||
-        //     to.path === "/pages/error-500" ||
-        //     to.path === "/pages/register" ||
-        //     to.path === "/callback" ||
-        //     to.path === "/pages/comingsoon" ||
-        //     (auth.isAuthenticated() || firebaseCurrentUser)
-        // ) {
-        //     return next();
-        // }
+    // if (
+    //     to.path === "/admin/pages/login"            ||
+    //     to.path === "/admin/pages/forgot-password"  ||
+    //     to.path === "/admin/pages/error-404"        ||
+    //     to.path === "/admin/pages/error-500"        ||
+    //     to.path === "/admin/pages/register"         ||
+    //     to.path === "/admin/callback"               ||
+    //     to.path === "/admin/pages/comingsoon"       ||
+    //     (accessToken || currentUser)
+    // ) {
+    //     return next();
+    // }
 
-        // If auth required, check login. If login fails redirect to login page
-        if(to.meta.authRequired) {
-          if (!(auth.isAuthenticated() || firebaseCurrentUser)) {
-            router.push({ path: '/pages/login', query: { to: to.path } })
-          }
+    // Logined User
+    if (currentUser != null && accessToken != null) {
+        if (
+            to.name == "admin-page-login"          ||
+            to.name == "admin-page-register"       ||
+            to.name == "admin-page-forgot-password"||
+            to.name == "admin-page-reset-password"   
+        ) {
+            router.push({ path: '/admin', query: { to: to.path } })
         }
+        
+    }
 
-        return next()
-        // Specify the current path as the customState parameter, meaning it
-        // will be returned to the application after auth
-        // auth.login({ target: to.path });
+    // #region Middleware
+    // Auth Required: If auth required, check login. If login fails redirect to login page
+    if(to.meta.requiresAuth) {
+        if (!(currentUser && accessToken)) {
+            router.push({ path: '/admin/pages/login', query: { to: to.path } })
+        }
+    }
+    // #endregion
 
-    });
+    return next();
 
 });
 

@@ -33,7 +33,6 @@ Route::group(['middleware' => ['auth:airlock']], function() {
     Route::get('/user', function (Request $request) {
         return response()->json(['user' => $request->user()], 200);
     })->name("user");
-
     Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 });
 

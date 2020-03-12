@@ -61,7 +61,7 @@ export default {
         // If user is already logged in notify and exit
         if (state.isUserLoggedIn()) {
             // Close animation if passed as payload
-            if(payload.closeAnimation) payload.closeAnimation()
+            if (payload.closeAnimation) payload.closeAnimation()
 
             payload.notify({
                 title: 'Login Attempt',
@@ -269,24 +269,28 @@ export default {
     //             })
     //         })
     // },
-    updateUsername({ commit }, payload) {
+    updateUsername({
+        commit
+    }, payload) {
         payload.user.updateProfile({
             displayName: payload.displayName
         }).then(() => {
 
             // If username update is success
-              // update in localstorage
+            // update in localstorage
             let newUserData = Object.assign({}, payload.user.providerData[0])
             newUserData.displayName = payload.displayName
-            commit('UPDATE_USER_INFO', newUserData, {root: true})
+            commit('UPDATE_USER_INFO', newUserData, {
+                root: true
+            })
 
             // If reload is required to get fresh data after update
-              // Reload current page
-            if(payload.isReloadRequired) {
+            // Reload current page
+            if (payload.isReloadRequired) {
                 router.push(router.currentRoute.query.to || '/')
             }
         }).catch((err) => {
-              payload.notify({
+            payload.notify({
                 time: 8800,
                 title: 'Error',
                 text: err.message,
@@ -299,60 +303,71 @@ export default {
 
 
     // JWT
-    loginJWT({ commit }, payload) {
+    loginJWT({
+        commit
+    }, payload) {
 
-      return new Promise((resolve,reject) => {
-        jwt.login(payload.userDetails.email, payload.userDetails.password)
-            .then(response => {
+        return new Promise((resolve, reject) => {
+            jwt.login(payload.userDetails.email, payload.userDetails.password)
+                .then(response => {
 
-                // If there's user data in response
-                if(response.data.userData) {
-                    // Navigate User to homepage
-                    router.push(router.currentRoute.query.to || '/')
+                    // If there's user data in response
+                    if (response.data.userData) {
+                        // Navigate User to homepage
+                        router.push(router.currentRoute.query.to || '/')
 
-                    // Set accessToken
-                    localStorage.setItem("accessToken", response.data.accessToken)
+                        // Set accessToken
+                        localStorage.setItem("accessToken", response.data.accessToken)
 
-                    // Update user details
-                    commit('UPDATE_USER_INFO', response.data.userData, {root: true})
+                        // Update user details
+                        commit('UPDATE_USER_INFO', response.data.userData, {
+                            root: true
+                        })
 
-                    // Set bearer token in axios
-                    commit("SET_BEARER", response.data.accessToken)
+                        // Set bearer token in axios
+                        commit("SET_BEARER", response.data.accessToken)
 
-                    resolve(response)
-                }else {
-                    reject({message: "Wrong Email or Password"})
-                }
+                        resolve(response)
+                    } else {
+                        reject({
+                            message: "Wrong Email or Password"
+                        })
+                    }
 
-            })
-            .catch(error => { reject(error) })
-      })
+                })
+                .catch(error => {
+                    reject(error)
+                })
+        })
     },
 
     registerUserJWT({ commit }, payload) {
 
-      const { displayName, email, password, confirmPassword } = payload.userDetails
+        const { displayName, email, password, confirmPassword } = payload.userDetails
 
-      return new Promise((resolve,reject) => {
+        return new Promise((resolve, reject) => {
 
-        // Check confirm password
-        if(password !== confirmPassword) {
-          reject({message: "Password doesn't match. Please try again."})
-        }
+            // Check confirm password
+            if (password !== confirmPassword) {
+                reject({
+                    message: "Password doesn't match. Please try again."
+                })
+            }
 
-        jwt.registerUser(displayName, email, password)
-          .then(response => {
-            // Redirect User
-            router.push(router.currentRoute.query.to || '/')
+            jwt.registerUser(displayName, email, password).then(response => {
+                // Redirect User
+                router.push(router.currentRoute.query.to || '/')
 
-            // Update data in localStorage
-            localStorage.setItem("accessToken", response.data.accessToken)
-            commit('UPDATE_USER_INFO', response.data.userData, {root: true})
+                // Update data in localStorage
+                localStorage.setItem("accessToken", response.data.accessToken)
+                commit('UPDATE_USER_INFO', response.data.userData, { root: true })
 
-            resolve(response)
-          })
-          .catch(error => { reject(error) })
-      })
+                resolve(response)
+            })
+            .catch(error => {
+                reject(error)
+            })
+        })
     },
 
     // #region My Airlock Auth 
@@ -365,58 +380,113 @@ export default {
     registerUserAirlock({ commit }, payload) {
         const { name, last_name, email, phone, password, password_confirmation, country_id, gender, fax } = payload.userDetails;
 
-        // Check confirm password
-        if(password !== password_confirmation) {
-            reject({message: "Password doesn't match. Please try again."})
-        }
+        return new Promise((resolve, reject) => {
+            // Check confirm password
+            if (password !== password_confirmation) {
+                reject({
+                    message: "Password doesn't match. Please try again."
+                })
+            }
 
-        airlock.registerUser(name, last_name, email, phone, password, password_confirmation, country_id, gender, fax).then(response => {
-            // Redirect User
-            console.log("Response Register Airlock: ", response);
-            router.push(router.currentRoute.query.to || "/admin");
+            airlock.registerUser(name, last_name, email, phone, password, password_confirmation, country_id, gender, fax).then(response => {
+                // Redirect User
+                console.log("Response Register Airlock: ", response);
+                router.push(router.currentRoute.query.to || "/admin");
 
-            // Update data in localStorage
-            localStorage.setItem("accessToken", response.data.accessToken)
-            // commit('UPDATE_USER_INFO', response.data.userData, {root: true})
+                // Update data in localStorage
+                localStorage.setItem("accessToken", response.data.accessToken)
+                // commit('UPDATE_USER_INFO', response.data.userData, {root: true})
 
-            // Set bearer token in axios
-            commit("SET_BEARER", response.data.accessToken);
+                // Set bearer token in axios
+                commit("SET_BEARER", response.data.accessToken);
+                resolve(response)
 
-        }).catch(error => { reject(error) })
+            }).catch(error => {
+                reject(error)
+            })
+        });
     },
 
     // Login
     loginAirlock({ commit }, payload) {
-        airlock.login(payload.userDetails.email, payload.userDetails.password).then(response => {
-            // If there's user data in response
-            if(response.data.userData) {
-                console.log("Response: ", response);
-                
-                // Navigate User to homepage
-                router.push(router.currentRoute.query.to || '/admin');
+        return new Promise((resolve, reject) => {
+            airlock.login(payload.userDetails.email, payload.userDetails.password).then(response => {
+                // If there's user data in response
+                if (response.data.userData) {
+                    // Navigate User to homepage
+                    router.push(router.currentRoute.query.to || '/admin');
 
-                // Set accessToken
-                localStorage.setItem("accessToken", response.data.accessToken);
+                    // Set accessToken
+                    localStorage.setItem("accessToken", response.data.accessToken);
 
-                // Update user details
-                commit('UPDATE_USER_INFO', response.data.userData, {root: true});
+                    // Update user details
+                    commit('UPDATE_USER_INFO', response.data.userData, {
+                        root: true
+                    });
 
-                // Set bearer token in axios
-                commit("SET_BEARER", response.data.accessToken);
+                    // Set bearer token in axios
+                    commit("SET_BEARER", response.data.accessToken);
 
-                // resolve(response)
-            }else {
-                console.error('Error: ', response);
-                reject({message: "Wrong Email or Password"});
-            }
+                    resolve(response)
+                } else {
+                    reject({
+                        message: "Wrong Email or Password"
+                    });
+                }
 
-        }).catch(error => { reject(error) })
+            }).catch(error => {
+                reject(error);
+            })
+        })
     },
+    // Logout
+    logoutAirlock({ commit }, payload) {
+        return new Promise((resolve, reject) => {
+            airlock.logout().then((response) => {
+                if (response.data.message == "logouted") {
+                    // Set bearer token in axios
+                    commit("SET_BEARER", null);
+                    // Update user details
+                    // commit('UPDATE_USER_INFO', null);
+                    // Remove AccessToken from LocaleStorage
+                    localStorage.removeItem('accessToken');
+                    // Remove UserInfo from LocaleStorage
+                    localStorage.removeItem('userInfo');
+                    resolve(response.message);
+                } else {
+                    reject({
+                        data: response.data,
+                        message: "Error logouted"
+                    });
+                }
+            }).catch((error) => {
+                reject(error);
+            });
+        });
+    },
+
+    // logOut() {
+    //     localStorage.removeItem(localStorageKey);
+    //     localStorage.removeItem(tokenExpiryKey);
+    //     localStorage.removeItem('userInfo');
+
+    //     idToken = null;
+    //     tokenExpiry = null;
+    //     profile = null;
+
+    //     webAuth.logout({
+    //         returnTo: window.location.origin + process.env.BASE_URL
+    //     });
+
+    //     this.emit(loginEvent, { loggedIn: false });
+    // }
     // #endregion
 
     fetchAccessToken() {
-      return new Promise((resolve) => {
-        jwt.refreshToken().then(response => { resolve(response) })
-      })
+        return new Promise((resolve) => {
+            jwt.refreshToken().then(response => {
+                resolve(response)
+            })
+        })
     }
 }

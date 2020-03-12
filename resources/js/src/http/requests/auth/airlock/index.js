@@ -70,5 +70,8 @@ export default {
         return axios.post("/api/auth/refresh-token", {
             accessToken: localStorage.getItem("accessToKen")
         })
+    },
+    logout() {
+        return axios.post("/api/logout")
     }
 }
