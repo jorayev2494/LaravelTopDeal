@@ -1381,6 +1381,7 @@ const router = new Router({
     ],
 })
 
+// #region  Global AfterEach()
 router.afterEach(() => {
   // Remove initial loading
   const appLoading = document.getElementById('loading-bg')
@@ -1388,43 +1389,48 @@ router.afterEach(() => {
         appLoading.style.display = "none";
     }
 })
+// #endregion
 
+// #region  Global BeforeEach()
 router.beforeEach((to, from, next) => {
 
     const currentUser = window.localStorage.getItem("userInfo");
     const accessToken = window.localStorage.getItem("accessToken");
 
-    // if (
-    //     to.path === "/admin/pages/login"            ||
-    //     to.path === "/admin/pages/forgot-password"  ||
-    //     to.path === "/admin/pages/error-404"        ||
-    //     to.path === "/admin/pages/error-500"        ||
-    //     to.path === "/admin/pages/register"         ||
-    //     to.path === "/admin/callback"               ||
-    //     to.path === "/admin/pages/comingsoon"       ||
-    //     (accessToken || currentUser)
-    // ) {
-    //     return next();
-    // }
-
-    // Logined User
+    // Authenticated User
     if (currentUser != null && accessToken != null) {
         if (
-            to.name == "admin-page-login"          ||
-            to.name == "admin-page-register"       ||
-            to.name == "admin-page-forgot-password"||
+            to.name == "admin-page-login"               ||
+            to.name == "admin-page-register"            ||
+            to.name == "admin-page-forgot-password"     ||
             to.name == "admin-page-reset-password"   
         ) {
             router.push({ path: '/admin', query: { to: to.path } })
-        }
-        
+        }        
     }
 
-    // #region Middleware
-    // Auth Required: If auth required, check login. If login fails redirect to login page
+    // Guest-s
+    if (currentUser == null && accessToken == null) {
+        
+        if (
+            to.name === "admin-page-login"              ||
+            to.name === "admin-page-forgot-password"    ||
+            to.name === "admin-page-error-404"          ||
+            to.name === "admin-page-error-500"          ||
+            to.name === "admin-page-register"           ||
+            to.name === "admin-callback"                ||
+            to.name === "admin-page-comingsoon"       
+            // || (accessToken || currentUser)
+        ) {
+            return next();
+        }
+    }
+
+    // #region Middleware - Auth Required: If auth required, check login. If login fails redirect to login page
     if(to.meta.requiresAuth) {
         if (!(currentUser && accessToken)) {
-            router.push({ path: '/admin/pages/login', query: { to: to.path } })
+            // router.push({ name: 'admin-page-login', query: { to: to.path } })
+            router.push({ name: 'admin-page-login' })
         }
     }
     // #endregion
@@ -1432,5 +1438,6 @@ router.beforeEach((to, from, next) => {
     return next();
 
 });
+// #endregion
 
 export default router

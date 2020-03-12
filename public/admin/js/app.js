@@ -112597,12 +112597,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 // axios
 
-var domain = "http://127.0.0.1:8080";
+var domain = "http://127.0.0.1:8080"; // Header Configs
+
+var headerConfigs = {};
+headerConfigs["Accept"] = 'application/json';
+if (window.localStorage.getItem('accessToken')) headerConfigs["Authorization"] = 'Bearer ' + window.localStorage.getItem('accessToken');
 /* harmony default export */ __webpack_exports__["default"] = (axios__WEBPACK_IMPORTED_MODULE_0___default.a.create({
   domain: domain,
-  headers: {
-    'Accept': 'application/json'
-  } // You can add your headers here
+  headers: headerConfigs // headers: { 
+  // 'Accept'        : 'application/json',
+  // 'Authorization' : window.localStorage.getItem('accessToken')
+  // },
+  // axios.defaults.headers.common['Authorization'] = 'Bearer ' + accessToken
+  // You can add your headers here
   // axios.defaults.headers.common['Authorization'] = 'Bearer ' + accessToken
 
 })); // .defaults.headers.
@@ -116639,6 +116646,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(vue_select__WEBPACK_IMPORTE
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _axios_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../axios.js */ "./resources/js/src/axios.js");
+ // axios.defaults.headers.common['Authorization'] = window.localStorage.getItem('accessToken') 
+//                                                 ? 'Bearer ' + window.localStorage.getItem('accessToken') 
+//                                                 : "";
 
 /* harmony default export */ __webpack_exports__["default"] = (_axios_js__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
@@ -119958,7 +119968,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     path: '/admin/*',
     redirect: '/admin/pages/error-404'
   }]
-});
+}); // #region  Global AfterEach()
+
 router.afterEach(function () {
   // Remove initial loading
   var appLoading = document.getElementById('loading-bg');
@@ -119966,22 +119977,12 @@ router.afterEach(function () {
   if (appLoading) {
     appLoading.style.display = "none";
   }
-});
+}); // #endregion
+// #region  Global BeforeEach()
+
 router.beforeEach(function (to, from, next) {
   var currentUser = window.localStorage.getItem("userInfo");
-  var accessToken = window.localStorage.getItem("accessToken"); // if (
-  //     to.path === "/admin/pages/login"            ||
-  //     to.path === "/admin/pages/forgot-password"  ||
-  //     to.path === "/admin/pages/error-404"        ||
-  //     to.path === "/admin/pages/error-500"        ||
-  //     to.path === "/admin/pages/register"         ||
-  //     to.path === "/admin/callback"               ||
-  //     to.path === "/admin/pages/comingsoon"       ||
-  //     (accessToken || currentUser)
-  // ) {
-  //     return next();
-  // }
-  // Logined User
+  var accessToken = window.localStorage.getItem("accessToken"); // Authenticated User
 
   if (currentUser != null && accessToken != null) {
     if (to.name == "admin-page-login" || to.name == "admin-page-register" || to.name == "admin-page-forgot-password" || to.name == "admin-page-reset-password") {
@@ -119992,24 +119993,30 @@ router.beforeEach(function (to, from, next) {
         }
       });
     }
-  } // #region Middleware
-  // Auth Required: If auth required, check login. If login fails redirect to login page
+  } // Guest-s
+
+
+  if (currentUser == null && accessToken == null) {
+    if (to.name === "admin-page-login" || to.name === "admin-page-forgot-password" || to.name === "admin-page-error-404" || to.name === "admin-page-error-500" || to.name === "admin-page-register" || to.name === "admin-callback" || to.name === "admin-page-comingsoon" // || (accessToken || currentUser)
+    ) {
+        return next();
+      }
+  } // #region Middleware - Auth Required: If auth required, check login. If login fails redirect to login page
 
 
   if (to.meta.requiresAuth) {
     if (!(currentUser && accessToken)) {
+      // router.push({ name: 'admin-page-login', query: { to: to.path } })
       router.push({
-        path: '/admin/pages/login',
-        query: {
-          to: to.path
-        }
+        name: 'admin-page-login'
       });
     }
   } // #endregion
 
 
   return next();
-});
+}); // #endregion
+
 /* harmony default export */ __webpack_exports__["default"] = (router);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../node_modules/process/browser.js */ "./node_modules/process/browser.js")))
 
@@ -120515,8 +120522,7 @@ __webpack_require__.r(__webpack_exports__);
         // If there's user data in response
         if (response.data.userData) {
           // Navigate User to homepage
-          _router__WEBPACK_IMPORTED_MODULE_4__["default"].push(_router__WEBPACK_IMPORTED_MODULE_4__["default"].currentRoute.query.to || '/admin'); // Set accessToken
-
+          // Set accessToken
           localStorage.setItem("accessToken", response.data.accessToken); // Update user details
 
           commit('UPDATE_USER_INFO', response.data.userData, {
@@ -120525,6 +120531,7 @@ __webpack_require__.r(__webpack_exports__);
 
           commit("SET_BEARER", response.data.accessToken);
           resolve(response);
+          _router__WEBPACK_IMPORTED_MODULE_4__["default"].push(_router__WEBPACK_IMPORTED_MODULE_4__["default"].currentRoute.query.to || '/admin');
         } else {
           reject({
             message: "Wrong Email or Password"
@@ -120536,30 +120543,36 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   // Logout
-  logoutAirlock: function logoutAirlock(_ref7, payload) {
+  logoutAirlock: function logoutAirlock(_ref7, payload) {// return new Promise((resolve, reject) => {
+    //     airlock.logout().then((response) => {
+    //         console.log('Success Logoued', response);
+    //         if (response.data.message == "logouted") {
+    //             // Set bearer token in axios
+    //             commit("SET_BEARER", "");
+    //             // this.emit(loginEvent, { loggedIn: false });
+    //             // Update user details
+    //             // commit('UPDATE_USER_INFO', null);
+    //             // Remove AccessToken from LocaleStorage
+    //             window.localStorage.removeItem('accessToken');
+    //             // Remove UserInfo from LocaleStorage
+    //             window.localStorage.removeItem('userInfo');
+    //             // window.localStorage.clear();
+    //             // setTimeout(() => {
+    //                 // this.emit(loginEvent, { loggedIn: false });
+    //             // }, 0);
+    //             // resolve(response.message);
+    //         } else {
+    //         //     reject({
+    //         //         data: response.data,
+    //         //         message: "Error logouted"
+    //         //     });
+    //         }
+    //     }).catch((error) => {
+    //         reject(error);
+    //     });
+    // });
+
     var commit = _ref7.commit;
-    return new Promise(function (resolve, reject) {
-      _http_requests_auth_airlock_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].logout().then(function (response) {
-        if (response.data.message == "logouted") {
-          // Set bearer token in axios
-          commit("SET_BEARER", null); // Update user details
-          // commit('UPDATE_USER_INFO', null);
-          // Remove AccessToken from LocaleStorage
-
-          localStorage.removeItem('accessToken'); // Remove UserInfo from LocaleStorage
-
-          localStorage.removeItem('userInfo');
-          resolve(response.message);
-        } else {
-          reject({
-            data: response.data,
-            message: "Error logouted"
-          });
-        }
-      }).catch(function (error) {
-        reject(error);
-      });
-    });
   },
   // logOut() {
   //     localStorage.removeItem(localStorageKey);

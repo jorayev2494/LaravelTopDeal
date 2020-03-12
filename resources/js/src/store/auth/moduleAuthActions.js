@@ -414,26 +414,26 @@ export default {
                 // If there's user data in response
                 if (response.data.userData) {
                     // Navigate User to homepage
-                    router.push(router.currentRoute.query.to || '/admin');
-
+                    
                     // Set accessToken
                     localStorage.setItem("accessToken", response.data.accessToken);
-
+                    
                     // Update user details
                     commit('UPDATE_USER_INFO', response.data.userData, {
                         root: true
                     });
-
+                    
                     // Set bearer token in axios
                     commit("SET_BEARER", response.data.accessToken);
-
+                    
                     resolve(response)
+
+                    router.push(router.currentRoute.query.to || '/admin');
                 } else {
                     reject({
                         message: "Wrong Email or Password"
                     });
                 }
-
             }).catch(error => {
                 reject(error);
             })
@@ -441,28 +441,41 @@ export default {
     },
     // Logout
     logoutAirlock({ commit }, payload) {
-        return new Promise((resolve, reject) => {
-            airlock.logout().then((response) => {
-                if (response.data.message == "logouted") {
-                    // Set bearer token in axios
-                    commit("SET_BEARER", null);
-                    // Update user details
-                    // commit('UPDATE_USER_INFO', null);
-                    // Remove AccessToken from LocaleStorage
-                    localStorage.removeItem('accessToken');
-                    // Remove UserInfo from LocaleStorage
-                    localStorage.removeItem('userInfo');
-                    resolve(response.message);
-                } else {
-                    reject({
-                        data: response.data,
-                        message: "Error logouted"
-                    });
-                }
-            }).catch((error) => {
-                reject(error);
-            });
-        });
+        // return new Promise((resolve, reject) => {
+        //     airlock.logout().then((response) => {
+        //         console.log('Success Logoued', response);
+        //         if (response.data.message == "logouted") {
+        //             // Set bearer token in axios
+        //             commit("SET_BEARER", "");
+
+        //             // this.emit(loginEvent, { loggedIn: false });
+
+        //             // Update user details
+        //             // commit('UPDATE_USER_INFO', null);
+
+        //             // Remove AccessToken from LocaleStorage
+        //             window.localStorage.removeItem('accessToken');
+
+        //             // Remove UserInfo from LocaleStorage
+        //             window.localStorage.removeItem('userInfo');
+
+        //             // window.localStorage.clear();
+
+        //             // setTimeout(() => {
+        //                 // this.emit(loginEvent, { loggedIn: false });
+        //             // }, 0);
+
+        //             // resolve(response.message);
+        //         } else {
+        //         //     reject({
+        //         //         data: response.data,
+        //         //         message: "Error logouted"
+        //         //     });
+        //         }
+        //     }).catch((error) => {
+        //         reject(error);
+        //     });
+        // });
     },
 
     // logOut() {

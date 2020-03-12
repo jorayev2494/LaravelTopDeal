@@ -25,7 +25,7 @@
         data() {
             return {
                 email: 'admin@admin.com',
-                password: 'adminadmin',
+                password: 'laravel',
                 checkbox_remember_me: !false
             }
         },

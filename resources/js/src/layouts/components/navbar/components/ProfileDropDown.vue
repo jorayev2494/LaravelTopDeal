@@ -48,7 +48,7 @@
 
                     <vs-divider class="m-1" />
 
-                    <li class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white" @click="logout">
+                    <li class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white" @click="logout()">
                         <feather-icon icon="LogOutIcon" svgClasses="w-4 h-4" />
                         <span class="ml-2">Logout</span>
                     </li>
@@ -61,6 +61,8 @@
 <script>
     // import firebase from 'firebase/app'
     // import 'firebase/auth'
+    // import airlock from "../../http/requests/auth/airlock/index.js"
+    import airlock from '../../../../http/requests/auth/airlock/index.js'
 
     export default {
         data() {
@@ -75,7 +77,37 @@
         },
         methods: {
             logout() {
-                this.$store.dispatch('auth/logoutAirlock');
+                // this.$store.dispatch('auth/logoutAirlock');
+
+                airlock.logout().then((response) => {
+                    if (response.data.message == "logouted") {
+                        if (window.localStorage.getItem("accessToken")) {
+                            // Set bearer token in axios
+                            // this.$store.commit("SET_BEARER", "");
+
+                            // Update user details
+                            // commit('UPDATE_USER_INFO', null);
+
+                            // Remove AccessToken from LocaleStorage
+                            window.localStorage.removeItem('accessToken');
+
+                            // Remove UserInfo from LocaleStorage
+                            window.localStorage.removeItem('userInfo');
+
+                            // this.emit(loginEvent, { loggedIn: false });
+                            this.$acl.change('admin')
+
+                            this.$router.push({ name: 'admin-page-login' }).catch(() => {})
+                        }
+                    } else {
+                        reject({
+                            message: "Error logouted"
+                        });
+                    }
+                }).catch((error) => {
+                    console.log("Error: ", error);
+                    // reject(error);
+                });
 
                 // If JWT login
                 // if (localStorage.getItem("accessToken")) {
@@ -88,13 +120,15 @@
                 // localStorage.removeItem('userInfo')
 
                 // This is just for demo Purpose. If user clicks on logout -> redirect
-                this.$router.push('/admin/pages/login').catch(() => {})
+                // this.$router.push('/admin/pages/login');    // .catch(() => {})
+                // this.$router.push({ name: 'admin-page-login' });    // .catch(() => {})
             },
 
             // logout() {
 
             //     // if user is logged in via auth0
             //     if (this.$auth.profile) this.$auth.logOut();
+
 
             //     // if user is logged in via firebase
             //     const firebaseCurrentUser = firebase.auth().currentUser
