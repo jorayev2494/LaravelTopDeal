@@ -118207,7 +118207,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/dashboard/analytics',
       name: 'dashboard-analytics',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(3), __webpack_require__.e(73)]).then(__webpack_require__.bind(null, /*! ./views/DashboardAnalytics.vue */ "./resources/js/src/views/DashboardAnalytics.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(3), __webpack_require__.e(71)]).then(__webpack_require__.bind(null, /*! ./views/DashboardAnalytics.vue */ "./resources/js/src/views/DashboardAnalytics.vue"));
       },
       meta: {
         rule: 'editor'
@@ -118411,7 +118411,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/apps/user/user-edit/:userId',
       name: 'admin-app-user-edit',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(4), __webpack_require__.e(59)]).then(__webpack_require__.bind(null, /*! @/views/apps/user/user-edit/UserEdit.vue */ "./resources/js/src/views/apps/user/user-edit/UserEdit.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(4), __webpack_require__.e(58)]).then(__webpack_require__.bind(null, /*! @/views/apps/user/user-edit/UserEdit.vue */ "./resources/js/src/views/apps/user/user-edit/UserEdit.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -118526,7 +118526,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/ui-elements/card/basic',
       name: 'admin-basic-cards',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(2), __webpack_require__.e(74)]).then(__webpack_require__.bind(null, /*! ./views/ui-elements/card/CardBasic.vue */ "./resources/js/src/views/ui-elements/card/CardBasic.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(2), __webpack_require__.e(72)]).then(__webpack_require__.bind(null, /*! ./views/ui-elements/card/CardBasic.vue */ "./resources/js/src/views/ui-elements/card/CardBasic.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -118677,7 +118677,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/components/avatar',
       name: 'component-avatar',
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 63).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/avatar/Avatar.vue */ "./resources/js/src/views/components/vuesax/avatar/Avatar.vue"));
+        return __webpack_require__.e(/*! import() */ 61).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/avatar/Avatar.vue */ "./resources/js/src/views/components/vuesax/avatar/Avatar.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -118696,7 +118696,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/components/breadcrumb',
       name: 'component-breadcrumb',
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 58).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/breadcrumb/Breadcrumb.vue */ "./resources/js/src/views/components/vuesax/breadcrumb/Breadcrumb.vue"));
+        return __webpack_require__.e(/*! import() */ 57).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/breadcrumb/Breadcrumb.vue */ "./resources/js/src/views/components/vuesax/breadcrumb/Breadcrumb.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -118734,7 +118734,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/components/button-group',
       name: 'component-button-group',
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 75).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/button-group/ButtonGroup.vue */ "./resources/js/src/views/components/vuesax/button-group/ButtonGroup.vue"));
+        return __webpack_require__.e(/*! import() */ 73).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/button-group/ButtonGroup.vue */ "./resources/js/src/views/components/vuesax/button-group/ButtonGroup.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -118772,7 +118772,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/components/collapse',
       name: 'component-collapse',
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 64).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/collapse/Collapse.vue */ "./resources/js/src/views/components/vuesax/collapse/Collapse.vue"));
+        return __webpack_require__.e(/*! import() */ 62).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/collapse/Collapse.vue */ "./resources/js/src/views/components/vuesax/collapse/Collapse.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -118791,7 +118791,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/components/dialogs',
       name: 'component-dialog',
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 70).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/dialogs/Dialogs.vue */ "./resources/js/src/views/components/vuesax/dialogs/Dialogs.vue"));
+        return __webpack_require__.e(/*! import() */ 68).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/dialogs/Dialogs.vue */ "./resources/js/src/views/components/vuesax/dialogs/Dialogs.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -118810,7 +118810,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/components/divider',
       name: 'component-divider',
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 60).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/divider/Divider.vue */ "./resources/js/src/views/components/vuesax/divider/Divider.vue"));
+        return __webpack_require__.e(/*! import() */ 59).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/divider/Divider.vue */ "./resources/js/src/views/components/vuesax/divider/Divider.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -118848,7 +118848,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/components/list',
       name: 'component-list',
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 65).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/list/List.vue */ "./resources/js/src/views/components/vuesax/list/List.vue"));
+        return __webpack_require__.e(/*! import() */ 63).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/list/List.vue */ "./resources/js/src/views/components/vuesax/list/List.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -118943,7 +118943,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/components/popup',
       name: 'component-popup',
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 61).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/popup/Popup.vue */ "./resources/js/src/views/components/vuesax/popup/Popup.vue"));
+        return __webpack_require__.e(/*! import() */ 60).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/popup/Popup.vue */ "./resources/js/src/views/components/vuesax/popup/Popup.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -118962,7 +118962,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/components/progress',
       name: 'component-progress',
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 81).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/progress/Progress.vue */ "./resources/js/src/views/components/vuesax/progress/Progress.vue"));
+        return __webpack_require__.e(/*! import() */ 79).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/progress/Progress.vue */ "./resources/js/src/views/components/vuesax/progress/Progress.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -119019,7 +119019,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/components/tabs',
       name: 'component-tabs',
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 66).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/tabs/Tabs.vue */ "./resources/js/src/views/components/vuesax/tabs/Tabs.vue"));
+        return __webpack_require__.e(/*! import() */ 64).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/tabs/Tabs.vue */ "./resources/js/src/views/components/vuesax/tabs/Tabs.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -119038,7 +119038,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/components/tooltip',
       name: 'component-tooltip',
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 67).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/tooltip/Tooltip.vue */ "./resources/js/src/views/components/vuesax/tooltip/Tooltip.vue"));
+        return __webpack_require__.e(/*! import() */ 65).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/tooltip/Tooltip.vue */ "./resources/js/src/views/components/vuesax/tooltip/Tooltip.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -119057,7 +119057,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/components/upload',
       name: 'component-upload',
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 71).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/upload/Upload.vue */ "./resources/js/src/views/components/vuesax/upload/Upload.vue"));
+        return __webpack_require__.e(/*! import() */ 69).then(__webpack_require__.bind(null, /*! @/views/components/vuesax/upload/Upload.vue */ "./resources/js/src/views/components/vuesax/upload/Upload.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -119139,7 +119139,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/forms/form-elements/radio',
       name: 'form-element-radio',
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 79).then(__webpack_require__.bind(null, /*! ./views/forms/form-elements/radio/Radio.vue */ "./resources/js/src/views/forms/form-elements/radio/Radio.vue"));
+        return __webpack_require__.e(/*! import() */ 77).then(__webpack_require__.bind(null, /*! ./views/forms/form-elements/radio/Radio.vue */ "./resources/js/src/views/forms/form-elements/radio/Radio.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -119235,7 +119235,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/forms/form-wizard',
       name: 'extra-component-form-wizard',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(15), __webpack_require__.e(72)]).then(__webpack_require__.bind(null, /*! @/views/forms/form-wizard/FormWizard.vue */ "./resources/js/src/views/forms/form-wizard/FormWizard.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(15), __webpack_require__.e(70)]).then(__webpack_require__.bind(null, /*! @/views/forms/form-wizard/FormWizard.vue */ "./resources/js/src/views/forms/form-wizard/FormWizard.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -119352,7 +119352,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/pages/knowledge-base',
       name: 'page-knowledge-base',
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 80).then(__webpack_require__.bind(null, /*! @/views/pages/KnowledgeBase.vue */ "./resources/js/src/views/pages/KnowledgeBase.vue"));
+        return __webpack_require__.e(/*! import() */ 78).then(__webpack_require__.bind(null, /*! @/views/pages/KnowledgeBase.vue */ "./resources/js/src/views/pages/KnowledgeBase.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -119418,7 +119418,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/pages/search',
       name: 'page-search',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(76)]).then(__webpack_require__.bind(null, /*! @/views/pages/Search.vue */ "./resources/js/src/views/pages/Search.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(74)]).then(__webpack_require__.bind(null, /*! @/views/pages/Search.vue */ "./resources/js/src/views/pages/Search.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -119497,7 +119497,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/charts-and-maps/maps/google-map',
       name: 'extra-component-maps-google-map',
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 68).then(__webpack_require__.bind(null, /*! @/views/charts-and-maps/maps/google-map/GoogleMap.vue */ "./resources/js/src/views/charts-and-maps/maps/google-map/GoogleMap.vue"));
+        return __webpack_require__.e(/*! import() */ 66).then(__webpack_require__.bind(null, /*! @/views/charts-and-maps/maps/google-map/GoogleMap.vue */ "./resources/js/src/views/charts-and-maps/maps/google-map/GoogleMap.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -119538,7 +119538,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/extensions/quill-editor',
       name: 'extra-component-quill-editor',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(13), __webpack_require__.e(123), __webpack_require__.e(69)]).then(__webpack_require__.bind(null, /*! @/views/components/extra-components/quill-editor/QuillEditor.vue */ "./resources/js/src/views/components/extra-components/quill-editor/QuillEditor.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(13), __webpack_require__.e(123), __webpack_require__.e(67)]).then(__webpack_require__.bind(null, /*! @/views/components/extra-components/quill-editor/QuillEditor.vue */ "./resources/js/src/views/components/extra-components/quill-editor/QuillEditor.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -119671,7 +119671,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/extensions/clipboard',
       name: 'extra-component-clipboard',
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 77).then(__webpack_require__.bind(null, /*! @/views/components/extra-components/clipboard/Clipboard.vue */ "./resources/js/src/views/components/extra-components/clipboard/Clipboard.vue"));
+        return __webpack_require__.e(/*! import() */ 75).then(__webpack_require__.bind(null, /*! @/views/components/extra-components/clipboard/Clipboard.vue */ "./resources/js/src/views/components/extra-components/clipboard/Clipboard.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -119690,7 +119690,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/extensions/context-menu',
       name: 'extra-component-context-menu',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(125), __webpack_require__.e(78)]).then(__webpack_require__.bind(null, /*! @/views/components/extra-components/context-menu/ContextMenu.vue */ "./resources/js/src/views/components/extra-components/context-menu/ContextMenu.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(125), __webpack_require__.e(76)]).then(__webpack_require__.bind(null, /*! @/views/components/extra-components/context-menu/ContextMenu.vue */ "./resources/js/src/views/components/extra-components/context-menu/ContextMenu.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -119747,7 +119747,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/extensions/tree',
       name: 'extra-component-tree',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(126), __webpack_require__.e(57)]).then(__webpack_require__.bind(null, /*! @/views/components/extra-components/tree/Tree.vue */ "./resources/js/src/views/components/extra-components/tree/Tree.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(126), __webpack_require__.e(56)]).then(__webpack_require__.bind(null, /*! @/views/components/extra-components/tree/Tree.vue */ "./resources/js/src/views/components/extra-components/tree/Tree.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -119850,7 +119850,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/admin/pages/login',
       name: 'page-login',
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 56).then(__webpack_require__.bind(null, /*! @/views/pages/login/Login.vue */ "./resources/js/src/views/pages/login/Login.vue"));
+        return __webpack_require__.e(/*! import() */ 80).then(__webpack_require__.bind(null, /*! @/views/pages/login/Login.vue */ "./resources/js/src/views/pages/login/Login.vue"));
       },
       meta: {
         rule: 'editor'
@@ -119859,7 +119859,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/pages/register',
       name: 'page-register',
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 62).then(__webpack_require__.bind(null, /*! @/views/pages/register/Register.vue */ "./resources/js/src/views/pages/register/Register.vue"));
+        return __webpack_require__.e(/*! import() */ 81).then(__webpack_require__.bind(null, /*! @/views/pages/register/Register.vue */ "./resources/js/src/views/pages/register/Register.vue"));
       },
       meta: {
         rule: 'editor'
