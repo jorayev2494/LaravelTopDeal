@@ -22,6 +22,7 @@ export default new AclCreate({
         moderator:  new AclRule("moderator").or("admin").generate(),
         user:       new AclRule("moderator").or("moderator").or("admin").generate(),
         guest:      new AclRule("guest").generate(),
+        any:        new AclRule("guest").or("user").or("moderator").or("admin").generate(),
         // editor: new AclRule("editor").or("admin").generate(),
         // public: new AclRule("public").or("admin").or("editor").generate(),
     }

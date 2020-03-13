@@ -1380,7 +1380,7 @@ const router = new Router({
                     name: 'admin-page-login',
                     component: () => import('@/views/pages/login/Login.vue'),
                     meta: {
-                        rule: 'guest'
+                        rule: 'any'
                     }
                 },
                 {
@@ -1481,13 +1481,17 @@ router.beforeEach((to, from, next) => {
     const currentUser = window.localStorage.getItem("userInfo");
     const accessToken = window.localStorage.getItem("accessToken");
 
+    // if (to.name == "admin-page-not-authorized")
+        // router.push({ name: 'admin-page-login' })
+
     // Authenticated User
     if (currentUser != null && accessToken != null) {
         if (
             to.name == "admin-page-login"               ||
             to.name == "admin-page-register"            ||
             to.name == "admin-page-forgot-password"     ||
-            to.name == "admin-page-reset-password"   
+            to.name == "admin-page-reset-password"      ||
+            to.name == "admin-page-not-authorized"   
         ) {
             router.push({ path: '/admin', query: { to: to.path } })
         }        
