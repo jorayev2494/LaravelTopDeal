@@ -18,154 +18,56 @@ const webAuth = new auth0.WebAuth({
     scope: 'openid profile email'
 });
 
-// class AuthService extends EventEmitter {
-//     // idToken = null;
-//     // profile = null;
-//     // tokenExpiry = null;
-
-//     // Starts the user login flow
-//     login(customState) {
-//         webAuth.authorize({
-//             appState: customState
-//         });
-//     }
-
-//     // Handles the callback request from Auth0
-//     handleAuthentication() {
-//         return new Promise((resolve, reject) => {
-//             webAuth.parseHash((err, authResult) => {
-//                 if (err) {
-//                     alert(err.error + '. Detailed error can be found in console.');
-//                     reject(err);
-//                 } else {
-//                     this.localLogin(authResult);
-//                     resolve(authResult.idToken);
-//                 }
-//             });
-//         });
-//     }
-
-//     localLogin(authResult) {
-//         this.idToken = authResult.idToken;
-//         this.profile = authResult.idTokenPayload;
-
-//         // Convert the JWT expiry time from seconds to milliseconds
-//         this.tokenExpiry = new Date(this.profile.exp * 1000);
-//         localStorage.setItem(tokenExpiryKey, this.tokenExpiry);
-//         localStorage.setItem(localStorageKey, 'true');
-
-//         store.commit("UPDATE_USER_INFO", {
-//             displayName: this.profile.name,
-//             email: this.profile.email,
-//             photoURL: this.profile.picture,
-//             providerId: this.profile.sub.substr(0, this.profile.sub.indexOf('|')),
-//             uid: this.profile.sub
-//         })
-
-//         this.emit(loginEvent, {
-//             loggedIn: true,
-//             profile: authResult.idTokenPayload,
-//             state: authResult.appState || {}
-//         });
-//     }
-
-//     renewTokens() {
-//         // reject can be used as parameter in promise for using reject
-//         return new Promise((resolve) => {
-//             if (localStorage.getItem(localStorageKey) !== "true") {
-//                 // return reject("Not logged in");
-//             }
-
-//             webAuth.checkSession({}, (err, authResult) => {
-//                 if (err) {
-//                     // reject(err);
-//                 } else {
-//                     this.localLogin(authResult);
-//                     resolve(authResult);
-//                 }
-//             });
-//         });
-//     }
-
-//     logOut() {
-//         localStorage.removeItem(localStorageKey);
-//         localStorage.removeItem(tokenExpiryKey);
-//         localStorage.removeItem('userInfo');
-
-//         this.idToken = null;
-//         this.tokenExpiry = null;
-//         this.profile = null;
-
-//         webAuth.logout({
-//             returnTo: window.location.origin + process.env.BASE_URL
-//         });
-
-//         this.emit(loginEvent, { loggedIn: false });
-//     }
-
-//     isAuthenticated() {
-//         return (
-//             new Date(Date.now()) < new Date(localStorage.getItem(tokenExpiryKey)) &&
-//             localStorage.getItem(localStorageKey) === 'true'
-//         );
-//     }
-// }
-
-var idToken = 1;
-var profile = "admin";
-var tokenExpiry = 4445464686886;
-
-
 class AuthService extends EventEmitter {
-    // idToken = null;
-    // profile = null;
-    // tokenExpiry = null;
+    idToken = null;
+    profile = null;
+    tokenExpiry = null;
 
     // Starts the user login flow
-    login(customState) {
-        webAuth.authorize({
-            appState: customState
-        });
-    }
+    // login(customState) {
+    //     webAuth.authorize({
+    //         appState: customState
+    //     });
+    // }
 
     // Handles the callback request from Auth0
-    handleAuthentication() {
-        return new Promise((resolve, reject) => {
-            webAuth.parseHash((err, authResult) => {
-                if (err) {
-                    alert(err.error + '. Detailed error can be found in console.');
-                    reject(err);
-                } else {
-                    this.localLogin(authResult);
-                    resolve(authResult.idToken);
-                }
-            });
-        });
-    }
+    // handleAuthentication() {
+    //     return new Promise((resolve, reject) => {
+    //         webAuth.parseHash((err, authResult) => {
+    //             if (err) {
+    //                 alert(err.error + '. Detailed error can be found in console.');
+    //                 reject(err);
+    //             } else {
+    //                 this.localLogin(authResult);
+    //                 resolve(authResult.idToken);
+    //             }
+    //         });
+    //     });
+    // }
 
-    localLogin(authResult) {
-        idToken = authResult.idToken;
-        profile = authResult.idTokenPayload;
+    // localLogin(authResult) {
+    //     this.idToken = authResult.idToken;
+    //     this.profile = authResult.idTokenPayload;
 
-        // Convert the JWT expiry time from seconds to milliseconds
-        tokenExpiry = new Date(profile.exp * 1000);
-        localStorage.setItem(tokenExpiryKey, tokenExpiry);
-        localStorage.setItem(localStorageKey, 'true');
+    //     // Convert the JWT expiry time from seconds to milliseconds
+    //     this.tokenExpiry = new Date(this.profile.exp * 1000);
+    //     localStorage.setItem(tokenExpiryKey, this.tokenExpiry);
+    //     localStorage.setItem(localStorageKey, 'true');
 
-        store.commit("UPDATE_USER_INFO", {
-            displayName: profile.name,
-            email: profile.email,
-            photoURL: profile.picture,
-            providerId: profile.sub.substr(0, profile.sub.indexOf('|')),
-            uid: profile.sub
-        })
+    //     store.commit("UPDATE_USER_INFO", {
+    //         displayName: this.profile.name,
+    //         email: this.profile.email,
+    //         photoURL: this.profile.picture,
+    //         providerId: this.profile.sub.substr(0, this.profile.sub.indexOf('|')),
+    //         uid: this.profile.sub
+    //     })
 
-        this.emit(loginEvent, {
-            loggedIn: true,
-            profile: authResult.idTokenPayload,
-            state: authResult.appState || {}
-        });
-    }
+    //     this.emit(loginEvent, {
+    //         loggedIn: true,
+    //         profile: authResult.idTokenPayload,
+    //         state: authResult.appState || {}
+    //     });
+    // }
 
     renewTokens() {
         // reject can be used as parameter in promise for using reject
@@ -185,23 +87,23 @@ class AuthService extends EventEmitter {
         });
     }
 
-    logOut() {
-        localStorage.removeItem(localStorageKey);
-        localStorage.removeItem(tokenExpiryKey);
-        localStorage.removeItem('userInfo');
+    // logOut() {
+    //     localStorage.removeItem(localStorageKey);
+    //     localStorage.removeItem(tokenExpiryKey);
+    //     localStorage.removeItem('userInfo');
 
-        idToken = null;
-        tokenExpiry = null;
-        profile = null;
+    //     this.idToken = null;
+    //     this.tokenExpiry = null;
+    //     this.profile = null;
 
-        webAuth.logout({
-            returnTo: window.location.origin + process.env.BASE_URL
-        });
+    //     webAuth.logout({
+    //         returnTo: window.location.origin + process.env.BASE_URL
+    //     });
 
-        this.emit(loginEvent, { loggedIn: false });
-    }
+    //     this.emit(loginEvent, { loggedIn: false });
+    // }
 
-    isAuthenticated() {
+    isAuthenticated() { 
         return (
             new Date(Date.now()) < new Date(localStorage.getItem(tokenExpiryKey)) &&
             localStorage.getItem(localStorageKey) === 'true'

@@ -103,4 +103,4 @@ new Vue({
     i18n,
     acl,
     render: h => h(App)
-}).$mount('#app')
+}).$mount('#app');

@@ -27,8 +27,14 @@ class CreateUsersTable extends Migration
 
             $table->enum('gender', ['male', 'female', 'other'])->nullable()->default('other');
             
+            // Country Id
             $table->bigInteger('country_id')->unsigned();
-            $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');           
+            $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');    
+            
+            // Role Id
+            $table->bigInteger('role_id')->unsigned();
+            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
+            
             
             $table->json('contact_options')->nullable();
             
@@ -36,8 +42,8 @@ class CreateUsersTable extends Migration
             
             $table->string('fax', 100)->nullable();
             
-            $table->json('location');
-            $table->json('social_links');
+            $table->json('location')->nullable();
+            $table->json('social_links')->nullable();
             
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

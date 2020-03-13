@@ -8,10 +8,11 @@ use CarbonDateTimeCast;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Airlock\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use HasApiTokens, Notifiable;
 
     // Passwords
     public const ADMIN_PASSWORD     = 476674;
@@ -48,7 +49,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
-        "country_id"
+        "country_id",
+        "role_id"
     ];
 
     /**
@@ -66,9 +68,20 @@ class User extends Authenticatable
         "social_links"      => "array",
     ];
 
-    protected $with = ["country"];
+    protected $with = ["role", "country"];
 
     #region RelationShips
+    // public function role()
+    // {
+    //     return $this->hasOne('App\Models\Role', 'id', 'role_id');
+    // }
+
+
+    public function role()
+    {
+        return $this->belongsTo('App\Models\Role', 'role_id', 'id');
+    }
+
     public function country()
     {
         return $this->hasOne('App\Models\Country', 'id', 'country_id');

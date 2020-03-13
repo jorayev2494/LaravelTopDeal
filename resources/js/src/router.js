@@ -39,6 +39,7 @@ const router = new Router({
     // MAIN LAYOUT ROUTES
     // =============================================================================
             path: '/admin',
+            name: 'admin',
             component: () => import('./layouts/main/Main.vue'),
             children: [
         // =============================================================================
@@ -46,14 +47,15 @@ const router = new Router({
         // =============================================================================
                 {
                     path: '/',
-                    redirect: '/admin/dashboard/analytics'
+                    redirect: '/admin/dashboard/analytics',
                 },
                 {
                     path: '/admin/dashboard/analytics',
-                    name: 'dashboard-analytics',
+                    name: 'admin-dashboard-analytics',
                     component: () => import('./views/DashboardAnalytics.vue'),
                     meta: {
-                        rule: 'editor',
+                        requiresAuth: true,
+                        rule: 'admin',
                     }
                 },
                 {
@@ -61,6 +63,7 @@ const router = new Router({
                     name: 'dashboard-ecommerce',
                     component: () => import('./views/DashboardECommerce.vue'),
                     meta: {
+                        requiresAuth: true,
                         rule: 'admin'
                     }
                 },
@@ -72,36 +75,39 @@ const router = new Router({
                 {
                     path: '/admin/apps/todo',
                     redirect: '/admin/apps/todo/all',
-                    name: 'todo',
+                    name: 'admin-todo',
                 },
                 {
                     path: '/admin/apps/todo/:filter',
                     component: () => import('./views/apps/todo/Todo.vue'),
                     meta: {
-                        rule: 'editor',
+                        requiresAuth: true,
+                        rule: 'admin',
                         parent: "todo",
                         no_scroll: true,
                     }
                 },
                 {
                     path: '/admin/apps/chat',
-                    name: 'chat',
+                    name: 'admin-chat',
                     component: () => import('./views/apps/chat/Chat.vue'),
                     meta: {
-                        rule: 'editor',
+                        requiresAuth: true,
+                        rule: 'admin',
                         no_scroll: true,
                     }
                 },
                 {
                     path: '/admin/apps/email',
                     redirect: '/admin/apps/email/inbox',
-                    name: 'email',
+                    name: 'admin-email',
                 },
                 {
                     path: '/admin/apps/email/:filter',
                     component: () => import('./views/apps/email/Email.vue'),
                     meta: {
-                        rule: 'editor',
+                        requiresAuth: true,
+                        rule: 'admin',
                         parent: 'email',
                         no_scroll: true,
                     }
@@ -111,7 +117,8 @@ const router = new Router({
                     name: 'calendar-simple-calendar',
                     component: () => import('./views/apps/calendar/SimpleCalendar.vue'),
                     meta: {
-                        rule: 'editor',
+                        requiresAuth: true,
+                        rule: 'admin',
                         no_scroll: true,
                     }
                 },
@@ -120,27 +127,29 @@ const router = new Router({
                     name: 'ecommerce-shop',
                     component: () => import('./views/apps/eCommerce/ECommerceShop.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'eCommerce'},
                             { title: 'Shop', active: true },
                         ],
                         pageTitle: 'Shop',
-                        rule: 'editor'
+                        rule: 'admin'
                     }
                 },
                 {
                     path: '/admin/apps/eCommerce/wish-list',
-                    name: 'ecommerce-wish-list',
+                    name: 'admin-ecommerce-wish-list',
                     component: () => import('./views/apps/eCommerce/ECommerceWishList.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'eCommerce', url:'/admin/apps/eCommerce/shop'},
                             { title: 'Wish List', active: true },
                         ],
                         pageTitle: 'Wish List',
-                        rule: 'editor'
+                        rule: 'admin'
                     }
                 },
                 {
@@ -148,13 +157,14 @@ const router = new Router({
                     name: 'admin-ecommerce-checkout',
                     component: () => import('./views/apps/eCommerce/ECommerceCheckout.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'eCommerce', url:'/admin/apps/eCommerce/shop'},
                             { title: 'Checkout', active: true },
                         ],
                         pageTitle: 'Checkout',
-                        rule: 'editor'
+                        rule: 'admin'
                     }
                 },
                 /*
@@ -175,6 +185,7 @@ const router = new Router({
                     name: 'admin-ecommerce-item-detail-view',
                     component: () => import('./views/apps/eCommerce/ECommerceItemDetailView.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'eCommerce'},
@@ -183,7 +194,7 @@ const router = new Router({
                         ],
                         parent: "ecommerce-item-detail-view",
                         pageTitle: 'Item Details',
-                        rule: 'editor'
+                        rule: 'admin'
                     }
                 },
                 {
@@ -191,13 +202,14 @@ const router = new Router({
                     name: 'admin-app-user-list',
                     component: () => import('@/views/apps/user/user-list/UserList.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'User' },
                             { title: 'List', active: true },
                         ],
                         pageTitle: 'User List',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -205,13 +217,14 @@ const router = new Router({
                     name: 'admin-app-user-view',
                     component: () => import('@/views/apps/user/UserView.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'User' },
                             { title: 'View', active: true },
                         ],
                         pageTitle: 'User View',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -219,13 +232,14 @@ const router = new Router({
                     name: 'admin-app-user-edit',
                     component: () => import('@/views/apps/user/user-edit/UserEdit.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'User' },
                             { title: 'Edit', active: true },
                         ],
                         pageTitle: 'User Edit',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
         // =============================================================================
@@ -236,13 +250,14 @@ const router = new Router({
                     name: 'admin-data-list-list-view',
                     component: () => import('@/views/ui-elements/data-list/list-view/DataListListView.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Data List'},
                             { title: 'List View', active: true },
                         ],
                         pageTitle: 'List View',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -250,13 +265,14 @@ const router = new Router({
                     name: 'admin-data-list-thumb-view',
                     component: () => import('@/views/ui-elements/data-list/thumb-view/DataListThumbView.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Data List'},
                             { title: 'Thumb View', active: true },
                         ],
                         pageTitle: 'Thumb View',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -264,13 +280,14 @@ const router = new Router({
                     name: 'admin-grid-vuesax',
                     component: () => import('@/views/ui-elements/grid/vuesax/GridVuesax.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Grid'},
                             { title: 'Vuesax', active: true },
                         ],
                         pageTitle: 'Grid',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -278,13 +295,14 @@ const router = new Router({
                     name: 'admin-grid-tailwind',
                     component: () => import('@/views/ui-elements/grid/tailwind/GridTailwind.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Grid'},
                             { title: 'Tailwind', active: true },
                         ],
                         pageTitle: 'Tailwind Grid',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -292,12 +310,13 @@ const router = new Router({
                     name: 'admin-colors',
                     component: () => import('./views/ui-elements/colors/Colors.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Colors', active: true },
                         ],
                         pageTitle: 'Colors',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -305,13 +324,14 @@ const router = new Router({
                     name: 'admin-basic-cards',
                     component: () => import('./views/ui-elements/card/CardBasic.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Card' },
                             { title: 'Basic Cards', active: true },
                         ],
                         pageTitle: 'Basic Cards',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -319,13 +339,14 @@ const router = new Router({
                     name: 'admin-statistics-cards',
                     component: () => import('./views/ui-elements/card/CardStatistics.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Card' },
                             { title: 'Statistics Cards', active: true },
                         ],
                         pageTitle: 'Statistics Card',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -333,13 +354,14 @@ const router = new Router({
                     name: 'admin-analytics-cards',
                     component: () => import('./views/ui-elements/card/CardAnalytics.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Card' },
                             { title: 'Analytics Card', active: true },
                         ],
                         pageTitle: 'Analytics Card',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -347,13 +369,14 @@ const router = new Router({
                     name: 'card-actions',
                     component: () => import('./views/ui-elements/card/CardActions.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Card' },
                             { title: 'Card Actions', active: true },
                         ],
                         pageTitle: 'Card Actions',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -361,13 +384,14 @@ const router = new Router({
                     name: 'card-colors',
                     component: () => import('./views/ui-elements/card/CardColors.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Card' },
                             { title: 'Card Colors', active: true },
                         ],
                         pageTitle: 'Card Colors',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -375,12 +399,13 @@ const router = new Router({
                     name: 'table',
                     component: () => import('./views/ui-elements/table/Table.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Table', active: true },
                         ],
                         pageTitle: 'Table',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -388,6 +413,7 @@ const router = new Router({
                     name: 'ag-grid-table',
                     component: () => import('./views/ui-elements/ag-grid-table/AgGridTable.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'agGrid Table', active: true },
@@ -405,6 +431,7 @@ const router = new Router({
                     name: 'component-alert',
                     component: () => import('@/views/components/vuesax/alert/Alert.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Components' },
@@ -419,6 +446,7 @@ const router = new Router({
                     name: 'component-avatar',
                     component: () => import('@/views/components/vuesax/avatar/Avatar.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Components' },
@@ -433,6 +461,7 @@ const router = new Router({
                     name: 'component-breadcrumb',
                     component: () => import('@/views/components/vuesax/breadcrumb/Breadcrumb.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Components' },
@@ -447,6 +476,7 @@ const router = new Router({
                     name: 'component-button',
                     component: () => import('@/views/components/vuesax/button/Button.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Components' },
@@ -461,6 +491,7 @@ const router = new Router({
                     name: 'component-button-group',
                     component: () => import('@/views/components/vuesax/button-group/ButtonGroup.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Components' },
@@ -475,6 +506,7 @@ const router = new Router({
                     name: 'component-chip',
                     component: () => import('@/views/components/vuesax/chip/Chip.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Components' },
@@ -489,6 +521,7 @@ const router = new Router({
                     name: 'component-collapse',
                     component: () => import('@/views/components/vuesax/collapse/Collapse.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Components' },
@@ -503,6 +536,7 @@ const router = new Router({
                     name: 'component-dialog',
                     component: () => import('@/views/components/vuesax/dialogs/Dialogs.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Components' },
@@ -517,6 +551,7 @@ const router = new Router({
                     name: 'component-divider',
                     component: () => import('@/views/components/vuesax/divider/Divider.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Components' },
@@ -531,6 +566,7 @@ const router = new Router({
                     name: 'component-drop-down',
                     component: () => import('@/views/components/vuesax/dropdown/Dropdown.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Components' },
@@ -545,6 +581,7 @@ const router = new Router({
                     name: 'component-list',
                     component: () => import('@/views/components/vuesax/list/List.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Components' },
@@ -559,6 +596,7 @@ const router = new Router({
                     name: 'component-loading',
                     component: () => import('@/views/components/vuesax/loading/Loading.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Components' },
@@ -573,6 +611,7 @@ const router = new Router({
                     name: 'component-navbar',
                     component: () => import('@/views/components/vuesax/navbar/Navbar.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Components' },
@@ -587,6 +626,7 @@ const router = new Router({
                     name: 'component-notifications',
                     component: () => import('@/views/components/vuesax/notifications/Notifications.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Components' },
@@ -601,6 +641,7 @@ const router = new Router({
                     name: 'component-pagination',
                     component: () => import('@/views/components/vuesax/pagination/Pagination.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Components' },
@@ -615,6 +656,7 @@ const router = new Router({
                     name: 'component-popup',
                     component: () => import('@/views/components/vuesax/popup/Popup.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/' },
                             { title: 'Components' },
@@ -629,6 +671,7 @@ const router = new Router({
                     name: 'component-progress',
                     component: () => import('@/views/components/vuesax/progress/Progress.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Components' },
@@ -643,6 +686,7 @@ const router = new Router({
                     name: 'component-sidebar',
                     component: () => import('@/views/components/vuesax/sidebar/Sidebar.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Components' },
@@ -657,6 +701,7 @@ const router = new Router({
                     name: 'component-slider',
                     component: () => import('@/views/components/vuesax/slider/Slider.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Components' },
@@ -671,6 +716,7 @@ const router = new Router({
                     name: 'component-tabs',
                     component: () => import('@/views/components/vuesax/tabs/Tabs.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Components' },
@@ -685,6 +731,7 @@ const router = new Router({
                     name: 'component-tooltip',
                     component: () => import('@/views/components/vuesax/tooltip/Tooltip.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Components' },
@@ -699,6 +746,7 @@ const router = new Router({
                     name: 'component-upload',
                     component: () => import('@/views/components/vuesax/upload/Upload.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Components' },
@@ -721,6 +769,7 @@ const router = new Router({
                     name: 'form-element-select',
                     component: () => import('./views/forms/form-elements/select/Select.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Form Elements' },
@@ -735,6 +784,7 @@ const router = new Router({
                     name: 'form-element-switch',
                     component: () => import('./views/forms/form-elements/switch/Switch.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Form Elements' },
@@ -749,6 +799,7 @@ const router = new Router({
                     name: 'form-element-checkbox',
                     component: () => import('./views/forms/form-elements/checkbox/Checkbox.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Form Elements' },
@@ -763,6 +814,7 @@ const router = new Router({
                     name: 'form-element-radio',
                     component: () => import('./views/forms/form-elements/radio/Radio.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Form Elements' },
@@ -777,6 +829,7 @@ const router = new Router({
                     name: 'form-element-input',
                     component: () => import('./views/forms/form-elements/input/Input.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Form Elements' },
@@ -791,6 +844,7 @@ const router = new Router({
                     name: 'form-element-number-input',
                     component: () => import('./views/forms/form-elements/number-input/NumberInput.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Form Elements' },
@@ -805,6 +859,7 @@ const router = new Router({
                     name: 'form-element-textarea',
                     component: () => import('./views/forms/form-elements/textarea/Textarea.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Form Elements' },
@@ -820,6 +875,7 @@ const router = new Router({
                     name: 'forms-form-layouts',
                     component: () => import('@/views/forms/FormLayouts.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Forms' },
@@ -834,6 +890,7 @@ const router = new Router({
                     name: 'extra-component-form-wizard',
                     component: () => import('@/views/forms/form-wizard/FormWizard.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Extra Components' },
@@ -848,6 +905,7 @@ const router = new Router({
                     name: 'extra-component-form-validation',
                     component: () => import('@/views/forms/form-validation/FormValidation.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Extra Components' },
@@ -858,18 +916,19 @@ const router = new Router({
                     },
                 },
                 {
-                  path: '/admin/forms/form-input-group',
-                  name: 'extra-component-form-input-group',
-                  component: () => import('@/views/forms/form-input-group/FormInputGroup.vue'),
-                  meta: {
-                      breadcrumb: [
-                          { title: 'Home', url: '/admin' },
-                          { title: 'Extra Components' },
-                          { title: 'Form Input Group', active: true },
-                      ],
-                      pageTitle: 'Form Input Group',
-                      rule: 'editor'
-                  },
+                    path: '/admin/forms/form-input-group',
+                    name: 'extra-component-form-input-group',
+                    component: () => import('@/views/forms/form-input-group/FormInputGroup.vue'),
+                    meta: {
+                        requiresAuth: true,
+                        breadcrumb: [
+                            { title: 'Home', url: '/admin' },
+                            { title: 'Extra Components' },
+                            { title: 'Form Input Group', active: true },
+                        ],
+                        pageTitle: 'Form Input Group',
+                        rule: 'admin'
+                    },
                 },
 
         // =============================================================================
@@ -877,16 +936,17 @@ const router = new Router({
         // =============================================================================
                 {
                     path: '/admin/pages/profile',
-                    name: 'page-profile',
+                    name: 'admin-page-profile',
                     component: () => import('@/views/pages/Profile.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Pages' },
                             { title: 'Profile', active: true },
                         ],
                         pageTitle: 'Profile',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -894,13 +954,14 @@ const router = new Router({
                     name: 'page-user-settings',
                     component: () => import('@/views/pages/user-settings/UserSettings.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Pages' },
                             { title: 'User Settings', active: true },
                         ],
                         pageTitle: 'Settings',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -908,13 +969,14 @@ const router = new Router({
                     name: 'page-faq',
                     component: () => import('@/views/pages/Faq.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Pages' },
                             { title: 'FAQ', active: true },
                         ],
                         pageTitle: 'FAQ',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -922,13 +984,14 @@ const router = new Router({
                     name: 'page-knowledge-base',
                     component: () => import('@/views/pages/KnowledgeBase.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Pages' },
                             { title: 'KnowledgeBase', active: true },
                         ],
                         pageTitle: 'KnowledgeBase',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -936,6 +999,7 @@ const router = new Router({
                     name: 'page-knowledge-base-category',
                     component: () => import('@/views/pages/KnowledgeBaseCategory.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Pages' },
@@ -943,7 +1007,7 @@ const router = new Router({
                             { title: 'Category', active: true },
                         ],
                         parent: 'page-knowledge-base',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -951,6 +1015,7 @@ const router = new Router({
                     name: 'page-knowledge-base-category-question',
                     component: () => import('@/views/pages/KnowledgeBaseCategoryQuestion.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Pages' },
@@ -967,6 +1032,7 @@ const router = new Router({
                     name: 'page-search',
                     component: () => import('@/views/pages/Search.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Pages' },
@@ -981,6 +1047,7 @@ const router = new Router({
                     name: 'page-invoice',
                     component: () => import('@/views/pages/Invoice.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Pages' },
@@ -999,6 +1066,7 @@ const router = new Router({
                     name: 'extra-component-charts-apex-charts',
                     component: () => import('@/views/charts-and-maps/charts/apex-charts/ApexCharts.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Charts & Maps' },
@@ -1013,6 +1081,7 @@ const router = new Router({
                     name: 'extra-component-charts-echarts',
                     component: () => import('@/views/charts-and-maps/charts/echarts/Echarts.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Charts & Maps' },
@@ -1027,6 +1096,7 @@ const router = new Router({
                     name: 'extra-component-maps-google-map',
                     component: () => import('@/views/charts-and-maps/maps/google-map/GoogleMap.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Charts & Maps' },
@@ -1047,13 +1117,14 @@ const router = new Router({
                     name: 'extra-component-select',
                     component: () => import('@/views/components/extra-components/select/Select.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Extra Components' },
                             { title: 'Select', active: true },
                         ],
                         pageTitle: 'Select',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -1061,6 +1132,7 @@ const router = new Router({
                     name: 'extra-component-quill-editor',
                     component: () => import('@/views/components/extra-components/quill-editor/QuillEditor.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Extra Components' },
@@ -1075,6 +1147,7 @@ const router = new Router({
                     name: 'extra-component-drag-and-drop',
                     component: () => import('@/views/components/extra-components/drag-and-drop/DragAndDrop.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Extra Components' },
@@ -1089,6 +1162,7 @@ const router = new Router({
                     name: 'extra-component-datepicker',
                     component: () => import('@/views/components/extra-components/datepicker/Datepicker.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Extra Components' },
@@ -1103,6 +1177,7 @@ const router = new Router({
                     name: 'extra-component-datetime-picker',
                     component: () => import('@/views/components/extra-components/datetime-picker/DatetimePicker.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Extra Components' },
@@ -1117,6 +1192,7 @@ const router = new Router({
                     name: 'extra-component-access-control',
                     component: () => import('@/views/components/extra-components/access-control/AccessControl.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Extensions' },
@@ -1131,6 +1207,7 @@ const router = new Router({
                     name: 'extra-component-i18n',
                     component: () => import('@/views/components/extra-components/I18n.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Extensions' },
@@ -1145,6 +1222,7 @@ const router = new Router({
                     name: 'extra-component-carousel',
                     component: () => import('@/views/components/extra-components/carousel/Carousel.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Extensions' },
@@ -1159,6 +1237,7 @@ const router = new Router({
                     name: 'extra-component-clipboard',
                     component: () => import('@/views/components/extra-components/clipboard/Clipboard.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Extensions' },
@@ -1173,6 +1252,7 @@ const router = new Router({
                     name: 'extra-component-context-menu',
                     component: () => import('@/views/components/extra-components/context-menu/ContextMenu.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Extensions' },
@@ -1187,6 +1267,7 @@ const router = new Router({
                     name: 'extra-component-star-ratings',
                     component: () => import('@/views/components/extra-components/star-ratings/StarRatings.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Extensions' },
@@ -1201,6 +1282,7 @@ const router = new Router({
                     name: 'extra-component-autocomplete',
                     component: () => import('@/views/components/extra-components/autocomplete/Autocomplete.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Extensions' },
@@ -1215,6 +1297,7 @@ const router = new Router({
                     name: 'extra-component-tree',
                     component: () => import('@/views/components/extra-components/tree/Tree.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Extensions' },
@@ -1229,6 +1312,7 @@ const router = new Router({
                     name: 'import-excel',
                     component: () => import('@/views/components/extra-components/import-export/Import.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Extensions' },
@@ -1244,6 +1328,7 @@ const router = new Router({
                     name: 'export-excel',
                     component: () => import('@/views/components/extra-components/import-export/Export.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Extensions' },
@@ -1259,6 +1344,7 @@ const router = new Router({
                     name: 'export-excel-selected',
                     component: () => import('@/views/components/extra-components/import-export/ExportSelected.vue'),
                     meta: {
+                        requiresAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
                             { title: 'Extensions' },
@@ -1283,90 +1369,90 @@ const router = new Router({
         // =============================================================================
                 {
                     path: '/admin/callback',
-                    name: 'auth-callback',
+                    name: 'admin-auth-callback',
                     component: () => import('@/views/Callback.vue'),
                     meta: {
-                        rule: 'editor'
+                        rule: 'guest'
                     }
                 },
                 {
-                    path: '/admin/admin/pages/login',
-                    name: 'page-login',
+                    path: '/admin/pages/login',
+                    name: 'admin-page-login',
                     component: () => import('@/views/pages/login/Login.vue'),
                     meta: {
-                        rule: 'editor'
+                        rule: 'guest'
                     }
                 },
                 {
                     path: '/admin/pages/register',
-                    name: 'page-register',
+                    name: 'admin-page-register',
                     component: () => import('@/views/pages/register/Register.vue'),
                     meta: {
-                        rule: 'editor'
+                        rule: 'guest'
                     }
                 },
                 {
                     path: '/admin/pages/forgot-password',
-                    name: 'page-forgot-password',
+                    name: 'admin-page-forgot-password',
                     component: () => import('@/views/pages/ForgotPassword.vue'),
                     meta: {
-                        rule: 'editor'
+                        rule: 'guest'
                     }
                 },
                 {
                     path: '/admin/pages/reset-password',
-                    name: 'page-reset-password',
+                    name: 'admin-page-reset-password',
                     component: () => import('@/views/pages/ResetPassword.vue'),
                     meta: {
-                        rule: 'editor'
+                        rule: 'guest'
                     }
                 },
                 {
                     path: '/admin/pages/lock-screen',
-                    name: 'page-lock-screen',
+                    name: 'admin-page-lock-screen',
                     component: () => import('@/views/pages/LockScreen.vue'),
                     meta: {
-                        rule: 'editor'
+                        rule: 'guest'
                     }
                 },
                 {
                     path: '/admin/pages/comingsoon',
-                    name: 'page-coming-soon',
+                    name: 'admin-page-coming-soon',
                     component: () => import('@/views/pages/ComingSoon.vue'),
                     meta: {
-                        rule: 'editor'
+                        rule: 'guest'
                     }
                 },
                 {
                     path: '/admin/pages/error-404',
-                    name: 'page-error-404',
+                    name: 'admin-page-error-404',
                     component: () => import('@/views/pages/Error404.vue'),
                     meta: {
-                        rule: 'editor'
+                        rule: 'guest'
                     }
                 },
                 {
                     path: '/admin/pages/error-500',
-                    name: 'page-error-500',
+                    name: 'admin-page-error-500',
                     component: () => import('@/views/pages/Error500.vue'),
                     meta: {
-                        rule: 'editor'
+                        rule: 'guest'
                     }
                 },
                 {
                     path: '/admin/pages/not-authorized',
-                    name: 'page-not-authorized',
+                    name: 'admin-page-not-authorized',
                     component: () => import('@/views/pages/NotAuthorized.vue'),
                     meta: {
-                        rule: 'editor'
+                        rule: 'guest'
                     }
                 },
                 {
                     path: '/admin/pages/maintenance',
-                    name: 'page-maintenance',
+                    name: 'admin-page-maintenance',
                     component: () => import('@/views/pages/Maintenance.vue'),
                     meta: {
-                        rule: 'editor'
+                        rule: 'guest'
                     }
                 },
             ]
@@ -1379,6 +1465,7 @@ const router = new Router({
     ],
 })
 
+// #region  Global AfterEach()
 router.afterEach(() => {
   // Remove initial loading
   const appLoading = document.getElementById('loading-bg')
@@ -1386,40 +1473,55 @@ router.afterEach(() => {
         appLoading.style.display = "none";
     }
 })
+// #endregion
 
+// #region  Global BeforeEach()
 router.beforeEach((to, from, next) => {
-    firebase.auth().onAuthStateChanged(() => {
 
-        // get firebase current user
-        const firebaseCurrentUser = firebase.auth().currentUser
+    const currentUser = window.localStorage.getItem("userInfo");
+    const accessToken = window.localStorage.getItem("accessToken");
 
-        // if (
-        //     to.path === "/pages/login" ||
-        //     to.path === "/pages/forgot-password" ||
-        //     to.path === "/pages/error-404" ||
-        //     to.path === "/pages/error-500" ||
-        //     to.path === "/pages/register" ||
-        //     to.path === "/callback" ||
-        //     to.path === "/pages/comingsoon" ||
-        //     (auth.isAuthenticated() || firebaseCurrentUser)
-        // ) {
-        //     return next();
-        // }
+    // Authenticated User
+    if (currentUser != null && accessToken != null) {
+        if (
+            to.name == "admin-page-login"               ||
+            to.name == "admin-page-register"            ||
+            to.name == "admin-page-forgot-password"     ||
+            to.name == "admin-page-reset-password"   
+        ) {
+            router.push({ path: '/admin', query: { to: to.path } })
+        }        
+    }
 
-        // If auth required, check login. If login fails redirect to login page
-        if(to.meta.authRequired) {
-          if (!(auth.isAuthenticated() || firebaseCurrentUser)) {
-            router.push({ path: '/pages/login', query: { to: to.path } })
-          }
+    // Guest-s
+    if (currentUser == null && accessToken == null) {
+        
+        if (
+            to.name === "admin-page-login"              ||
+            to.name === "admin-page-forgot-password"    ||
+            to.name === "admin-page-error-404"          ||
+            to.name === "admin-page-error-500"          ||
+            to.name === "admin-page-register"           ||
+            to.name === "admin-callback"                ||
+            to.name === "admin-page-comingsoon"       
+            // || (accessToken || currentUser)
+        ) {
+            return next();
         }
+    }
 
-        return next()
-        // Specify the current path as the customState parameter, meaning it
-        // will be returned to the application after auth
-        // auth.login({ target: to.path });
+    // #region Middleware - Auth Required: If auth required, check login. If login fails redirect to login page
+    if(to.meta.requiresAuth) {
+        if (!(currentUser && accessToken)) {
+            // router.push({ name: 'admin-page-login', query: { to: to.path } })
+            router.push({ name: 'admin-page-login' })
+        }
+    }
+    // #endregion
 
-    });
+    return next();
 
 });
+// #endregion
 
 export default router
