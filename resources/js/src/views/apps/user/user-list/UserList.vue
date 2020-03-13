@@ -136,9 +136,7 @@
 </template>
 
 <script>
-    import {
-        AgGridVue
-    } from "ag-grid-vue"
+    import { AgGridVue } from "ag-grid-vue"
     import '@sass/vuexy/extraComponents/agGridStyleOverride.scss'
     import vSelect from 'vue-select'
 
@@ -183,7 +181,8 @@
                     label: 'All',
                     value: 'all'
                 },
-                statusOptions: [{
+                statusOptions: [
+                    {
                         label: 'All',
                         value: 'all'
                     },
@@ -288,7 +287,7 @@
                     },
                     {
                         headerName: 'Role',
-                        field: 'role',
+                        field: 'role.slug',
                         filter: true,
                         width: 150,
                     },
@@ -310,7 +309,7 @@
                     {
                         headerName: 'Department',
                         field: 'department',
-                        filter: true,
+                        filter: false,
                         width: 150,
                     },
                     {

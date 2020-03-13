@@ -49,7 +49,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
-        "country_id"
+        "country_id",
+        "role_id"
     ];
 
     /**
@@ -67,9 +68,20 @@ class User extends Authenticatable
         "social_links"      => "array",
     ];
 
-    protected $with = ["country"];
+    protected $with = ["role", "country"];
 
     #region RelationShips
+    // public function role()
+    // {
+    //     return $this->hasOne('App\Models\Role', 'id', 'role_id');
+    // }
+
+
+    public function role()
+    {
+        return $this->belongsTo('App\Models\Role', 'role_id', 'id');
+    }
+
     public function country()
     {
         return $this->hasOne('App\Models\Country', 'id', 'country_id');

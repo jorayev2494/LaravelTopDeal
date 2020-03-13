@@ -17,31 +17,31 @@
                 <ul style="min-width: 9rem">
 
                     <li class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
-                        @click="$router.push('/admin/pages/profile').catch(() => {})">
+                        @click="$router.push({ name: 'admin-page-profile' }).catch(() => {})">
                         <feather-icon icon="UserIcon" svgClasses="w-4 h-4" />
                         <span class="ml-2">Profile</span>
                     </li>
 
                     <li class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
-                        @click="$router.push('/admin/apps/email').catch(() => {})">
+                        @click="$router.push({ name: 'admin-email' }).catch(() => {})">
                         <feather-icon icon="MailIcon" svgClasses="w-4 h-4" />
                         <span class="ml-2">Inbox</span>
                     </li>
 
                     <li class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
-                        @click="$router.push('/admin/apps/todo').catch(() => {})">
+                        @click="$router.push({ name: 'admin-todo' }).catch(() => {})">
                         <feather-icon icon="CheckSquareIcon" svgClasses="w-4 h-4" />
                         <span class="ml-2">Tasks</span>
                     </li>
 
                     <li class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
-                        @click="$router.push('/admin/apps/chat').catch(() => {})">
+                        @click="$router.push({ name: 'admin-chat' }).catch(() => {})">
                         <feather-icon icon="MessageSquareIcon" svgClasses="w-4 h-4" />
                         <span class="ml-2">Chat</span>
                     </li>
 
                     <li class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
-                        @click="$router.push('/admin/apps/eCommerce/wish-list').catch(() => {})">
+                        @click="$router.push({ name: 'admin-ecommerce-wish-list' }).catch(() => {})">
                         <feather-icon icon="HeartIcon" svgClasses="w-4 h-4" />
                         <span class="ml-2">Wish List</span>
                     </li>
@@ -61,7 +61,6 @@
 <script>
     // import firebase from 'firebase/app'
     // import 'firebase/auth'
-    // import airlock from "../../http/requests/auth/airlock/index.js"
     import airlock from '../../../../http/requests/auth/airlock/index.js'
 
     export default {

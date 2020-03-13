@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -46,3 +47,7 @@ Route::group(['middleware' => 'guest'], function() {
     // Route::post("/register", ["uses" => "RegisterController@register", "as" => ".register"]);
 // });
 
+
+Route::get('/role/{role:slug}', function (Role $role) {
+    return $role->users()->select("email")->get();
+});

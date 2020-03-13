@@ -58,6 +58,7 @@ $factory->define(User::class, function (Faker $faker) {
         "contact_options"   =>  $contactOptions,
         'country_id'        =>  $activeCountries[rand(0, $activeCountries->count() - 1)],
         'email_verified_at' =>  $dateNow,
+        "role_id"           =>  3,
         "website"           =>  $faker->url,
         'location'          =>  [
             "add_line_1"            =>  $faker->address,

@@ -36,7 +36,7 @@ const userDefaults = {
 
     // about       : "Dessert chocolate cake lemon drops jujubes. Biscuit cupcake ice cream bear claw brownie brownie marshmallow.",
     status          : null,
-    userRole        : null
+    // userRole        : null
 }
 
 const userInfoLocalStorage = JSON.parse(localStorage.getItem("userInfo")) || {}

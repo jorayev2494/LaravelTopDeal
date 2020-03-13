@@ -16,7 +16,8 @@
                                     <a class="link-lg" href="login.html">Login </a>
                                 </li>
                                 <li class="account" id="my_account">
-                                    <a href="my-account.html" title="My Account" class="btn-xs dropdown-toggle" data-toggle="dropdown">
+                                    <a href="my-account.html" title="My Account" class="btn-xs dropdown-toggle"
+                                        data-toggle="dropdown">
                                         <span>My Account</span>
                                         <span class="fa fa-angle-down"></span>
                                     </a>
@@ -35,26 +36,22 @@
                                 <!-- LANGUAGE CURENTY -->
                                 <li>
                                     <div class="pull-left">
-                                        <form action="#" method="post" enctype="multipart/form-data"
-                                            id="form-language">
+                                        <form action="#" method="post" enctype="multipart/form-data" id="form-language">
                                             <div class="btn-group">
                                                 <button class="btn-link dropdown-toggle" data-toggle="dropdown">
                                                     <img src="/public/image/catalog/flags/gb.png" alt="English"
                                                         title="English">
-                                                    <span
-                                                        class="hidden-xs hidden-sm hidden-md">English</span>&nbsp;<i
+                                                    <span class="hidden-xs hidden-sm hidden-md">English</span>&nbsp;<i
                                                         class="fa fa-angle-down"></i>
                                                 </button>
                                                 <ul class="dropdown-menu">
                                                     <li>
-                                                        <button class="btn-block language-select" type="button"
-                                                            name="ar-ar"><img src="/public/image/catalog/flags/ar.png"
-                                                                alt="Arabic" title="Arabic"> Arabic</button>
+                                                        <button class="btn-block language-select" type="button" name="ar-ar">
+                                                        <img src="/public/image/catalog/flags/ar.png" alt="Arabic" title="Arabic"> Arabic</button>
                                                     </li>
                                                     <li>
-                                                        <button class="btn-block language-select" type="button"
-                                                            name="en-gb"><img src="/public/image/catalog/flags/gb.png"
-                                                                alt="English" title="English"> English</button>
+                                                        <button class="btn-block language-select" type="button" name="en-gb">
+                                                        <img src="/public/image/catalog/flags/gb.png" alt="English" title="English"> English</button>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -65,8 +62,7 @@
                                 </li>
                                 <li class="currency">
                                     <div class="pull-left">
-                                        <form action="#" method="post" enctype="multipart/form-data"
-                                            id="form-currency">
+                                        <form action="#" method="post" enctype="multipart/form-data" id="form-currency">
                                             <div class="btn-group">
                                                 <button class="btn-link dropdown-toggle" data-toggle="dropdown">
                                                     $<span class="hidden-xs"> US Dollar</span>
@@ -104,7 +100,7 @@
             <div class="container">
                 <div class="row">
                     <div class="navbar-logo col-lg-3 col-md-12 col-xs-12">
-                        <a href="index6.php"><img src="/public/image/catalog/demo/logo/logo-home6.png"
+                        <a href="index6.php"><img src="/public/image/catalog/demo/logo/logo-home6.png" 
                                 title="Your Store - Layout 6" alt="Your Store - Layout 6"></a>
                     </div>
                     <div class="header-center-right col-lg-6 col-md-7 col-sm-7 col-xs-9">
@@ -331,8 +327,7 @@
                                         <li>
                                             <div class="checkout clearfix">
                                                 <a href="cart.html" class="btn btn-view-cart inverse"> View Cart</a>
-                                                <a href="checkout.html"
-                                                    class="btn btn-checkout pull-right">Checkout</a>
+                                                <a href="checkout.html" class="btn btn-checkout pull-right">Checkout</a>
                                             </div>
                                         </li>
                                     </ul>
@@ -378,8 +373,8 @@
                                                 <div class="navbar-header">
                                                     <span class="title-navbar hidden-lg hidden-md"> All Categories
                                                     </span>
-                                                    <button type="button" id="show-verticalmenu"
-                                                        data-toggle="collapse" class="navbar-toggle">
+                                                    <button type="button" id="show-verticalmenu" data-toggle="collapse"
+                                                        class="navbar-toggle">
                                                         <span class="icon-bar"></span>
                                                         <span class="icon-bar"></span>
                                                         <span class="icon-bar"></span>
@@ -445,14 +440,12 @@
                                                                                                     <a href="#"
                                                                                                         title="Sound">Sound</a>
                                                                                                     <ul>
-                                                                                                        <li
-                                                                                                            class="">
+                                                                                                        <li class="">
                                                                                                             <a href="#"
                                                                                                                 title="Bluetooth Speakers">Bluetooth
                                                                                                                 Speakers</a>
                                                                                                         </li>
-                                                                                                        <li
-                                                                                                            class="">
+                                                                                                        <li class="">
                                                                                                             <a href="#"
                                                                                                                 title="Wireless Speakers">Wireless
                                                                                                                 Speakers</a>
@@ -464,15 +457,13 @@
                                                                                                     <a href="#"
                                                                                                         title="Headphone">Headphone</a>
                                                                                                     <ul>
-                                                                                                        <li
-                                                                                                            class="">
+                                                                                                        <li class="">
                                                                                                             <a href="#"
                                                                                                                 title="VGA and CPU">VGA
                                                                                                                 and
                                                                                                                 CPU</a>
                                                                                                         </li>
-                                                                                                        <li
-                                                                                                            class="">
+                                                                                                        <li class="">
                                                                                                             <a href="#"
                                                                                                                 title="Desna Jacket">Desna
                                                                                                                 Jacket</a>
@@ -486,14 +477,12 @@
                                                                                                         &amp;
                                                                                                         Camera</a>
                                                                                                     <ul>
-                                                                                                        <li
-                                                                                                            class="">
+                                                                                                        <li class="">
                                                                                                             <a href="#"
                                                                                                                 title="Camera New">Camera
                                                                                                                 New</a>
                                                                                                         </li>
-                                                                                                        <li
-                                                                                                            class="">
+                                                                                                        <li class="">
                                                                                                             <a href="#"
                                                                                                                 title="Video You">Video
                                                                                                                 You</a>
@@ -507,14 +496,12 @@
                                                                                                         &amp;
                                                                                                         HDD</a>
                                                                                                     <ul>
-                                                                                                        <li
-                                                                                                            class="">
+                                                                                                        <li class="">
                                                                                                             <a href="#"
                                                                                                                 title="Usb Computer">USB
                                                                                                                 Computer</a>
                                                                                                         </li>
-                                                                                                        <li
-                                                                                                            class="">
+                                                                                                        <li class="">
                                                                                                             <a href="#"
                                                                                                                 title="HDD Computer">HDD
                                                                                                                 Computer</a>
@@ -528,14 +515,12 @@
                                                                                                         &amp;
                                                                                                         Cable</a>
                                                                                                     <ul>
-                                                                                                        <li
-                                                                                                            class="">
+                                                                                                        <li class="">
                                                                                                             <a href="#"
                                                                                                                 title="Cell Computers">Cell
                                                                                                                 Computers</a>
                                                                                                         </li>
-                                                                                                        <li
-                                                                                                            class="">
+                                                                                                        <li class="">
                                                                                                             <a href="#"
                                                                                                                 title="Cable Com">Cable
                                                                                                                 Com</a>
@@ -547,14 +532,12 @@
                                                                                                     <a href="#"
                                                                                                         title="Cell &amp; Cable">Laptop</a>
                                                                                                     <ul>
-                                                                                                        <li
-                                                                                                            class="">
+                                                                                                        <li class="">
                                                                                                             <a href="#"
                                                                                                                 title="Computer Headsets">Computer
                                                                                                                 Headsets</a>
                                                                                                         </li>
-                                                                                                        <li
-                                                                                                            class="">
+                                                                                                        <li class="">
                                                                                                             <a href="#"
                                                                                                                 title="Headphone Earpads">Headphone
                                                                                                                 Earpads</a>
@@ -566,14 +549,12 @@
                                                                                                     <a href="#"
                                                                                                         title="Case">Case</a>
                                                                                                     <ul>
-                                                                                                        <li
-                                                                                                            class="">
+                                                                                                        <li class="">
                                                                                                             <a href="#"
                                                                                                                 title="Case Computer">Case
                                                                                                                 Computer</a>
                                                                                                         </li>
-                                                                                                        <li
-                                                                                                            class="">
+                                                                                                        <li class="">
                                                                                                             <a href="#"
                                                                                                                 title="Vafar Comfaoe">Vafar
                                                                                                                 Comfaoe</a>
@@ -842,8 +823,7 @@
                                                                                 <div class="col-sm-12">
                                                                                     <div class="link banner-full">
                                                                                         <img src="/public/image/catalog/demo/menu/menu_bg2.jpg"
-                                                                                            alt=""
-                                                                                            style="width: 100%;">
+                                                                                            alt="" style="width: 100%;">
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -861,8 +841,7 @@
                                                                         </span>
                                                                     </a>
                                                                 </li>
-                                                                <li
-                                                                    class="item-vertical  css-menu with-sub-menu hover">
+                                                                <li class="item-vertical  css-menu with-sub-menu hover">
                                                                     <p class="close-menu"></p>
                                                                     <a href="#" class="clearfix">
                                                                         <span>
@@ -1094,8 +1073,7 @@
                                                         <div class="container">
                                                             <ul class="megamenu" data-transition="slide"
                                                                 data-animationtime="500">
-                                                                <li
-                                                                    class="full-width menu-home with-sub-menu hover">
+                                                                <li class="full-width menu-home with-sub-menu hover">
                                                                     <p class="close-menu"></p>
                                                                     <a href="#" class="clearfix">
                                                                         <strong>
@@ -1349,29 +1327,25 @@
                                                                                 <div class="col-sm-3">
                                                                                     <div class="link ">
                                                                                         <img src="/public/image/catalog/demo/menu/menu-img1.jpg"
-                                                                                            alt=""
-                                                                                            style="width: 100%;">
+                                                                                            alt="" style="width: 100%;">
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-sm-3">
                                                                                     <div class="link ">
                                                                                         <img src="/public/image/catalog/demo/menu/menu-img2.jpg"
-                                                                                            alt=""
-                                                                                            style="width: 100%;">
+                                                                                            alt="" style="width: 100%;">
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-sm-3">
                                                                                     <div class="link ">
                                                                                         <img src="/public/image/catalog/demo/menu/menu-img3.jpg"
-                                                                                            alt=""
-                                                                                            style="width: 100%;">
+                                                                                            alt="" style="width: 100%;">
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-sm-3">
                                                                                     <div class="link ">
                                                                                         <img src="/public/image/catalog/demo/menu/menu-img4.jpg"
-                                                                                            alt=""
-                                                                                            style="width: 100%;">
+                                                                                            alt="" style="width: 100%;">
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -1774,8 +1748,7 @@
                                                                                                     src="/public/image/catalog/demo/product/fashion/24.png"
                                                                                                     alt=""></a>
                                                                                         </div>
-                                                                                        <div class="name"><a
-                                                                                                href="#"
+                                                                                        <div class="name"><a href="#"
                                                                                                 onclick="window.location = '#'">Est
                                                                                                 Officia Including
                                                                                                 Shoes Beautiful
@@ -1883,6 +1856,7 @@
     export default {
 
     }
+
 </script>
 
 <style scoped>
