@@ -6,12 +6,20 @@ use App\Http\Controllers\Admin\Traits\UserUpdateTrait;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Users\UserAccountUpdateRequest;
 use App\Models\User;
+use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
 
     use UserUpdateTrait;
+
+    private $user_r;
+
+    public function __construct() {
+        $this->user_r = new UserRepository();
+    }
+    
 
     /**
      * Display a listing of the resource.
@@ -20,12 +28,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::all();
-        
-        // return [
-        //     "status" => 200,
-        //     "data" => User::all(),
-        // ];
+        $users = $this->user_r->getAll();
+        return $this->response($users);
     }
 
     /**
@@ -34,10 +38,10 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-    }
+    // public function store(Request $request)
+    // {
+    //     //
+    // }
 
     /**
      * Display the specified resource.
@@ -47,7 +51,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return User::find($id) ?? new User();
+        $user = $this->user_r->findById($id);
+        return $this->response($user);
     }
 
     /**
@@ -92,10 +97,6 @@ class UserController extends Controller
         if ($isDeleted)
             $deleteUser->delete();
 
-        return [
-            "status" => 200,
-            "data" => null,
-            "message" => "success"
-        ];
+        return $this->response(response()->noContent(), 204);
     }
 }

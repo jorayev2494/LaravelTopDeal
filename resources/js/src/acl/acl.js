@@ -23,10 +23,9 @@ export default new AclCreate({
     globalRules: {
         admin:      new AclRule("admin").generate(),
         moderator:  new AclRule("moderator").or("admin").generate(),
-        user:       new AclRule("user").or("moderator").or("admin").generate(),
-        guest:      new AclRule("user").or("guest").or("moderator").or("admin").generate(),
-        // any:        new AclRule("guest").or("user").or("moderator").or("admin").generate(),
-        
+        user:       new AclRule("moderator").or("moderator").or("admin").generate(),
+        guest:      new AclRule("guest").generate(),
+        any:        new AclRule("guest").or("user").or("moderator").or("admin").generate(),
         // editor: new AclRule("editor").or("admin").generate(),
         // public: new AclRule("public").or("admin").or("editor").generate(),
     }
