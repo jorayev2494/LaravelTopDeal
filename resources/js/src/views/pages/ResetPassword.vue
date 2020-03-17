@@ -23,13 +23,13 @@
                                     <h4 class="mb-4">Reset Password</h4>
                                     <p>Please enter your new password.</p>
                                 </div>
-                                <vs-input type="email" label-placeholder="Email" v-model="value1" class="w-full mb-6" />
-                                <vs-input type="password" label-placeholder="Password" v-model="value2" class="w-full mb-6" />
-                                <vs-input type="password" label-placeholder="Confirm Password" v-model="value3" class="w-full mb-8" />
+                                <vs-input type="email" label-placeholder="Email" v-model="email" class="w-full mb-6" />
+                                <vs-input type="password" label-placeholder="Password" v-model="password" class="w-full mb-6" />
+                                <vs-input type="password" label-placeholder="Confirm Password" v-model="password_confirmation" class="w-full mb-8" />
 
                                 <div class="flex flex-wrap justify-between flex-col-reverse sm:flex-row">
-                                    <vs-button type="border" to="/pages/login" class="w-full sm:w-auto mb-8 sm:mb-auto mt-3 sm:mt-auto">Go Back To Login</vs-button>
-                                    <vs-button class="w-full sm:w-auto">Reset</vs-button>
+                                    <vs-button type="border" :to="{ name: 'admin-page-login' }" class="w-full sm:w-auto mb-8 sm:mb-auto mt-3 sm:mt-auto">Go Back To Login</vs-button>
+                                    <vs-button class="w-full sm:w-auto" v-on:click="reset()">Reset</vs-button>
                                 </div>
 
                             </div>
@@ -45,9 +45,18 @@
 export default {
     data() {
         return {
-            value1: '',
-            value2: '',
-            value3: '',
+            email                   : '',
+            password                : '',
+            password_confirmation   : '',
+        }
+    },
+    methods: {
+        reset() {
+            this.$store.dispatch('auth/resetAirlock', { 
+                email                   : this.email,
+                password                : this.password,
+                password_confirmation   : this.password_confirmation
+            })
         }
     }
 }

@@ -73,5 +73,17 @@ export default {
     },
     logout() {
         return axios.post("/api/logout")
+    },
+    passwordReset(email) {
+        return axios.post("/api/password/email", { email })
+    },
+    reset(email, pwd, conf_pwd) {
+        window.console.log("Reset: ", email, pwd, conf_pwd);
+        return axios.post("/api/password/reset", { 
+            email, 
+            password                : pwd, 
+            password_confirmation   : conf_pwd,
+            token:                  "awdawdawdawdawda"
+        })
     }
 }
