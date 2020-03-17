@@ -419,7 +419,7 @@ const router = new Router({
                             { title: 'agGrid Table', active: true },
                         ],
                         pageTitle: 'agGrid Table',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
 
@@ -438,7 +438,7 @@ const router = new Router({
                             { title: 'Alert', active: true },
                         ],
                         pageTitle: 'Alert',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -453,7 +453,7 @@ const router = new Router({
                             { title: 'Avatar', active: true },
                         ],
                         pageTitle: 'Avatar',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -468,7 +468,7 @@ const router = new Router({
                             { title: 'Breadcrumb', active: true },
                         ],
                         pageTitle: 'Breadcrumb',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -483,7 +483,7 @@ const router = new Router({
                             { title: 'Button', active: true },
                         ],
                         pageTitle: 'Button',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -498,7 +498,7 @@ const router = new Router({
                             { title: 'Button Group', active: true },
                         ],
                         pageTitle: 'Button Group',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -513,7 +513,7 @@ const router = new Router({
                             { title: 'Chip', active: true },
                         ],
                         pageTitle: 'Chip',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -528,7 +528,7 @@ const router = new Router({
                             { title: 'Collapse', active: true },
                         ],
                         pageTitle: 'Collapse',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -543,7 +543,7 @@ const router = new Router({
                             { title: 'Dialogs', active: true },
                         ],
                         pageTitle: 'Dialogs',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -558,7 +558,7 @@ const router = new Router({
                             { title: 'Divider', active: true },
                         ],
                         pageTitle: 'Divider',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -573,7 +573,7 @@ const router = new Router({
                             { title: 'Dropdown', active: true },
                         ],
                         pageTitle: 'Dropdown',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -588,7 +588,7 @@ const router = new Router({
                             { title: 'List', active: true },
                         ],
                         pageTitle: 'List',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -603,7 +603,7 @@ const router = new Router({
                             { title: 'Loading', active: true },
                         ],
                         pageTitle: 'Loading',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -618,7 +618,7 @@ const router = new Router({
                             { title: 'Navbar', active: true },
                         ],
                         pageTitle: 'Navbar',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -633,7 +633,7 @@ const router = new Router({
                             { title: 'Notifications', active: true },
                         ],
                         pageTitle: 'Notifications',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -648,7 +648,7 @@ const router = new Router({
                             { title: 'Pagination', active: true },
                         ],
                         pageTitle: 'Pagination',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -663,7 +663,7 @@ const router = new Router({
                             { title: 'Popup', active: true },
                         ],
                         pageTitle: 'Popup',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -678,7 +678,7 @@ const router = new Router({
                             { title: 'Progress', active: true },
                         ],
                         pageTitle: 'Progress',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -693,7 +693,7 @@ const router = new Router({
                             { title: 'Sidebar', active: true },
                         ],
                         pageTitle: 'Sidebar',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -708,7 +708,7 @@ const router = new Router({
                             { title: 'Slider', active: true },
                         ],
                         pageTitle: 'Slider',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -723,7 +723,7 @@ const router = new Router({
                             { title: 'Tabs', active: true },
                         ],
                         pageTitle: 'Tabs',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -738,7 +738,7 @@ const router = new Router({
                             { title: 'Tooltip', active: true },
                         ],
                         pageTitle: 'Tooltip',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -753,7 +753,7 @@ const router = new Router({
                             { title: 'Upload', active: true },
                         ],
                         pageTitle: 'Upload',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
 
@@ -776,7 +776,7 @@ const router = new Router({
                             { title: 'Select', active: true },
                         ],
                         pageTitle: 'Select',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -791,7 +791,7 @@ const router = new Router({
                             { title: 'Switch', active: true },
                         ],
                         pageTitle: 'Switch',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -806,7 +806,7 @@ const router = new Router({
                             { title: 'Checkbox', active: true },
                         ],
                         pageTitle: 'Checkbox',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -821,7 +821,7 @@ const router = new Router({
                             { title: 'Radio', active: true },
                         ],
                         pageTitle: 'Radio',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -836,7 +836,7 @@ const router = new Router({
                             { title: 'Input', active: true },
                         ],
                         pageTitle: 'Input',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -851,7 +851,7 @@ const router = new Router({
                             { title: 'Number Input', active: true },
                         ],
                         pageTitle: 'Number Input',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -866,7 +866,7 @@ const router = new Router({
                             { title: 'Textarea', active: true },
                         ],
                         pageTitle: 'Textarea',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
         // -------------------------------------------------------------------------------------------------------------------------------------------
@@ -882,7 +882,7 @@ const router = new Router({
                             { title: 'Form Layouts', active: true },
                         ],
                         pageTitle: 'Form Layouts',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -897,7 +897,7 @@ const router = new Router({
                             { title: 'Form Wizard', active: true },
                         ],
                         pageTitle: 'Form Wizard',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -912,7 +912,7 @@ const router = new Router({
                             { title: 'Form Validation', active: true },
                         ],
                         pageTitle: 'Form Validation',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -1024,7 +1024,7 @@ const router = new Router({
                             { title: 'Question', active: true },
                         ],
                         parent: 'page-knowledge-base',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -1039,7 +1039,7 @@ const router = new Router({
                             { title: 'Search', active: true },
                         ],
                         pageTitle: 'Search',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -1054,7 +1054,7 @@ const router = new Router({
                             { title: 'Invoice', active: true },
                         ],
                         pageTitle: 'Invoice',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
 
@@ -1073,7 +1073,7 @@ const router = new Router({
                             { title: 'Apex Charts', active: true },
                         ],
                         pageTitle: 'Apex Charts',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -1088,7 +1088,7 @@ const router = new Router({
                             { title: 'echarts', active: true },
                         ],
                         pageTitle: 'echarts',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -1103,7 +1103,7 @@ const router = new Router({
                             { title: 'Google Map', active: true },
                         ],
                         pageTitle: 'Google Map',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
 
@@ -1139,7 +1139,7 @@ const router = new Router({
                             { title: 'Quill Editor', active: true },
                         ],
                         pageTitle: 'Quill Editor',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -1154,7 +1154,7 @@ const router = new Router({
                             { title: 'Drag & Drop', active: true },
                         ],
                         pageTitle: 'Drag & Drop',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -1169,7 +1169,7 @@ const router = new Router({
                             { title: 'Datepicker', active: true },
                         ],
                         pageTitle: 'Datepicker',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -1184,7 +1184,7 @@ const router = new Router({
                             { title: 'Datetime Picker', active: true },
                         ],
                         pageTitle: 'Datetime Picker',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -1199,7 +1199,7 @@ const router = new Router({
                             { title: 'Access Control', active: true },
                         ],
                         pageTitle: 'Access Control',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -1214,7 +1214,7 @@ const router = new Router({
                             { title: 'I18n', active: true },
                         ],
                         pageTitle: 'I18n',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -1229,7 +1229,7 @@ const router = new Router({
                             { title: 'Carousel', active: true },
                         ],
                         pageTitle: 'Carousel',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -1244,7 +1244,7 @@ const router = new Router({
                             { title: 'Clipboard', active: true },
                         ],
                         pageTitle: 'Clipboard',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -1259,7 +1259,7 @@ const router = new Router({
                             { title: 'Context Menu', active: true },
                         ],
                         pageTitle: 'Context Menu',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -1274,7 +1274,7 @@ const router = new Router({
                             { title: 'Star Ratings', active: true },
                         ],
                         pageTitle: 'Star Ratings',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -1289,7 +1289,7 @@ const router = new Router({
                             { title: 'Autocomplete', active: true },
                         ],
                         pageTitle: 'Autocomplete',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -1304,7 +1304,7 @@ const router = new Router({
                             { title: 'Tree', active: true },
                         ],
                         pageTitle: 'Tree',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -1320,7 +1320,7 @@ const router = new Router({
                             { title: 'Import', active: true },
                         ],
                         pageTitle: 'Import Excel',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -1336,7 +1336,7 @@ const router = new Router({
                             { title: 'Export', active: true },
                         ],
                         pageTitle: 'Export Excel',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
                 {
@@ -1352,7 +1352,7 @@ const router = new Router({
                             { title: 'Export Selected', active: true },
                         ],
                         pageTitle: 'Export Excel',
-                        rule: 'editor'
+                        rule: 'admin'
                     },
                 },
             ],
@@ -1412,7 +1412,7 @@ const router = new Router({
                     name: 'admin-page-lock-screen',
                     component: () => import('@/views/pages/LockScreen.vue'),
                     meta: {
-                        rule: 'guest'
+                        rule: 'moderator'
                     }
                 },
                 {

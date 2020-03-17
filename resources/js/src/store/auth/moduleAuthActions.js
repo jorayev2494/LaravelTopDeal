@@ -428,7 +428,9 @@ export default {
                     
                     resolve(response)
 
-                    router.push(router.currentRoute.query.to || '/admin');
+                    // router.push(router.currentRoute.query.to || '/admin');
+                    router.push({ path: '/admin' });
+
                 } else {
                     reject({
                         message: "Wrong Email or Password"
@@ -476,6 +478,33 @@ export default {
         //         reject(error);
         //     });
         // });
+    },
+    // Password Reset
+    passwordResetAirlock({ commit }, payload) {
+        return new Promise((resolve, reject) => {
+            airlock.passwordReset(payload).then((response) => {
+                window.console.log("Response: ", response);
+                window.alert(response.data.message.original.message);
+                resolve(response.data.message.original.message);
+            }).catch((error) => {
+                window.console.log("Error: ", error);
+                window.alert("Error!");
+                reject(error);
+            })
+        })
+    },
+    resetAirlock({ commit }, payload) {
+        return new Promise((resolve, reject) => {
+            airlock.reset(payload.email, payload.password, payload.password_confirmation).then((response) => {
+                window.console.log("Response: ", response);
+                window.alert(response.data.message.original.message);
+                resolve(response.data.message.original.message);
+            }).catch((error) => {
+                window.console.log("Error: ", error);
+                window.alert("Error!");
+                reject(error);
+            })
+        })
     },
 
     // logOut() {
