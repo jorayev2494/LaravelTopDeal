@@ -40,7 +40,7 @@ Route::group(['middleware' => ['auth:airlock']], function() {
 
 
 Route::group(['middleware' => 'guest'], function() {
-    Route::post("/register", ["uses" => "Auth\RegisterController@register", "as" => "register"]);
+    Route::post("/register", ["uses" => "Auth\RegisterController@apiRegister", "as" => "register"]);
     Route::post("/login", ["uses" => "Auth\LoginController@token", "as" => "login"]);
     Route::post('/password/email', ["uses" => "Auth\ForgotPasswordController@apiSendResetLinkEmail", "as" => "password.email"]);
     Route::post('/password/reset', ["uses" => "Auth\ResetPasswordController@apiReset", "as" => "password.update"]);

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Str;
@@ -23,7 +24,7 @@ class RegisterController extends Controller
     |
     */
 
-    use RegistersUsers;
+    // use RegistersUsers;
 
     /**
      * Where to redirect users after registration.
@@ -40,6 +41,31 @@ class RegisterController extends Controller
     public function __construct()
     {
         // $this->middleware('guest');
+    }
+
+    public function apiRegister(Request $request)
+    {
+        // $this->validator($request->all())->validate();
+        // \Log::info("FrondddT Registfffer: ", $request->all());
+
+        // event(new Registered($user = $this->create($request->all())));
+        $user = $this->create($request->all());
+
+        // $this->guard()->login($user);
+
+        // if ($response = $this->registered($request, $user)) {
+        //     return $response;
+        // }
+
+        // return $request->wantsJson()
+                    // ? new Response('', 201)
+                    // : redirect($this->redirectPath());
+
+
+        // $request->device;
+        $token = $user->createToken($user->email)->plainTextToken;
+
+        return response()->json(["accessToken" => $token], 200);
     }
 
     /**
@@ -80,7 +106,7 @@ class RegisterController extends Controller
                 "avatar" => $avatar,
             ]);
         }
-        
+
         return User::create([
             'avatar'        => $data['avatar'],
             'login'         => $login,
@@ -92,6 +118,7 @@ class RegisterController extends Controller
             'fax'           => $data['fax'],
             'gender'        => $data['gender'],
             'country_id'    => $data['country_id'],
+            'role_id'       => 3
         ]);
     }
 }

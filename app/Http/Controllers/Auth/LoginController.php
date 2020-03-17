@@ -22,7 +22,7 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers;
+    // use AuthenticatesUsers;
 
     /**
      * Where to redirect users after login.
@@ -105,8 +105,6 @@ class LoginController extends Controller
         // $user->tokens()->delete();
         $user->tokens->each->delete();
 
-        // dd($request->user());
-
-        return $this->response(response()->noContent(), 204, "logouted");
+        return $this->response(response()->noContent(), 200, "logouted");
     }
 }

@@ -31,16 +31,17 @@ export default {
         //     })
         // })
 
-        // return new Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => {
             axios.get("/api/admin/users").then((response) => {
-                commit('SET_USERS', response.data)
-                // resolve(response)
+                console.log('Success', response);
+                commit('SET_USERS', response.data);
+                resolve(response)
             })
             .catch((error) => {
-                // reject(error)
+                reject(error)
                 console.error('Server Error: ', error);
             });
-        // })
+        })
     },
 
     fetchUser({}, userId) {
