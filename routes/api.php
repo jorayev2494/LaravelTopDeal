@@ -26,7 +26,8 @@ Route::get('/countries', ["uses" => "Api\CountryController", "as" => "countries"
 
 Route::group(['prefix' => 'admin', ['middleware' => ['auth:airlock']], "namespace" => "Admin\Api", "as" => "admin."], function() {
     Route::apiResource("/users", "UserController");
-    Route::post("/users/{user}", ["uses" => "UserController@update", "as" => "users.account"]);                                          // Update with Avatar
+    // Route::get("/categories", ["uses" => "CategoryController@categories", "as" => "categories"]);                                       // Get Categories
+    Route::post("/users/{user}", ["uses" => "UserController@update", "as" => "users.account"]);                                         // Update with Avatar
 });
 
 
