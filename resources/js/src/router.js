@@ -1372,7 +1372,7 @@ const router = new Router({
                     name: 'admin-auth-callback',
                     component: () => import('@/views/Callback.vue'),
                     meta: {
-                        rule: 'guest'
+                        rule: 'any'
                     }
                 },
                 {
@@ -1388,7 +1388,7 @@ const router = new Router({
                     name: 'admin-page-register',
                     component: () => import('@/views/pages/register/Register.vue'),
                     meta: {
-                        rule: 'guest'
+                        rule: 'any'
                     }
                 },
                 {
@@ -1396,7 +1396,7 @@ const router = new Router({
                     name: 'admin-page-forgot-password',
                     component: () => import('@/views/pages/ForgotPassword.vue'),
                     meta: {
-                        rule: 'guest'
+                        rule: 'any'
                     }
                 },
                 {
@@ -1404,7 +1404,7 @@ const router = new Router({
                     name: 'admin-page-reset-password',
                     component: () => import('@/views/pages/ResetPassword.vue'),
                     meta: {
-                        rule: 'guest'
+                        rule: 'any'
                     }
                 },
                 {
@@ -1412,7 +1412,7 @@ const router = new Router({
                     name: 'admin-page-lock-screen',
                     component: () => import('@/views/pages/LockScreen.vue'),
                     meta: {
-                        rule: 'moderator'
+                        rule: 'any'
                     }
                 },
                 {
@@ -1420,7 +1420,7 @@ const router = new Router({
                     name: 'admin-page-coming-soon',
                     component: () => import('@/views/pages/ComingSoon.vue'),
                     meta: {
-                        rule: 'guest'
+                        rule: 'any'
                     }
                 },
                 {
@@ -1428,7 +1428,7 @@ const router = new Router({
                     name: 'admin-page-error-404',
                     component: () => import('@/views/pages/Error404.vue'),
                     meta: {
-                        rule: 'guest'
+                        rule: 'any'
                     }
                 },
                 {
@@ -1436,7 +1436,7 @@ const router = new Router({
                     name: 'admin-page-error-500',
                     component: () => import('@/views/pages/Error500.vue'),
                     meta: {
-                        rule: 'guest'
+                        rule: 'any'
                     }
                 },
                 {
@@ -1444,7 +1444,7 @@ const router = new Router({
                     name: 'admin-page-not-authorized',
                     component: () => import('@/views/pages/NotAuthorized.vue'),
                     meta: {
-                        rule: 'guest'
+                        rule: 'any'
                     }
                 },
                 {
@@ -1452,7 +1452,7 @@ const router = new Router({
                     name: 'admin-page-maintenance',
                     component: () => import('@/views/pages/Maintenance.vue'),
                     meta: {
-                        rule: 'guest'
+                        rule: 'any'
                     }
                 },
             ]

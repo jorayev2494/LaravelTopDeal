@@ -13,6 +13,7 @@ class CategoryController extends Controller
 
     public function __construct() {
         $this->category_r = new CategoryRepository();
+        $this->category_r->setSelect(["id", "slug", "parent_id", "is_active"]);
     }
 
     /**
@@ -23,7 +24,6 @@ class CategoryController extends Controller
     public function index()
     {
         // dd($this->category_r->getAll()->toArray());
-        $this->category_r->setSelect(["id", "slug", "parent_id", "is_active"]);
         $categories = $this->category_r->getAll();
         // return $this->responseMobile($categories, 200);
         return $this->response($categories);
@@ -48,7 +48,9 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        $this->category_r->setSelect(["slug", "parent_id", "is_active"]);
+        $suer = $this->category_r->findById($id);
+        return $this->response($suer);
     }
 
     /**

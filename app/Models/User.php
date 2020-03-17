@@ -39,6 +39,7 @@ class User extends Authenticatable
         'location',
         'fax',
         'password',
+        'role_id',
     ];
 
     /**
