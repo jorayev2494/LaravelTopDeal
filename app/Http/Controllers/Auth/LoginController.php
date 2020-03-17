@@ -105,6 +105,6 @@ class LoginController extends Controller
         // $user->tokens()->delete();
         $user->tokens->each->delete();
 
-        return $this->response(response()->noContent(), 200, "logouted");
+        return $this->response(null, 200, "logouted");
     }
 }
