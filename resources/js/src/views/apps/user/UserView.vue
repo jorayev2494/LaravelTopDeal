@@ -60,7 +60,7 @@
                             </tr>
                             <tr>
                                 <td class="font-semibold">Role</td>
-                                <td>{{ user_data.role }}</td>
+                                <td>{{ user_data.role.slug }}</td>
                             </tr>
                             <tr>
                                 <td class="font-semibold">Company</td>
@@ -145,7 +145,7 @@
             </div>
 
             <!-- Permissions -->
-            <vx-card>
+            <vx-card v-if="!isUser()">
 
                 <div class="vx-row">
                     <div class="vx-col w-full">
@@ -222,6 +222,9 @@
                     title: 'User Deleted',
                     text: 'The selected user was successfully deleted'
                 })
+            },
+            isUser() {
+                return this.user_data.role.slug == "user";
             }
         },
         computed: {

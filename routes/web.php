@@ -21,10 +21,19 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/admin/{any}', 'ApplicationController')->where('any', '.*');
 // Route::view('/{any}', 'admin')->where('any', '.*');
 
+Auth::routes([
+    "register"  => false,
+    "login"     => false,
+]);
+
+Route::get('/home', 'HomeController@index')->name('home');
+
 // Admin
 Route::group(['prefix' => 'admin'], function() {
     Route::view('/{any?}', 'admin')->where('any', '.*');
 });
     
 // Public
-Route::get('/{any}', "IndexController")->where('any', '.*');
+// Route::get('/{any}', "IndexController")->where('any', '.*');
+
+

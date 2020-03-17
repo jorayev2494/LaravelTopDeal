@@ -153,13 +153,13 @@
                         value: "admin"
                     },
                     {
-                        label: "User",
-                        value: "user"
+                        label: "Moderator",
+                        value: "moderator"
                     },
                     {
-                        label: "Staff",
-                        value: "staff"
-                    },
+                        label: "User",
+                        value: "user"
+                    }                    
                 ],
                 formData: new FormData(),
                 isUploadedAvatar: false,
@@ -244,13 +244,13 @@
             },
             role_local: {
                 get() {
-                    // return {
-                    //     label: this.capitalize(this.data_local.role),
-                    //     value: this.data_local.role
-                    // }
+                    return {
+                        label: this.capitalize(this.data_local.role.slug),
+                        value: this.data_local.role.slug
+                    }
                 },
                 set(obj) {
-                    this.data_local.role = obj.value
+                    this.data_local.role.slug = obj.value
                 }
             },
             validateForm() {

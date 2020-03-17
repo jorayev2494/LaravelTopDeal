@@ -20,12 +20,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::all();
-        
-        // return [
-        //     "status" => 200,
-        //     "data" => User::all(),
-        // ];
+        $users = User::class;
+        return $this->response($users);
     }
 
     /**
@@ -47,7 +43,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return User::find($id) ?? new User();
+        $user = User::find($id);
+        return $this->response($user);
     }
 
     /**
@@ -92,10 +89,6 @@ class UserController extends Controller
         if ($isDeleted)
             $deleteUser->delete();
 
-        return [
-            "status" => 200,
-            "data" => null,
-            "message" => "success"
-        ];
+        return $this->response(response()->noContent(), 204);
     }
 }
