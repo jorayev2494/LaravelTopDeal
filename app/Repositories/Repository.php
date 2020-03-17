@@ -10,7 +10,7 @@ abstract class Repository
 
     abstract protected function getModel() : string;
 
-    private function __construct() {
+    public function __construct() {
         $this->model = app($this->getModel());
     }
 

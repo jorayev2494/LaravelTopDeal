@@ -12,8 +12,19 @@ class Category extends Model
      * @var array
      */
     protected $fillable = [
-        
+        "slug",
+        "parent_id",
+        "is_active",
     ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'is_active' => 'bool',
+     ];
 
     protected $guards = ["*"];
 }
