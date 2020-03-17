@@ -26,7 +26,7 @@
 
                                 <vs-input type="email" v-validate="'required|email|min:3'" label-placeholder="Email" v-model="email" class="w-full mb-8" />
                                 <vs-button type="border" :to="{ name: 'admin-page-login' }" class="px-4 w-full md:w-auto">Back To Login</vs-button>
-                                <vs-button class="float-right px-4 w-full md:w-auto mt-3 mb-8 md:mt-0 md:mb-0">Recover Password</vs-button>
+                                <vs-button class="float-right px-4 w-full md:w-auto mt-3 mb-8 md:mt-0 md:mb-0" :disabled="email.length <= 5" v-on:click.prevent="recoveryPassword()" >Recover Password</vs-button>
                             </div>
                         </div>
                     </div>
@@ -41,6 +41,23 @@ export default {
     data() {
         return {
             email: ''
+        }
+    },
+    methods: {
+        recoveryPassword() {
+            this.$store.dispatch('auth/passwordResetAirlock', this.email)
+            // .then(() => {
+            //     this.$vs.loading.close()
+            // }).catch(error => {
+            //     this.$vs.loading.close()
+            //     this.$vs.notify({
+            //         title: 'Error',
+            //         text: error.message,
+            //         iconPack: 'feather',
+            //         icon: 'icon-alert-circle',
+            //         color: 'danger'
+            //     })
+            // })
         }
     }
 }
