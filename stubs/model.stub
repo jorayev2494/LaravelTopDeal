@@ -13,7 +13,7 @@ class {{ class }} extends Model
      */
     protected $fillable = [
 
-    ],
+    ];
 
     protected $guards = ["*"];
 }
