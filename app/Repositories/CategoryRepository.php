@@ -15,12 +15,25 @@ class CategoryRepository extends Repository implements IRepository
     public function getAll(): \Illuminate\Database\Eloquent\Collection
     {
         $build = $this->getModelClone()->all($this->getSelect());
+
+        $build->map(function($category) {
+            $category->load(['childs', 'parents']);
+        });
+
         return $build;
     }
 
     public function findById(int $id): \Illuminate\Database\Eloquent\Model
     {
-        return $this->getModelClone()->select($this->getSelect())->find($id);
+        $build = $this->getModelClone()->select($this->getSelect())->find($id)->load(['childs', 'parents']);
+
+        // if($build) {
+        //     if ($build->hasChildren())  $load[] = "childs";
+        //     if ($build->hasParent())    $load[] = "parents";
+        //     $build->load($load);
+        // }
+
+        return $build;
+
     }
-    
 }

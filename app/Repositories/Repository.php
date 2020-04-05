@@ -29,4 +29,24 @@ abstract class Repository
     {
         $this->select = $params;
     }
+
+    /**
+     * Handle dynamic method calls into the model.
+     *
+     * @param  string  $method
+     * @param  array  $parameters
+     * @return mixed
+     */
+    public function __call(string $method, $parameters)
+    {
+        if (is_string($method) && count($parameters)) {
+            return $this->getModelClone()->$method($parameters[0]);
+        } else if (is_string($method) && !is_array($parameters)) {
+            return $this->getModelClone()->$method($parameters);
+        } else {
+            return $this->getModelClone()->$method();
+        }
+
+        return $this->getModelClone()->$method();
+    }
 }
