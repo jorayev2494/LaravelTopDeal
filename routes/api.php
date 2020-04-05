@@ -5,28 +5,13 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-
 #region Public URL - s
 Route::get('/countries', ["uses" => "Api\CountryController", "as" => "countries"]);
 #endregion
 
 Route::group(['prefix' => 'admin', ['middleware' => ['auth:airlock']], "namespace" => "Admin\Api", "as" => "admin."], function() {
     Route::apiResource("/users", "UserController");
-    Route::apiResource("/categories", "CategoryController");                                       // Get Categories
+    Route::apiResource("/categories", "CategoryController", ["parameters" => ["categories" => "category"]]);                                                                            // Get Categories
     Route::post("/users/{user}", ["uses" => "UserController@update", "as" => "users.account"]);                                         // Update with Avatar
 });
 
