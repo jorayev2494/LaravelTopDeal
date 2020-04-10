@@ -8,6 +8,6 @@ use Faker\Generator as Faker;
 $factory->define(Country::class, function (Faker $faker) {
     return [
         "slug"          => $faker->unique()->country,
-        "is_active"     => $faker->boolean
+        "is_active"     => true,    // $faker->boolean
     ];
 });

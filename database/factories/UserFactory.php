@@ -46,6 +46,8 @@ $factory->define(User::class, function (Faker $faker) {
         $faker->boolean ? "phone" : "sms",
     ];
 
+    // dd($activeCountries);
+
     return [
         'avatar'            =>  $faker->imageUrl(250, 250, "cats"),
         'login'             =>  $login,
