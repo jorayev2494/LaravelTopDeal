@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Repositories\AdminRepository;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Str;
@@ -45,9 +46,8 @@ class RegisterController extends Controller
     public function register(Request $request) : JsonResponse
     {
         $this->validator($request->all());
-        $user = $this->create($request->all());
-
-        return response()->json(["message" => "admin_successful_registered"], 201);
+        $this->create($request->all());
+        return $this->jsonResponse(null, Response::HTTP_CREATED, "admin_successful_registered");
     }
 
     /**

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Admin\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -8,7 +8,9 @@ use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use App\Repositories\AdminRepository;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class LoginController extends Controller
 {
@@ -45,9 +47,26 @@ class LoginController extends Controller
      * @param Request $request
      * @return void
      */
-    public function login(Request $request)
+    public function login(Request $request) : JsonResponse
     {
-       
+        $this->validateLogin($request);
+
+        // $admin = $this->admin_r->whereEmail($this->username($request), $request->get($this->username($request)))->first();
+        $admin = $this->admin_r->whereEmail($request->get($this->username($request)))->first();
+
+
+        // dd($admin);
+
+        // if (!$admin || !Hash::check($request->password, $admin->password)) {
+            // return response()->json(['error' => 'The provided credentials are incorrect.'], 200);
+        // }
+
+        $credentials = request(['email', 'password']);
+        if (! $token = auth()->guard("admin")->attempt($credentials)) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
+        return $this->jsonResponse($this->generateAuthToken($token, $admin), Response::HTTP_OK);
     }
 
     /**
@@ -83,7 +102,7 @@ class LoginController extends Controller
      */
     public function refresh()
     {
-        return $this->respondWithToken(auth()->refresh());
+        return $this->jsonResponse($this->generateAuthToken(auth()->guard("admin")->refresh()), Response::HTTP_OK);
     }
 
     /**
@@ -93,8 +112,7 @@ class LoginController extends Controller
      */
     public function logout()
     {
-        auth()->logout();
-
-        return response()->json(['message' => 'Successfully logged out']);
+        auth()->guard("admin")->logout();
+        return $this->jsonResponse(null, Response::HTTP_OK, 'successfully_logged_out');
     }
 }
