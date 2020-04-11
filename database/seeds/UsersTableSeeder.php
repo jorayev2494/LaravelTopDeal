@@ -15,7 +15,7 @@ class UsersTableSeeder extends Seeder
         // Add Create Admin
         factory(User::class)->create([
             "login"     => "admin",
-            "email"     => "admin@admin.com",
+            "email"     => "admin@mail.com",
             "name"      => "Admin",
             "last_name" => "Adminov",
             "role_id"   => 1

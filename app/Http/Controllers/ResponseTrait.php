@@ -3,44 +3,22 @@
 
 namespace App\Http\Controllers;
 
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Response Trait
  */
 trait ResponseTrait
 {
-    private $status;
-    private $data;
-    private $message;
-
-
-    public function responseMobile($data, int $status = 200, string $message = null)
+    public function response($data = null, int $status = 200, string $message = 'success')
     {
-        $message = $message == null && $status == 200 ? "success" : $message;
-        return response()->json(["status" => $status, "data" => $data, "message" => $message], $status);
+        return response()->json(compact('status', 'data', 'message'), $status);
     }
 
-    /**
-     * Browser Api
-     *
-     * @param [type] $data
-     * @param integer $status
-     * @param string $message
-     * @return void
-     */
-    public function response($data, int $status = 200, string $message = null)
+    public function responseErrors(string $errors, int $status = 301)
     {
-        
-        $response = $data;
-        
-        if ($message) {
-            $response = ["data" => $data];
-            $response =  array_merge($response, ["message" => $message]);
-        }
-        
-        $message = $message == null && $status == 200 ? "success" : $message;
-
-        return response()->json($response, $status);
+        $response['errors'] = $errors;
+        $response['status'] = $status;
+        return response()->json([$response], Response::HTTP_OK);
     }
-
 }

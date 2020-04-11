@@ -95,6 +95,6 @@ class LoginController extends Controller
     {
         auth()->logout();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return $this->response(null, 200, "logouted");
     }
 }

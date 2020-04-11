@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Categories\CategoryCreateRequest;
+use App\Http\Requests\Admin\Categories\CategoryUpdateRequest;
+use App\Models\Category;
 use App\Repositories\CategoryRepository;
 use Illuminate\Http\Request;
 
@@ -10,6 +13,13 @@ class CategoryController extends Controller
 {
 
     private $category_r;
+
+    /**
+     * Category
+     *
+     * @var \App\Models\Category
+     */
+    private $category;
 
     public function __construct() {
         $this->category_r = new CategoryRepository();
@@ -23,9 +33,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        // dd($this->category_r->getAll()->toArray());
         $categories = $this->category_r->getAll();
-        // return $this->responseMobile($categories, 200);
         return $this->response($categories);
     }
 
@@ -35,9 +43,20 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryCreateRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        $this->category = $this->category_r->create([
+            'slug'          => $data['slug'],
+            'parent_id'     => $data['parent_id'],
+            'is_active'     => $data['is_active'],
+        ]); // ->load(["childs", "parents", "trans"]);
+
+        $this->category->trans()->create($data['trans']);
+        $this->category->with("langs");
+
+        return $this->response(['category' => $this->category]);
     }
 
     /**
@@ -46,11 +65,10 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Category $category)
     {
-        $this->category_r->setSelect(["slug", "parent_id", "is_active"]);
-        $suer = $this->category_r->findById($id);
-        return $this->response($suer);
+        if (!$category) return $this->responseErrors('category_not_found');
+        return $this->response($category->load(['childs', 'parents']));
     }
 
     /**
@@ -60,9 +78,23 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryUpdateRequest $request, Category $category)
     {
-        //
+        $data = $request->validated();
+
+        if (!$category) return $this->responseErrors('category_not_found');
+
+        // Category Update
+        $category->update([
+            'slug'      => $data['slug'],
+            'parent_id' => $data['parent_id'],
+            'is_active' => $data['is_active'],
+        ]);
+        
+        // TranslateCategory Update
+        $category->trans()->update($data['trans']);
+
+        return $this->response($category->load(['childs', 'parents']));
     }
 
     /**
@@ -71,8 +103,13 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        //
+        if (!$category) return $this->responseErrors('category_not_found');
+
+        $category->trans()->delete();
+        $category->delete();
+
+        return $this->response(null, 200, "category successful deleted");
     }
 }

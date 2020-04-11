@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\Category;
-use Illuminate\Database\Eloquent\Collection;
+use App\Models\TranslateCategory;
 use Illuminate\Database\Seeder;
 
 class CategoriesTableSeeder extends Seeder
@@ -13,39 +13,19 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Category::class, 10)->create();
+        // Add categories
+        factory(Category::class, 2)->create()->each(function($category) {
+            // Trans for $category
+            factory(TranslateCategory::class)->create(['category_id' => $category->id]);
 
-        // Generate Parents
-        for ($i = 0; $i < 2; $i++) { 
-            foreach ($this->getActiveCategories() as $category) {
-                factory(Category::class)->create(["parent_id" => $category->id]);
-            }
-        }
-    }
-
-    /**
-     * Get Active Categories
-     *
-     * @return Collection
-     */
-    public function getActiveCategories() : Collection
-    {
-        return Category::where([
-            "is_active" => true,
-            "parent_id" => null
-        ])->get();
-    }
-
-    /**
-     * Get All Categories
-     *
-     * @return Collection
-     */
-    public function getCategories() : Collection
-    {
-        return Category::where([
-            // "is_active" => true,
-            "parent_id" => null
-        ])->get();
+            if ($category->id > $category->id + 2) return;
+            
+            // Add Child Categories
+            $childCats = factory(Category::class, 3)->create(['parent_id' => $category->id])->each(function($childCategory) {
+                // Trans for $childCategory
+                $transCategory = factory(TranslateCategory::class)->create(['category_id' => $childCategory->id]);
+            });
+            $category->categories()->saveMany(factory($childCats));
+        });
     }
 }
