@@ -29,9 +29,9 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/home', 'HomeController@index')->name('home');
 
 // Admin
-// Route::group(['prefix' => 'admin'], function() {
-    // Route::view('/{any?}', 'admin')->where('any', '.*');
-// });
+Route::group(['prefix' => 'admin'], function() {
+    Route::view('/{any?}', 'admin')->where('any', '.*');
+});
     
 // Public
 // Route::get('/{any}', "IndexController")->where('any', '.*');

@@ -14,6 +14,11 @@ trait FormatResponseTrait
         return response()->json(compact('status', 'data', 'message'), $status);
     }
 
+    public function jsonErrorsResponse(string $errors, int $status = 400, string $message = "error") : JsonResponse
+    {
+        return response()->json(compact('status', 'errors', 'message'), $status);
+    }
+
      /**
      * Get the token array structure.
      *

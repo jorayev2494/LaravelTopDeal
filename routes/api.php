@@ -23,6 +23,8 @@ Route::group(["prefix" => "admin", "namespace" => "Admin", "as" => "admin."], fu
         Route::post("/login", ["uses" => "Auth\LoginController@login", "as" => "login"]);
         Route::post("/refresh", ["uses" => "Auth\LoginController@refresh", "as" => "refresh"]);
         Route::post("/logout", ["uses" => "Auth\LoginController@logout", "as" => "logout"]);
+        Route::post("/reset_password", ["uses" => "Auth\PasswordController@sendResetLink", "as" => "sendResetLink"]);
+        Route::post("/change_password", ["uses" => "Auth\PasswordController@changePassword", "as" => "changePassword"]);
     });
 
     Route::get("/me", ["uses" => "AdminController@me", "as" => "me"]);

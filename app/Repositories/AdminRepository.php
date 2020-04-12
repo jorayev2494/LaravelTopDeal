@@ -21,8 +21,13 @@ class AdminRepository extends Repository implements IRepository
         return $this->getModelClone()->find($id, $this->getSelect());
     }
 
-    public function whereByEmail(string $email) : Model
+    public function whereByEmail(string $email) : \Illuminate\Database\Eloquent\Collection
     {
         return $this->getModelClone()->select($this->getSelect())->whereEmail($email)->get();
+    }
+
+    public function findByEmail(string $email) : Model
+    {
+        return $this->getModelClone()->select($this->getSelect())->whereEmail($email)->first();
     }
 }
