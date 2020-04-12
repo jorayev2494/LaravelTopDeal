@@ -6,17 +6,19 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use App\Repositories\AdminRepository;
+use App\Repositories\UserRepository;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Str;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class RegisterController extends Controller
+class RegisterUserController extends Controller
 {
 
-    private $admin_r;
+    private $user_r;
 
     /*
     |--------------------------------------------------------------------------
@@ -36,18 +38,18 @@ class RegisterController extends Controller
      *
      * @return void
      */
-    public function __construct(AdminRepository $adminRepository)
+    public function __construct(UserRepository $userRepository)
     {
-        $this->admin_r = $adminRepository;
+        $this->user_r = $userRepository;
         $this->middleware('guest');
     }
 
     public function register(Request $request) : JsonResponse
     {
         $this->validator($request->all());
-        $user = $this->create($request->all());
+        $this->create($request->all());
 
-        return response()->json(["message" => "admin_successful_registered"], 201);
+        return $this->jsonResponse("user_successful_registered", Response::HTTP_ACCEPTED);
     }
 
     /**
@@ -73,11 +75,11 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $login  = Str::before($data["email"], "@");
-        return $this->admin_r->create([
-            'login'         => $login,
+        return $this->user_r->create([
+            'login'         => Str::before($data["email"], "@"),
             'email'         => $data['email'],
             'password'      => Hash::make($data['password']),
+            'role_id'       => 2,
             'country_id'    => $data['country_id'],
         ]);
     }

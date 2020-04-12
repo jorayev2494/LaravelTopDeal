@@ -7,13 +7,21 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use App\Repositories\AdminRepository;
+use App\Repositories\UserRepository;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
-class LoginController extends Controller
+class LoginUserController extends Controller
 {
 
-    private $admin_r;
+    /**
+     * UserRepository
+     *
+     * @var \App\Repositories\UserRepository;
+     */
+    private $user_r;
 
     /*
     |--------------------------------------------------------------------------
@@ -33,10 +41,10 @@ class LoginController extends Controller
      *
      * @return void
      */
-    public function __construct(AdminRepository $adminRepository)
+    public function __construct(UserRepository $userRepository)
     {
-        $this->admin_r = $adminRepository;
-        $this->middleware('guest')->except('logout');
+        $this->user_r = $userRepository;
+        // $this->middleware('auth')->except('logout');
     }
 
     /**
@@ -45,9 +53,22 @@ class LoginController extends Controller
      * @param Request $request
      * @return void
      */
-    public function login(Request $request)
+    public function login(Request $request) : JsonResponse
     {
-       
+        $this->validateLogin($request);
+
+        // $user = $this->user_r->findByEmail($request->get($this->username($request)));
+
+        // if (!$admin || !Hash::check($request->password, $admin->password)) {
+            // return response()->json(['error' => 'The provided credentials are incorrect.'], 200);
+        // }
+
+        $credentials = request()->only(['email', 'password']);
+        if (!$token = auth()->attempt($credentials)) {
+            return $this->jsonErrorsResponse('the_provided_credentials_are_incorrect', 401);
+        }
+
+        return $this->jsonResponse($this->generateAuthToken($token, auth()->user()), Response::HTTP_OK);
     }
 
     /**
@@ -83,7 +104,7 @@ class LoginController extends Controller
      */
     public function refresh()
     {
-        return $this->respondWithToken(auth()->refresh());
+        return $this->jsonResponse($this->generateAuthToken(auth()->refresh()), Response::HTTP_OK);
     }
 
     /**
@@ -94,7 +115,6 @@ class LoginController extends Controller
     public function logout()
     {
         auth()->logout();
-
-        return $this->response(null, 200, "logouted");
+        return $this->jsonResponse(null, Response::HTTP_OK, 'user_successfully_logged_out');
     }
 }

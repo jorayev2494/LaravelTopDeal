@@ -51,7 +51,7 @@ $factory->define(User::class, function (Faker $faker) {
     return [
         'avatar'            =>  $faker->imageUrl(250, 250, "cats"),
         'login'             =>  $login,
-        'name'              =>  $faker->name,
+        'first_name'        =>  $faker->name,
         'last_name'         =>  $faker->lastName,
         'email'             =>  $email,
         'phone'             =>  $faker->e164PhoneNumber,
@@ -60,7 +60,7 @@ $factory->define(User::class, function (Faker $faker) {
         "contact_options"   =>  $contactOptions,
         'country_id'        =>  $activeCountries[rand(0, $activeCountries->count() - 1)],
         'email_verified_at' =>  $dateNow,
-        "role_id"           =>  3,
+        "role_id"           =>  2,
         "website"           =>  $faker->url,
         'location'          =>  [
             "add_line_1"            =>  $faker->address,

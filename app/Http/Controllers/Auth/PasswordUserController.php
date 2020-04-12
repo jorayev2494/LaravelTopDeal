@@ -14,19 +14,19 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class PasswordController extends Controller
+class PasswordUserController extends Controller
 {
 
     /**
-     * AdminRepository
+     * UserRepository
      *
-     * @var \App\Repositories\AdminRepository;
+     * @var \App\Repositories\UserRepository;
      */ 
-    private $admin_r;
+    private $user_r;
 
 
-    public function __construct(AdminRepository $adminRepository) {
-        $this->admin_r = $adminRepository;
+    public function __construct(UserRepository $userRepository) {
+        $this->user_r = $userRepository;
     }
     
 
@@ -38,11 +38,12 @@ class PasswordController extends Controller
      */
     public function sendResetLink(Request $request) : JsonResponse
     {
-        $email  = $request->get("email");
+        $email = $request->get("email");
+        dd($email);
 
-        $admin = $this->admin_r->findByEmail($email);
+        $user = $this->user_r->findByEmail($email);
 
-        if (!$admin) {
+        if (!$user) {
             return $this->jsonErrorsResponse("admin_not_found");
         }
 
@@ -50,11 +51,11 @@ class PasswordController extends Controller
         $token = md5(uniqid());
         DB::table("password_resets")->where("email", $email)->delete();
         DB::table("password_resets")->insert([
-            ["email" => $admin->email, "token" => $token, "created_at" => Carbon::now()]
+            ["email" => $user->email, "token" => $token, "created_at" => Carbon::now()]
         ]);
 
         $url = env("APP_URL") . "/password_recovery/?" . $token;
-        Mail::to($admin->email)->queue(new PasswordResetEmail($admin->first_name, $url));
+        Mail::to($user->email)->queue(new PasswordResetEmail($user->first_name, $url));
 
         $data = [];
         if (config("app.debug")) {
@@ -76,7 +77,7 @@ class PasswordController extends Controller
         $admin = $this->admin_r->findByEmail($resetPassword->email);
 
         if (!$admin) {
-            return $this->jsonErrorsResponse("admin_not_exist");
+            return $this->jsonErrorsResponse("user_not_exist");
         }
 
         if ($this->validator($request->all())->fails()) {

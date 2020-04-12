@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('avatar')->nullable();
             $table->string('login');
-            $table->string('name');
+            $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('email')->unique();
 
@@ -34,7 +34,6 @@ class CreateUsersTable extends Migration
             // Role Id
             $table->bigInteger('role_id')->unsigned();
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
-            
             
             $table->json('contact_options')->nullable();
             

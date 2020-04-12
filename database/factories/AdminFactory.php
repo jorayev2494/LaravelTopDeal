@@ -22,7 +22,7 @@ $factory->define(Admin::class, function (Faker $faker) {
         "email"             => $email,
         "dob"               => Carbon::now()->addYears(rand(1, 5)),
         "gender"            => "other",
-        "country_id"        => $countries[rand(0, $countries->count())]->id,
+        "country_id"        => $countries->random()->id,
         "password"          => Hash::make("476674"),
     ];
 });
