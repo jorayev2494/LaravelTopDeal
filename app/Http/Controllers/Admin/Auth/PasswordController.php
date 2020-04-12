@@ -86,7 +86,7 @@ class PasswordController extends Controller
         $admin->password = Hash::make($request->password);
         $admin->push();
 
-        // DB::table("password_resets")->where("token", $request->token)->delete();
+        DB::table("password_resets")->where("token", $request->token)->delete();
 
         return $this->jsonResponse(null, Response::HTTP_ACCEPTED, "password_changed");
     }
