@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Auth;
+namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Mail\Auth\PasswordResetEmail;
-use App\Repositories\AdminRepository;
+use App\Repositories\UserRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -39,7 +39,6 @@ class PasswordUserController extends Controller
     public function sendResetLink(Request $request) : JsonResponse
     {
         $email = $request->get("email");
-        dd($email);
 
         $user = $this->user_r->findByEmail($email);
 
@@ -74,9 +73,9 @@ class PasswordUserController extends Controller
             return $this->jsonErrorsResponse("token_incorrect");
         }
 
-        $admin = $this->admin_r->findByEmail($resetPassword->email);
+        $user = $this->user_r->findByEmail($resetPassword->email);
 
-        if (!$admin) {
+        if (!$user) {
             return $this->jsonErrorsResponse("user_not_exist");
         }
 
@@ -84,8 +83,8 @@ class PasswordUserController extends Controller
             return $this->jsonErrorsResponse("validation_failed");
         };
 
-        $admin->password = Hash::make($request->password);
-        $admin->push();
+        $user->password = Hash::make($request->password);
+        $user->push();
 
         DB::table("password_resets")->where("token", $request->token)->delete();
 

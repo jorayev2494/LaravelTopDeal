@@ -12,12 +12,12 @@ class UserRepository extends Repository implements IRepository
         return Model::class;
     }
 
-    public function getAll(): \Illuminate\Database\Eloquent\Collection
+    public function getAll() : \Illuminate\Database\Eloquent\Collection
     {
         return $this->getModelClone()->all($this->getSelect());
     }
 
-    public function findById(int $id): \Illuminate\Database\Eloquent\Model
+    public function findById(int $id) : \Illuminate\Database\Eloquent\Model
     {
         return $this->getModelClone()->find($id, $this->getSelect());
     }
@@ -27,7 +27,7 @@ class UserRepository extends Repository implements IRepository
         return $this->getModelClone()->select($this->getSelect())->whereEmail($email)->get();
     }
 
-    public function findByEmail(string $email) : Model
+    public function findByEmail(string $email)
     {
         return $this->getModelClone()->select($this->getSelect())->whereEmail($email)->first();
     }
