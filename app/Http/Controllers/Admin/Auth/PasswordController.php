@@ -53,7 +53,7 @@ class PasswordController extends Controller
             ["email" => $admin->email, "token" => $token, "created_at" => Carbon::now()]
         ]);
 
-        $url = env("APP_URL") . "/password_recovery/?" . $token;
+        $url = env("APP_URL") . "/admin/pages/reset-password/?tkn=" . $token;
         Mail::to($admin->email)->queue(new PasswordResetEmail($admin->first_name, $url));
 
         $data = [];
@@ -61,16 +61,16 @@ class PasswordController extends Controller
             $data['password_reset_token'] = $token;
         }
 
-        return $this->jsonResponse($data, Response::HTTP_OK);
+        return $this->jsonResponse($data, Response::HTTP_OK, "sent_reset_link_email");
     }
 
 
     public function changePassword(Request $request) : JsonResponse
     {
-        $resetPassword = DB::table("password_resets")->where("token", $request->token)->first();
+        $resetPassword = DB::table("password_resets")->where("token", $request->tkn)->first();
 
         if (!$resetPassword) {
-            return $this->jsonErrorsResponse("token_incorrect");
+            return $this->jsonErrorsResponse("token_incorrect", Response::HTTP_ACCEPTED);
         }
 
         $admin = $this->admin_r->findByEmail($resetPassword->email);
@@ -86,7 +86,7 @@ class PasswordController extends Controller
         $admin->password = Hash::make($request->password);
         $admin->push();
 
-        DB::table("password_resets")->where("token", $request->token)->delete();
+        DB::table("password_resets")->where("token", $request->tkn)->delete();
 
         return $this->jsonResponse(null, Response::HTTP_ACCEPTED, "password_changed");
     }

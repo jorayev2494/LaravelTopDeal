@@ -29,12 +29,13 @@
                                 </div>
 
                                 <vs-tabs>
-                                    <vs-tab label="Airlock">
-                                        <login-airlock></login-airlock>
+                                    
+                                    <vs-tab label="JWT">
+                                        <login-jwt></login-jwt>
                                     </vs-tab>
 
-                                    <!-- <vs-tab label="JWT">
-                                        <login-jwt></login-jwt>
+                                    <!-- <vs-tab label="Airlock">
+                                        <login-airlock></login-airlock>
                                     </vs-tab>
 
                                     <vs-tab label="Firebase">
@@ -57,16 +58,16 @@
 
 
 <script>
-    // import LoginJwt from "./LoginJWT.vue"
+    import LoginJwt from "./LoginJWT.vue"
     // import LoginFirebase from "./LoginFirebase.vue"
     // import LoginAuth0 from "./LoginAuth0.vue"
 
     export default {
         components: {
-            // LoginJwt,
+            LoginJwt,
             // LoginFirebase,
             // LoginAuth0
-            LoginAirlock:   require("./LoginAirlock.vue").default,
+            // LoginAirlock:   require("./LoginAirlock.vue").default,
         }
     }
 

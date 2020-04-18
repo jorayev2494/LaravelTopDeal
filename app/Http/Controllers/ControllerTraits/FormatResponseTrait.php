@@ -26,15 +26,15 @@ trait FormatResponseTrait
      *
      * @return array
      */
-    protected function generateAuthToken($token, $auth_data = null) : array
+    protected function generateAuthToken($token, $authData = null) : array
     {
         $response = [
-            'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
+            "accessToken" => $token,
+            // "token_type" => "bearer",
+            // "expires_in" => auth()->factory()->getTTL() * 60
         ];
 
-        if ($auth_data) $response = array_merge($response, compact('auth_data'));
+        if ($authData) $response = array_merge($response, compact('authData'));
 
         return $response;
     }

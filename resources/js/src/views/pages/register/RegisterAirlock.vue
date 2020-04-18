@@ -42,10 +42,10 @@ Author URL: http://www.themeforest.net/user/pixinvent
             placeholder="Confirm Password" v-model="confirm_password" class="w-full mt-6" />
         <span class="text-danger text-sm">{{ errors.first('confirm_password') }}</span>
 
-        <!-- Fax -->
+        <!-- Fax 
         <vs-input v-validate="'required|alpha_dash|min:3'" data-vv-validate-on="blur" label-placeholder="Fax"
             name="fax" placeholder="Fax" v-model="fax" class="w-full" />
-        <span class="text-danger text-sm">{{ errors.first('fax') }}</span>
+        <span class="text-danger text-sm">{{ errors.first('fax') }}</span> -->
 
         <!-- Country -->
         <div class="row mt-6">
@@ -84,7 +84,7 @@ Author URL: http://www.themeforest.net/user/pixinvent
                 phone                   : '',
                 password                : '',
                 confirm_password        : '',
-                fax                     : '',
+                // fax                     : '',
                 country_id              : '',
                 gender                  : 'other',
                 isTermsConditionAccepted: true
@@ -135,8 +135,9 @@ Author URL: http://www.themeforest.net/user/pixinvent
         },
         computed: {
             validateForm() {
-                return !this.errors.any() && this.displayName != '' && this.email != '' && this.password != '' && this
-                    .confirm_password != '' && this.isTermsConditionAccepted === true;
+                return !this.errors.any()   && this.displayName != '' && this.email != '' 
+                                            && this.password != ''  && this.confirm_password != '' 
+                                            && this.isTermsConditionAccepted === true && this.country_id != '';
             },
             countriesComp() {
                 return this.$store.getters["country/GET_COUNTRIES"];

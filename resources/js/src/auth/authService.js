@@ -10,6 +10,10 @@ const localStorageKey = 'loggedIn';
 const tokenExpiryKey = 'tokenExpiry';
 const loginEvent = 'loginEvent';
 
+// This is my codes
+const accessToken = 'accessToken';
+const userInfo = 'userInfo';
+
 const webAuth = new auth0.WebAuth({
     domain: authConfig.domain,
     redirectUri: window.location.origin + process.env.BASE_URL + "callback",
@@ -105,8 +109,8 @@ class AuthService extends EventEmitter {
 
     isAuthenticated() { 
         return (
-            new Date(Date.now()) < new Date(localStorage.getItem(tokenExpiryKey)) &&
-            localStorage.getItem(localStorageKey) === 'true'
+            // new Date(Date.now()) < new Date(localStorage.getItem(tokenExpiryKey)) && localStorage.getItem(localStorageKey) === 'true'
+            window.localStorage.getItem(accessToken) && window.localStorage.getItem(userInfo)
         );
     }
 }

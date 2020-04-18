@@ -34,6 +34,6 @@ Route::group(['prefix' => 'admin'], function() {
 });
     
 // Public
-// Route::get('/{any}', "IndexController")->where('any', '.*');
+Route::get('/{any}', "IndexController")->where('any', '.*');
 
 

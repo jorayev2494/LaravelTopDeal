@@ -59,9 +59,12 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         Validator::make($data, [
-            'email'         => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
+            'first_name'    => ['required', 'string', 'max:255'],
+            'last_name'     => ['required', 'string', 'max:255'],
+            'email'         => ['required', 'string', 'email', 'max:255', 'unique:admins,email'],
             'password'      => ['required', 'string', 'min:6', 'confirmed'],
-            "country_id"    => ['required', 'integer', 'exists:countries,id']
+            'country_id'    => ['required', 'integer', 'exists:countries,id'],
+            'gender'        => ['required', 'in:male,female']
         ]);
     }
 
@@ -76,9 +79,12 @@ class RegisterController extends Controller
         $login  = Str::before($data["email"], "@");
         return $this->admin_r->create([
             'login'         => $login,
+            'first_name'    => $data['first_name'],
+            'last_name'     => $data['last_name'],
             'email'         => $data['email'],
             'password'      => Hash::make($data['password']),
             'country_id'    => $data['country_id'],
+            'gender'        => $data['gender'],
         ]);
     }
 }

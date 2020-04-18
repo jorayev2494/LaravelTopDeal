@@ -17,12 +17,12 @@ class UserRepository extends Repository implements IRepository
         return $this->getModelClone()->all($this->getSelect());
     }
 
-    public function findById(int $id) : \Illuminate\Database\Eloquent\Model
+    public function findById(int $id)
     {
         return $this->getModelClone()->find($id, $this->getSelect());
     }
 
-    public function whereByEmail(string $email) : \Illuminate\Database\Eloquent\Collection
+    public function whereByEmail(string $email)
     {
         return $this->getModelClone()->select($this->getSelect())->whereEmail($email)->get();
     }

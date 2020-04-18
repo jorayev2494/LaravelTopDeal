@@ -1,8 +1,8 @@
 <template>
-    <div class="the-navbar__user-meta flex items-center" v-if="activeUserInfo.name">
+    <div class="the-navbar__user-meta flex items-center" v-if="activeUserInfo.first_name">
 
         <div class="text-right leading-tight hidden sm:block">
-            <p class="font-semibold">{{ activeUserInfo.name }}</p>
+            <p class="font-semibold">{{ activeUserInfo.first_name }}</p>
             <small>Available</small>
         </div>
 
@@ -62,6 +62,7 @@
     // import firebase from 'firebase/app'
     // import 'firebase/auth'
     import airlock from '../../../../http/requests/auth/airlock/index.js'
+    import jwt from '../../../../http/requests/auth/jwt/index.js'
 
     export default {
         data() {
@@ -76,16 +77,26 @@
         },
         methods: {
             logout() {
-                // this.$store.dispatch('auth/logoutAirlock');
-
-                airlock.logout().then((response) => {
-                    if (response.data.message == "logouted") {
+                this.$store.dispatch('auth/logoutJWT').then((response) => {
+                    if (response.data.message == "successfully_logged") {
                         if (window.localStorage.getItem("accessToken")) {
+
+                            this.$vs.loading.close()
+                            this.$vs.notify({
+                                title: 'Success',
+                                text: response.data.message,
+                                iconPack: 'feather',
+                                icon: 'icon-alert-circle',
+                                color: 'success'
+                            });
+
                             // Set bearer token in axios
-                            // this.$store.commit("SET_BEARER", "");
+                            this.$store.commit('auth/SET_BEARER', "");
 
                             // Update user details
-                            // commit('UPDATE_USER_INFO', null);
+                            this.$store.commit('UPDATE_USER_INFO', {}, {
+                                root: true
+                            })
 
                             // Remove AccessToken from LocaleStorage
                             window.localStorage.removeItem('accessToken');
@@ -94,18 +105,29 @@
                             window.localStorage.removeItem('userInfo');
 
                             // this.emit(loginEvent, { loggedIn: false });
-                            this.$acl.change('admin')
+                            // this.$acl.change('admin')
 
                             this.$router.push({ name: 'admin-page-login' }).catch(() => {})
                         }
                     } else {
-                        reject({
-                            message: "Error logouted"
-                        });
+                        this.$vs.loading.close();
+                        this.$vs.notify({
+                            title: 'Error',
+                            text: 'Error',
+                            iconPack: 'feather',
+                            icon: 'icon-alert-circle',
+                            color: 'danger'
+                        })
                     }
-                }).catch((error) => {
-                    console.log("Error: ", error);
-                    // reject(error);
+                }).catch(error => {
+                    this.$vs.loading.close();
+                    this.$vs.notify({
+                        title: 'Error',
+                        text: error.errors,
+                        iconPack: 'feather',
+                        icon: 'icon-alert-circle',
+                        color: 'danger'
+                    })
                 });
 
                 // If JWT login

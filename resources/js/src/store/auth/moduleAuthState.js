@@ -8,7 +8,7 @@
 ==========================================================================================*/
 
 
-import auth from "@/auth/authService";
+import auth from "@/auth/authService.js";
 import firebase from 'firebase/app'
 import 'firebase/auth'
 
@@ -17,11 +17,13 @@ export default {
         let isAuthenticated = false
 
         // get firebase current user
-        const firebaseCurrentUser = firebase.auth().currentUser
+        // const firebaseCurrentUser = firebase.auth().currentUser
 
-        if (auth.isAuthenticated() || firebaseCurrentUser) isAuthenticated = true
-        else isAuthenticated = false
+        // if (auth.isAuthenticated() || firebaseCurrentUser) 
+        //     isAuthenticated = true
+        // else 
+        //     isAuthenticated = false
 
-        return (localStorage.getItem('userInfo') && isAuthenticated)
+        return (localStorage.getItem('userInfo') && isAuthenticated);
     },
 }

@@ -303,71 +303,133 @@ export default {
 
 
     // JWT
-    loginJWT({
-        commit
-    }, payload) {
+    // loginJWT({commit}, payload) {
+    //     return new Promise((resolve, reject) => {
+    //         jwt.login(payload.userDetails.email, payload.userDetails.password).then(response => {
+    //             // If there's user data in response
+    //             if (response.data.data.authData) {
+    //                 console.log("Server Response: ", response.data, response.data.data.accessToken);
+                    
+    //                 // Navigate User to homepage
+    //                 router.push(router.currentRoute.query.to || '/')
 
+    //                 // Set accessToken
+    //                 localStorage.setItem("accessToken", response.data.data.accessToken)
+
+    //                 // Update user details
+    //                 commit('UPDATE_USER_INFO', response.data.data.authData, {
+    //                     root: true
+    //                 })
+
+    //                 // Set bearer token in axios
+    //                 commit("SET_BEARER", response.data.data.accessToken)
+
+    //                 resolve({
+    //                     message: "Wrong Email or Password"
+    //                 })
+    //             } else {
+    //                 reject({
+    //                     message: "Wrong Email or Password"
+    //                 })
+    //             }
+    //         })
+    //         .catch(error => {
+    //             reject(error)
+    //         })
+    //     })
+    // },
+
+    loginJWT({commit}, payload) {
+        return jwt.login(payload.userDetails.email, payload.userDetails.password);
+    },
+    
+    // Register
+    // registerUserJWT({commit}, payload) {
+    //     const { first_name, last_name, email, password, confirmPassword, country_id, gender } = payload.userDetails
+
+    //     return new Promise((resolve, reject) => {
+
+    //         // Check confirm password
+    //         if (password !== confirmPassword) {
+    //             reject({
+    //                 message: "Password doesn't match. Please try again."
+    //             })
+    //         }
+
+    //         jwt.registerUser(first_name, last_name, email, password, confirmPassword, country_id, gender).then(response => {
+    //             // Redirect User
+    //             router.push(router.currentRoute.query.to || '/')
+
+    //             // Update data in localStorage
+    //             localStorage.setItem("accessToken", response.data.accessToken)
+    //             commit('UPDATE_USER_INFO', response.data.userData, { root: true })
+
+    //             resolve(response)
+    //         })
+    //         .catch(error => {
+    //             reject(error)
+    //         })
+    //     })
+    // },
+
+    registerUserJWT({commit}, payload) {
+        const { first_name, last_name, email, password, confirmPassword, country_id, gender } = payload.userDetails
+
+        return jwt.registerUser(first_name, last_name, email, password, confirmPassword, country_id, gender);   
+            // .then(response => {
+                // Redirect User
+                // router.push(router.currentRoute.query.to || '/')
+
+                // Update data in localStorage
+                // localStorage.setItem("accessToken", response.data.accessToken)
+                // commit('UPDATE_USER_INFO', response.data.userData, { root: true })
+ 
+                // resolve(response)
+            // })
+            // .catch(error => {
+                // reject(error)
+            // })
+    },
+
+    // Password Reset
+    // resetPasswordJWT({ commit }, payload) {
+    //     return new Promise((resolve, reject) => {
+    //         jwt.resetPassword(payload).then((response) => {
+    //             window.console.log("Response: ", response.data);
+    //             resolve("wdawdawd");
+    //         }).catch((error) => {
+    //             reject(error);
+    //         })
+    //     })
+    // },
+
+    resetPasswordJWT({ commit }, payload) {
+        // return new Promise((resolve, reject) => {
+            return jwt.resetPassword(payload);
+            // .then((response) => {
+            //     window.console.log("Response: ", response.data);
+            //     resolve("wdawdawd");
+            // }).catch((error) => {
+            //     reject(error);
+            // })
+        // });
+    },
+
+    // Change Password
+    changePasswordJWT({ commit }, payload) {
         return new Promise((resolve, reject) => {
-            jwt.login(payload.userDetails.email, payload.userDetails.password)
-                .then(response => {
-
-                    // If there's user data in response
-                    if (response.data.userData) {
-                        // Navigate User to homepage
-                        router.push(router.currentRoute.query.to || '/')
-
-                        // Set accessToken
-                        localStorage.setItem("accessToken", response.data.accessToken)
-
-                        // Update user details
-                        commit('UPDATE_USER_INFO', response.data.userData, {
-                            root: true
-                        })
-
-                        // Set bearer token in axios
-                        commit("SET_BEARER", response.data.accessToken)
-
-                        resolve(response)
-                    } else {
-                        reject({
-                            message: "Wrong Email or Password"
-                        })
-                    }
-
-                })
-                .catch(error => {
-                    reject(error)
-                })
+            jwt.changePassword(payload.tkn, payload.email, payload.password, payload.password_confirmation).then((response) => {
+                resolve(response.data.message);
+            }).catch((error) => {
+                console.log('eee', error)
+                reject(response.data.errors);
+            })
         })
     },
 
-    registerUserJWT({ commit }, payload) {
-
-        const { displayName, email, password, confirmPassword } = payload.userDetails
-
-        return new Promise((resolve, reject) => {
-
-            // Check confirm password
-            if (password !== confirmPassword) {
-                reject({
-                    message: "Password doesn't match. Please try again."
-                })
-            }
-
-            jwt.registerUser(displayName, email, password).then(response => {
-                // Redirect User
-                router.push(router.currentRoute.query.to || '/')
-
-                // Update data in localStorage
-                localStorage.setItem("accessToken", response.data.accessToken)
-                commit('UPDATE_USER_INFO', response.data.userData, { root: true })
-
-                resolve(response)
-            })
-            .catch(error => {
-                reject(error)
-            })
-        })
+    // logout
+    logoutJWT() {
+        return jwt.logout();
     },
 
     // #region My Airlock Auth 

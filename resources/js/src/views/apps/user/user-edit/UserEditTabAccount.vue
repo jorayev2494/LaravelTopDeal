@@ -17,7 +17,7 @@
                     <!-- <img :src="data_local.avatar" class="mr-8 rounded h-24 w-24" /> -->
                     <vs-avatar :src="data_local.avatar" size="80px" class="mr-4" />
                     <div>
-                        <p class="text-lg font-medium mb-2 mt-4 sm:mt-0">{{ data_local.name  }}</p>
+                        <p class="text-lg font-medium mb-2 mt-4 sm:mt-0">{{ data_local.first_name  }}</p>
                         <input type="file" class="hidden" ref="update_avatar_input" @change="avatarChanged($event)" accept="image/*">
 
                         <!-- Toggle comment of below buttons as one for actual flow & currently shown is only for demo -->
@@ -37,17 +37,24 @@
                     v-validate="'required|alpha_num'" name="login" />
                 <span class="text-danger text-sm" v-show="errors.has('login')">{{ errors.first('login') }}</span>
 
-                <vs-input class="w-full mt-4" label="Name" v-model="data_local.name"
-                    v-validate="'required|alpha_spaces'" name="name" />
-                <span class="text-danger text-sm" v-show="errors.has('name')">{{ errors.first('name') }}</span>
+                <!-- First Name -->
+                <vs-input class="w-full mt-4" label="First Name" v-model="data_local.first_name"
+                    v-validate="'required|alpha_spaces'" name="first_name" />
+                <span class="text-danger text-sm" v-show="errors.has('first_name')">{{ errors.first('first_name') }}</span>
 
+                <!-- Last Name -->
+                <vs-input class="w-full mt-4" label="Last Name" v-model="data_local.last_name"
+                    v-validate="'required|alpha_spaces'" name="last_name" />
+                <span class="text-danger text-sm" v-show="errors.has('first_name')">{{ errors.first('last_name') }}</span>
+
+                <!-- Email -->
                 <vs-input class="w-full mt-4" label="Email" v-model="data_local.email" type="email"
                     v-validate="'required|email'" name="email" />
                 <span class="text-danger text-sm" v-show="errors.has('email')">{{ errors.first('email') }}</span>
             </div>
 
             <div class="vx-col md:w-1/2 w-full">
-
+                <!-- Status -->
                 <div class="mt-4">
                     <label class="vs-input--label">Status</label>
                     <v-select v-model="status_local" :clearable="false" :options="statusOptions" v-validate="'required'"
@@ -55,12 +62,12 @@
                     <span class="text-danger text-sm" v-show="errors.has('status')">{{ errors.first('status') }}</span>
                 </div>
 
-                <div class="mt-4">
+                <!--- <div class="mt-4">
                     <label class="vs-input--label">Role</label>
                     <v-select v-model="role_local" :clearable="false" :options="roleOptions" v-validate="'required'"
                         name="role" :dir="$vs.rtl ? 'rtl' : 'ltr'" />
                     <span class="text-danger text-sm" v-show="errors.has('role')">{{ errors.first('role') }}</span>
-                </div>
+                </div> -->
 
                 <vs-input class="w-full mt-4" label="Company" v-model="data_local.company" v-validate="'alpha_spaces'"
                     name="company" />
@@ -70,7 +77,7 @@
         </div>
 
         <!-- Permissions -->
-        <vx-card class="mt-base" no-shadow card-border>
+        <vx-card v-if="data_local.permissions" class="mt-base" no-shadow card-border>
 
             <div class="vx-row">
                 <div class="vx-col w-full">
@@ -95,7 +102,7 @@
 
                     <tr v-for="(val, name) in data_local.permissions" :key="name">
                         <td class="px-3 py-2">{{ name }}</td>
-                        <td v-for="(permission, name) in val" class="px-3 py-2" :key="name+permission">
+                        <td v-for="(permission, name) in val" class="px-3 py-2" :key="name + permission">
                             <vs-checkbox v-model="val[name]" />
                         </td>
                     </tr>
@@ -178,7 +185,7 @@
 
                 if (this.isUploadedAvatar) 
                 {
-                    this.formData.set("name", this.data_local.name);
+                    this.formData.set("first_name", this.data_local.first_name);
                     this.formData.set("login", this.data_local.login);
                     this.formData.set("email", this.data_local.email);
 
@@ -242,17 +249,17 @@
                     this.data_local.status = obj.value
                 }
             },
-            role_local: {
-                get() {
-                    return {
-                        label: this.capitalize(this.data_local.role.slug),
-                        value: this.data_local.role.slug
-                    }
-                },
-                set(obj) {
-                    this.data_local.role.slug = obj.value
-                }
-            },
+            // role_local: {
+            //     get() {
+            //         return {
+            //             label: this.capitalize(this.data_local.role.slug),
+            //             value: this.data_local.role.slug
+            //         }
+            //     },
+            //     set(obj) {
+            //         this.data_local.role.slug = obj.value
+            //     }
+            // },
             validateForm() {
                 return !this.errors.any()
             }

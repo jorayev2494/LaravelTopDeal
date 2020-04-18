@@ -408,6 +408,15 @@
                 this.setColumnFilter("department", obj.value)
             },
         },
+        created() {
+            if (!moduleUserManagement.isRegistered) {
+                this.$store.registerModule('userManagement', moduleUserManagement)
+                moduleUserManagement.isRegistered = true
+            }
+            this.$store.dispatch("userManagement/fetchUsers").catch(err => {
+                console.error(err)
+            })
+        },
         mounted() {
             this.gridApi = this.gridOptions.api
 
@@ -421,15 +430,6 @@
                 header.style.left = "-" + String(Number(header.style.transform.slice(11, -3)) + 9) + "px"
             }
         },
-        created() {
-            if (!moduleUserManagement.isRegistered) {
-                this.$store.registerModule('userManagement', moduleUserManagement)
-                moduleUserManagement.isRegistered = true
-            }
-            this.$store.dispatch("userManagement/fetchUsers").catch(err => {
-                console.error(err)
-            })
-        }
     }
 
 </script>

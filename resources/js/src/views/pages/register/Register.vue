@@ -24,11 +24,12 @@
                                     <p>Fill the below form to create a new account.</p>
                                 </div>
                                 <vs-tabs>
-                                    <vs-tab label="Airlock">
-                                        <register-airlock></register-airlock>
-                                    </vs-tab>
-                                    <!-- <vs-tab label="JWT">
+                                    <vs-tab label="JWT">
                                         <register-jwt></register-jwt>
+                                    </vs-tab>
+                                    
+                                    <!-- <vs-tab label="Airlock">
+                                        <register-airlock></register-airlock>
                                     </vs-tab>
 
                                     <vs-tab label="Firebase">
@@ -52,7 +53,7 @@
 
     export default {
         components: {
-            RegisterAirlock: require("./RegisterAirlock.vue").default,
+            RegisterJwt: require("./RegisterJWT.vue").default,
         }
     }
 

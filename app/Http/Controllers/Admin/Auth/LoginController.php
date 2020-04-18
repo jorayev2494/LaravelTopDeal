@@ -11,6 +11,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Tymon\JWTAuth\Exceptions\JWTException;
 
 class LoginController extends Controller
 {
@@ -63,7 +64,7 @@ class LoginController extends Controller
 
         $credentials = request(['email', 'password']);
         if (! $token = auth()->guard("admin")->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return $this->jsonErrorsResponse("email_ro_password_invalid", Response::HTTP_ACCEPTED);
         }
 
         return $this->jsonResponse($this->generateAuthToken($token, $admin), Response::HTTP_OK);
@@ -112,7 +113,12 @@ class LoginController extends Controller
      */
     public function logout()
     {
-        auth()->guard("admin")->logout();
-        return $this->jsonResponse(null, Response::HTTP_OK, 'successfully_logged_out');
+        try {
+            auth()->guard("admin")->logout();
+        } catch (JWTException $ex) {
+            return $this->jsonResponse(null, Response::HTTP_OK, 'successfully_logged');
+        }
+
+        return $this->jsonResponse(null, Response::HTTP_OK, 'successfully_logged');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Api;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Admin\Traits\UserUpdateTrait;
 use App\Http\Controllers\Controller;
@@ -8,6 +8,8 @@ use App\Http\Requests\Admin\Users\UserAccountUpdateRequest;
 use App\Models\User;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class UserController extends Controller
 {
@@ -29,7 +31,7 @@ class UserController extends Controller
     public function index()
     {
         $users = $this->user_r->getAll();
-        return $this->response($users);
+        return $this->jsonResponse($users, Response::HTTP_OK);
     }
 
     /**
@@ -52,7 +54,7 @@ class UserController extends Controller
     public function show($id)
     {
         $user = $this->user_r->findById($id);
-        return $this->response($user);
+        return $this->jsonResponse($user, Response::HTTP_OK);
     }
 
     /**
@@ -62,20 +64,24 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $user) : JsonResponse
     {
+        // dd($request->all());
         switch ($request->update) {
             case 'account':
-                return $this->updateAccount($request, $user);
+                $user = $this->updateAccount($request, $user);
+                return  $this->jsonResponse($user, Response::HTTP_ACCEPTED);
                 break;
             case 'information':
-                return $this->updateInformation($request, $user);
+                $user = $this->updateInformation($request, $user);
+                return  $this->jsonResponse($user, Response::HTTP_ACCEPTED);
                 break;
             case 'social':
-                return $this->updateSocial($request, $user)->social_links;
+                $user = $this->updateSocial($request, $user);
+                return  $this->jsonResponse($user->social_links, Response::HTTP_ACCEPTED);
                 break;
             default:
-                return;
+                return $this->jsonResponse(null, Response::HTTP_BAD_REQUEST);
                 break;
         }
     }
@@ -97,6 +103,6 @@ class UserController extends Controller
         if ($isDeleted)
             $deleteUser->delete();
 
-        return $this->response(response()->noContent(), 204);
+        return $this->jsonResponse(response()->noContent(), Response::HTTP_NO_CONTENT, "user_successful_deleted");
     }
 }

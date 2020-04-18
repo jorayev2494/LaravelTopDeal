@@ -34,7 +34,7 @@ export default {
         return new Promise((resolve, reject) => {
             axios.get("/api/admin/users").then((response) => {
                 console.log('Success', response);
-                commit('SET_USERS', response.data);
+                commit('SET_USERS', response.data.data);
                 resolve(response)
             })
             .catch((error) => {
@@ -76,7 +76,7 @@ export default {
     accountUpdate({commit}, user) {
         user.update = "account";
         delete user.avatar;
-        axios.post(`/api/admin/users/${user.id}`, user).then((response) => {
+        axios.put(`/api/admin/users/${user.id}`, user).then((response) => {
             console.log("Server Response: ", response);
         }).catch((err) => { });
     },
@@ -134,10 +134,8 @@ export default {
         //     })
         // })
 
-        // return new Promise((resolve, reject) => {
-            axios.delete(`/api/admin/users/${userId}`).then((response) => {
-                commit('REMOVE_RECORD', userId)
-            }).catch((error) => { })
-        // })
+        axios.delete(`/api/admin/users/${userId}`).then((response) => {
+            commit('REMOVE_RECORD', userId)
+        }).catch((error) => { });
     }
 }

@@ -58,10 +58,7 @@
                                 <td class="font-semibold">Status</td>
                                 <td>{{ user_data.status }}</td>
                             </tr>
-                            <tr>
-                                <td class="font-semibold">Role</td>
-                                <td>{{ user_data.role.slug }}</td>
-                            </tr>
+                            
                             <tr>
                                 <td class="font-semibold">Company</td>
                                 <td>{{ user_data.company }}</td>
@@ -224,7 +221,7 @@
                 })
             },
             isUser() {
-                return this.user_data.role.slug == "user";
+                return !true;
             }
         },
         computed: {
@@ -244,17 +241,16 @@
             }
 
             const userId = this.$route.params.userId
-            this.$store.dispatch("userManagement/fetchUser", userId)
-                .then(res => {
-                    this.user_data = res.data
-                })
-                .catch(err => {
-                    if (err.response.status === 404) {
-                        this.user_not_found = true
-                        return
-                    }
-                    console.error(err)
-                })
+            this.$store.dispatch("userManagement/fetchUser", userId).then(res => {
+                console.log("Get User: ", res);
+                this.user_data = res.data.data;
+            }).catch(err => {
+                if (err.response.status === 404) {
+                    this.user_not_found = true
+                    return
+                }
+                console.error(err)
+            })
         }
     }
 

@@ -40,7 +40,10 @@ mix.js('resources/js/app.js', 'public/admin/js')
     .copyDirectory('node_modules/material-icons/iconfont/material-icons.css', 'public/admin/css/material-icons/material-icons.css') // Material Icon fonts css
     .copy('node_modules/prismjs/themes/prism-tomorrow.css', 'public/admin/css/prism-tomorrow.css') // Prism Tomorrow theme css
     .copyDirectory('resources/assets/images', 'public/admin/images'); // Copy all images from resources to public folder
-
+// mix.browserSync('http://127.0.0.1:8080');
+mix.browserSync({
+    proxy: 'http://127.0.0.1:8080'
+});
 
 // Change below options according to your requirement
 // if (mix.inProduction()) {

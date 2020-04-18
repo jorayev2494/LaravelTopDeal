@@ -45,19 +45,27 @@ export default {
     },
     methods: {
         recoveryPassword() {
-            this.$store.dispatch('auth/passwordResetAirlock', this.email)
-            // .then(() => {
-            //     this.$vs.loading.close()
-            // }).catch(error => {
-            //     this.$vs.loading.close()
-            //     this.$vs.notify({
-            //         title: 'Error',
-            //         text: error.message,
-            //         iconPack: 'feather',
-            //         icon: 'icon-alert-circle',
-            //         color: 'danger'
-            //     })
-            // })
+            this.$store.dispatch('auth/resetPasswordJWT', this.email).then((response) => {
+                this.$vs.loading.close()
+                this.$vs.notify({
+                    title: 'Success',
+                    text: response.data.message,
+                    iconPack: 'feather',
+                    icon: 'icon-alert-circle',
+                    color: 'success'
+                });
+                this.$router.push({ name: 'admin-page-login' });
+            }).catch(error => {
+                this.$vs.loading.close();
+                console.log(error);
+                this.$vs.notify({
+                    title: 'Error',
+                    text: error.errors,
+                    iconPack: 'feather',
+                    icon: 'icon-alert-circle',
+                    color: 'danger'
+                })
+            });
         }
     }
 }

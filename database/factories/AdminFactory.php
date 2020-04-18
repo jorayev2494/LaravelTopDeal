@@ -23,6 +23,6 @@ $factory->define(Admin::class, function (Faker $faker) {
         "dob"               => Carbon::now()->addYears(rand(1, 5)),
         "gender"            => "other",
         "country_id"        => $countries->random()->id,
-        "password"          => Hash::make("476674"),
+        "password"          => Hash::make("laravel"),
     ];
 });

@@ -15,8 +15,8 @@ import getters from './moduleAuthGetters.js'
 
 export default {
 	namespaced: true,
-    state: state,
-    mutations: mutations,
-    actions: actions,
-    getters: getters
+    state,
+    getters,
+    mutations,
+    actions,
 }

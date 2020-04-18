@@ -35,10 +35,7 @@ trait UserUpdateTrait
         // Save Avatar
         $avatarPath = $user->avatar;
         if ($request->hasFile("avatar")) {
-            $disk = "public";
-            $isDelete = $this->removeAvatar($user->avatar, $disk);
-            if ($isDelete)
-                $avatarPath = "/storage/" . $validated["avatar"]->store("/users/avatars", $disk);
+            if ($this->removeAvatar($user->avatar)) $avatarPath = "/storage/" . $validated["avatar"]->store("/users/avatars", "public");
         }
 
         // Update User Properties
@@ -105,9 +102,9 @@ trait UserUpdateTrait
      */
     private function removeAvatar(string $path, string $disk = "public") : bool
     {
-        if (Storage::disk($disk)->exists(Str::after($path, "storage")))
-            return Storage::disk($disk)->delete(Str::after($path, "storage"));
-        return true;
+        // if (Storage::disk($disk)->exists(Str::after($path, "storage")))
+        return Storage::disk($disk)->delete(Str::after($path, "/storage/"));
+        // return true;
     }
 
 }

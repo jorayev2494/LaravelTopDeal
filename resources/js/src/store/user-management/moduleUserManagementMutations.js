@@ -17,6 +17,8 @@ export default {
     SET_USERS(state, users) {
         // state.users = users;
 
+        console.log('Userss', users);
+
         users.forEach(user => user.country = user.country.slug);
 
         state.users = users;

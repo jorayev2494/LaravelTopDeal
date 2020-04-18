@@ -45,6 +45,7 @@
 export default {
     data() {
         return {
+            tkn                     : '',
             email                   : '',
             password                : '',
             password_confirmation   : '',
@@ -52,12 +53,17 @@ export default {
     },
     methods: {
         reset() {
-            this.$store.dispatch('auth/resetAirlock', { 
+            this.$store.dispatch('auth/changePasswordJWT', { 
+                tkn                     : this.tkn,
                 email                   : this.email,
                 password                : this.password,
                 password_confirmation   : this.password_confirmation
             })
         }
+    },
+    mounted() {
+        var queryString = window.location.search;
+        this.tkn = (new URLSearchParams(queryString)).get("tkn");
     }
 }
 </script>

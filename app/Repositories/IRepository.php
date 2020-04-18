@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 interface IRepository
 {
     public function getAll() : Collection;
-    public function findById(int $id) : Model;
+    public function findById(int $id);
 }

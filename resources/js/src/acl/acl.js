@@ -7,10 +7,10 @@ Vue.use(AclInstaller)
 // let initialRole = "admin develop"
 let initialRole = "admin"
 
-let userInfo = JSON.parse(localStorage.getItem("userInfo"))
+// let userInfo = JSON.parse(localStorage.getItem("userInfo"))
 // if(userInfo && userInfo.userRole) initialRole = userInfo.userRole
-if(userInfo && userInfo.role.slug) 
-    initialRole = userInfo.role.slug
+// if(userInfo && userInfo.role.slug) 
+    // initialRole = userInfo.role.slug
 
 console.log('initialRole', initialRole)
 
