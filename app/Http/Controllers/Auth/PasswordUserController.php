@@ -53,7 +53,7 @@ class PasswordUserController extends Controller
             ["email" => $user->email, "token" => $token, "created_at" => Carbon::now()]
         ]);
 
-        $url = env("APP_URL") . "/password_recovery/?" . $token;
+        $url = env("APP_URL") . "/password_recovery/?tkn=" . $token;    // . "&email=" . $user->email;
         Mail::to($user->email)->queue(new PasswordResetEmail($user->first_name, $url));
 
         $data = [];
@@ -61,13 +61,13 @@ class PasswordUserController extends Controller
             $data['password_reset_token'] = $token;
         }
 
-        return $this->jsonResponse($data, Response::HTTP_OK);
+        return $this->jsonResponse($data, Response::HTTP_OK, "sent_email_link");
     }
 
 
     public function changePassword(Request $request) : JsonResponse
     {
-        $resetPassword = DB::table("password_resets")->where("token", $request->token)->first();
+        $resetPassword = DB::table("password_resets")->where("token", $request->tkn)->first();
 
         if (!$resetPassword) {
             return $this->jsonErrorsResponse("token_incorrect");

@@ -26,19 +26,18 @@
 
                             <h2>Returning Customer</h2>
                             <p><strong>I am a returning customer</strong></p>
-                            <form action="#" method="post" enctype="multipart/form-data">
+                            <form method="POST" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label class="control-label" for="input-email">E-Mail Address</label>
-                                    <input type="text" name="email" value="" placeholder="E-Mail Address"
-                                        id="input-email" class="form-control">
+                                    <input type="text" name="email" v-model="form.email" placeholder="E-Mail Address" id="input-email" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label" for="input-password">Password</label>
-                                    <input type="password" name="password" value="" placeholder="Password"
-                                        id="input-password" class="form-control">
-                                    <a href="#">Forgotten Password</a></div>
+                                    <input type="password" name="password" v-model="form.password" placeholder="Password" id="input-password" class="form-control">
+                                    <router-link :to="{ name: 'forgot-password' }">Forgotten Password</router-link>
+                                </div>
 
-                                <input type="submit" value="Login" class="btn btn-primary pull-left">
+                                <input type="submit" v-on:click.prevent="login()" value="Login" class="btn btn-primary pull-left">
                             </form>
                             <column id="column-login" class="col-sm-8 pull-right">
                                 <div class="row">
@@ -67,8 +66,21 @@
 </template>
 
 <script>
+    // name: "LoginComponent",
     export default {
-
+        data() {
+            return {
+                form: {
+                    email:      'user@mail.com',
+                    password:   'laravel',
+                }
+            }
+        },
+        methods: {
+            async login() {
+                this.$store.dispatch('auth/USER_LOGIN', this.form);
+            }
+        },
     }
 
 </script>

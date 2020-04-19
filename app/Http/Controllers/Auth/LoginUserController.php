@@ -12,6 +12,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Tymon\JWTAuth\Exceptions\JWTException;
 
 class LoginUserController extends Controller
 {
@@ -114,7 +115,12 @@ class LoginUserController extends Controller
      */
     public function logout()
     {
-        auth()->logout();
+        try {
+            auth()->logout();
+        } catch (JWTException $ex) {
+            return $this->jsonResponse(null, Response::HTTP_OK, 'user_successfully_logged_out');
+        }
+        
         return $this->jsonResponse(null, Response::HTTP_OK, 'user_successfully_logged_out');
     }
 }

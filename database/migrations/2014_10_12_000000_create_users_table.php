@@ -28,7 +28,7 @@ class CreateUsersTable extends Migration
             $table->enum('gender', ['male', 'female', 'other'])->nullable()->default('other');
             
             // Country Id
-            $table->bigInteger('country_id')->unsigned();
+            $table->bigInteger('country_id')->unsigned()->nullable();
             $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');    
             
             // Role Id

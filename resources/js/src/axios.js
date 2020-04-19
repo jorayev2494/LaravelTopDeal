@@ -5,7 +5,8 @@ const baseURL = "http://127.0.0.1:8080"
 
 // Header Configs
 var headerConfigs = {};
-headerConfigs["Accept"] = 'application/json';
+headerConfigs["Accept"]             = 'application/json';
+headerConfigs['X-Requested-With']   = 'XMLHttpRequest'
 
 if (window.localStorage.getItem('accessToken')) 
     headerConfigs["Authorization"] = 'Bearer ' + window.localStorage.getItem('accessToken');

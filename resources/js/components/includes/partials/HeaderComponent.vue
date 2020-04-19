@@ -13,9 +13,9 @@
                         <div class="tabBlock" id="TabBlock-1">
                             <ul class="top-link list-inline">
                                 <li class="login">
-                                    <a class="link-lg" href="login.html">Login </a>
+                                    <router-link :to="{ name: 'login' }">Login </router-link>
                                 </li>
-                                <li class="account" id="my_account">
+                                <li class="account" v-if="authCheckComp" id="my_account">
                                     <a href="my-account.html" title="My Account" class="btn-xs dropdown-toggle"
                                         data-toggle="dropdown">
                                         <span>My Account</span>
@@ -30,6 +30,9 @@
                                             <a href="checkout.html" class="btn-link" title="Checkout">
                                                 <span>Checkout </span>
                                             </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" v-on:click.prevent="logout()">Logout</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -1854,7 +1857,19 @@
 
 <script>
     export default {
-
+        methods: {
+            async logout() {
+                var result = await this.$store.dispatch('auth/USER_LOGOUT', null);
+                if (result == 'user_successfully_logged_out') {
+                    this.$router.push({ name: 'login' });
+                }
+            }
+        },
+        computed: {
+            authCheckComp() {
+                return this.$store.getters['auth/GET_AUTH_CHECK'];
+            }
+        }
     }
 
 </script>

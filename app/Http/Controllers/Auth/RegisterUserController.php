@@ -46,10 +46,18 @@ class RegisterUserController extends Controller
 
     public function register(Request $request) : JsonResponse
     {
-        $this->validator($request->all());
+
+        // dd($request->all());
+
+        $validator = $this->validator($request->all());
+
+        if ($validator->fails()) {
+            return $this->jsonErrorsResponse($validator->errors(), Response::HTTP_BAD_REQUEST);
+        }
+
         $this->create($request->all());
 
-        return $this->jsonResponse("user_successful_registered", Response::HTTP_ACCEPTED);
+        return $this->jsonResponse(null, Response::HTTP_ACCEPTED, "user_successful_registered");
     }
 
     /**
@@ -60,10 +68,14 @@ class RegisterUserController extends Controller
      */
     protected function validator(array $data)
     {
-        Validator::make($data, [
+        return Validator::make($data, [
+            'first_name'    => ['required', 'string', 'max:255'],
+            'last_name'     => ['required', 'string', 'max:255'],
             'email'         => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'password'      => ['required', 'string', 'min:6', 'confirmed'],
-            "country_id"    => ['required', 'integer', 'exists:countries,id']
+            'phone'         => ['required', 'string'],
+            'fax'           => ['nullable', 'string'],
+            // "country_id"    => ['required', 'integer', 'exists:countries,id']
         ]);
     }
 
@@ -77,10 +89,14 @@ class RegisterUserController extends Controller
     {
         return $this->user_r->create([
             'login'         => Str::before($data["email"], "@"),
+            'first_name'    => $data['first_name'],
+            'last_name'     => $data['last_name'],
             'email'         => $data['email'],
             'password'      => Hash::make($data['password']),
+            'phone'         => $data['phone'],
+            'fax'           => $data['fax'],
             'role_id'       => 2,
-            'country_id'    => $data['country_id'],
+            // 'country_id'    => $data['country_id'],
         ]);
     }
 }

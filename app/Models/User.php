@@ -8,8 +8,25 @@ use CarbonDateTimeCast;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Date;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
+/**
+ * @property integer $id
+ * @property string $avatar
+ * @property string $login
+ * @property string $first_name
+ * @property string $last_name
+ * @property string $email
+ * @property string $phone
+ * @property Date $dob
+ * @property integer $country_id
+ * @property JSON $contact_options
+ * @property JSON $location
+ * @property string $fax
+ * @property string $password
+ * @property integer $role_id
+ */
 class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
@@ -48,6 +65,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $hidden = [
+        'avatar',
         'password',
         'remember_token',
         "country_id",
