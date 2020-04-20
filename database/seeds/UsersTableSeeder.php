@@ -12,6 +12,9 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(User::class, 30)->create();
+        for ($i = 1; $i < 13; $i++) { 
+            $numbers = ($i > 9) ? $i : "0{$i}";
+            factory(User::class)->create(["avatar" => "/storage/images/profile/user-uploads/user-$numbers.jpg"]);
+        }
     }
 }

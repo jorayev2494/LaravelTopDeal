@@ -12,9 +12,6 @@
                     <div class="header-top-right collapsed-block col-lg-6 col-sm-12 col-md-5 col-xs-12 ">
                         <div class="tabBlock" id="TabBlock-1">
                             <ul class="top-link list-inline">
-                                <li class="login">
-                                    <router-link :to="{ name: 'login' }">Login </router-link>
-                                </li>
                                 <li class="account" v-if="authCheckComp" id="my_account">
                                     <a href="my-account.html" title="My Account" class="btn-xs dropdown-toggle"
                                         data-toggle="dropdown">
@@ -35,6 +32,9 @@
                                             <a href="#" v-on:click.prevent="logout()">Logout</a>
                                         </li>
                                     </ul>
+                                </li>
+                                <li v-else class="login">
+                                    <router-link :to="{ name: 'login' }">Login </router-link>
                                 </li>
                                 <!-- LANGUAGE CURENTY -->
                                 <li>

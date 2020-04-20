@@ -65,7 +65,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $hidden = [
-        'avatar',
+        // 'avatar',
         'password',
         'remember_token',
         "country_id",
@@ -89,7 +89,6 @@ class User extends Authenticatable implements JWTSubject
 
     protected $with = ["role", "country"];
 
-    #region RelationShips
     // public function role()
     // {
     //     return $this->hasOne('App\Models\Role', 'id', 'role_id');
@@ -115,7 +114,16 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
+    public function getAvatarAttributes()
+    {
+        $build = $this->attributes["avatar"];
 
+        if ($build) $build = env("APP_URL") . $build;
+
+        return $build;
+    }
+
+    #region RelationShips
     public function role()
     {
         return $this->belongsTo('App\Models\Role', 'role_id', 'id');
