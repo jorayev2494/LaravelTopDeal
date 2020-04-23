@@ -16,23 +16,19 @@
             <div class="vx-row">
                 <div class="vx-col md:w-1/4 sm:w-1/2 w-full">
                     <label class="text-sm opacity-75">Role</label>
-                    <v-select :options="roleOptions" :clearable="false" :dir="$vs.rtl ? 'rtl' : 'ltr'"
-                        v-model="roleFilter" class="mb-4 md:mb-0" />
+                    <v-select :options="roleOptions" :clearable="false" :dir="$vs.rtl ? 'rtl' : 'ltr'" v-model="roleFilter" class="mb-4 md:mb-0" />
                 </div>
                 <div class="vx-col md:w-1/4 sm:w-1/2 w-full">
                     <label class="text-sm opacity-75">Status</label>
-                    <v-select :options="statusOptions" :clearable="false" :dir="$vs.rtl ? 'rtl' : 'ltr'"
-                        v-model="statusFilter" class="mb-4 md:mb-0" />
+                    <v-select :options="statusOptions" :clearable="false" :dir="$vs.rtl ? 'rtl' : 'ltr'" v-model="statusFilter" class="mb-4 md:mb-0" />
                 </div>
                 <div class="vx-col md:w-1/4 sm:w-1/2 w-full">
                     <label class="text-sm opacity-75">Verified</label>
-                    <v-select :options="isVerifiedOptions" :clearable="false" :dir="$vs.rtl ? 'rtl' : 'ltr'"
-                        v-model="isVerifiedFilter" class="mb-4 sm:mb-0" />
+                    <v-select :options="isVerifiedOptions" :clearable="false" :dir="$vs.rtl ? 'rtl' : 'ltr'" v-model="isVerifiedFilter" class="mb-4 sm:mb-0" />
                 </div>
                 <div class="vx-col md:w-1/4 sm:w-1/2 w-full">
                     <label class="text-sm opacity-75">Department</label>
-                    <v-select :options="departmentOptions" :clearable="false" :dir="$vs.rtl ? 'rtl' : 'ltr'"
-                        v-model="departmentFilter" />
+                    <v-select :options="departmentOptions" :clearable="false" :dir="$vs.rtl ? 'rtl' : 'ltr'" v-model="departmentFilter" />
                 </div>
             </div>
         </vx-card>
@@ -73,8 +69,7 @@
                 </div>
 
                 <!-- TABLE ACTION COL-2: SEARCH & EXPORT AS CSV -->
-                <vs-input class="sm:mr-4 mr-0 sm:w-auto w-full sm:order-normal order-3 sm:mt-0 mt-4"
-                    v-model="searchQuery" @input="updateSearchQuery" placeholder="Search..." />
+                <vs-input class="sm:mr-4 mr-0 sm:w-auto w-full sm:order-normal order-3 sm:mt-0 mt-4" v-model="searchQuery" @input="updateSearchQuery" placeholder="Search..." />
                 <!-- <vs-button class="mb-4 md:mb-0" @click="gridApi.exportDataAsCsv()">Export as CSV</vs-button> -->
 
                 <!-- ACTION - DROPDOWN -->
@@ -190,10 +185,10 @@
                         label: 'Active',
                         value: 'active'
                     },
-                    {
-                        label: 'Deactivated',
-                        value: 'deactivated'
-                    },
+                    // {
+                    //     label: 'Deactivated',
+                    //     value: 'deactivated'
+                    // },
                     {
                         label: 'Blocked',
                         value: 'blocked'
@@ -261,11 +256,17 @@
                         headerCheckboxSelection: true,
                     },
                     {
-                        headerName: 'Username',
-                        field: 'username',
+                        headerName: 'F:name',
+                        field: 'first_name',
                         filter: true,
                         width: 210,
                         cellRendererFramework: 'CellRendererLink'
+                    },
+                    {
+                        headerName: 'L:name',
+                        field: 'first_name',
+                        filter: true,
+                        width: 200,
                     },
                     {
                         headerName: 'Email',
@@ -274,14 +275,8 @@
                         width: 225,
                     },
                     {
-                        headerName: 'Name',
-                        field: 'name',
-                        filter: true,
-                        width: 200,
-                    },
-                    {
                         headerName: 'Country',
-                        field: 'country',
+                        field: 'country.slug',
                         filter: true,
                         width: 150,
                     },
@@ -306,12 +301,12 @@
                         cellRendererFramework: 'CellRendererVerified',
                         cellClass: "text-center"
                     },
-                    {
-                        headerName: 'Department',
-                        field: 'department',
-                        filter: false,
-                        width: 150,
-                    },
+                    // {
+                    //     headerName: 'Department',
+                    //     field: 'department',
+                    //     filter: false,
+                    //     width: 150,
+                    // },
                     {
                         headerName: 'Actions',
                         field: 'transactions',

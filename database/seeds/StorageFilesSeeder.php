@@ -13,12 +13,14 @@ class StorageFilesSeeder extends Seeder
      */
     public function run()
     {
-        // Copy Admin Images
+        // Clear Storage Public Images
         File::deleteDirectory(storage_path("/app/public/images"));
-        // File::copyDirectory(base_path("/resources/assets/images"), storage_path("app/public/images"));
+        
+        // Copy Admin Images
+        File::copyDirectory(base_path("/resources/assets/images"), storage_path("app/public/images"));
 
         // Copy TopDeal Images
         // File::deleteDirectory(storage_path("/app/public/images"));
-        File::copyDirectory(base_path("/resources/topDeal/images"), storage_path("app/public/images"));
+        File::copyDirectory(base_path("/resources/topDeal/image"), storage_path("app/public/images"));
     }
 }

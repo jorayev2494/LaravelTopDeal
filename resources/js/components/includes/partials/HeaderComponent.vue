@@ -2,6 +2,14 @@
     <header id="header" class="typeheader-6">
         <!-- Header Top -->
         <div class="header-top hidden-compact">
+        
+            <!-- Notify: start-notification -->
+            <notifications group="start-notification" position="bottom right" style="margin: 5px 0px;"></notifications>
+            <!-- Notify: auth -->
+            <notifications group="auth" position="bottom right" style="margin: 5px 0px;"></notifications>
+            <!-- Notify: cabinet -->
+            <notifications group="cabinet" position="bottom right" style="margin: 5px 0px;"></notifications>
+
             <div class="container">
                 <div class="row">
                     <div class="header-top-left  col-lg-6  col-sm-12 col-md-7 hidden-xs">
@@ -19,10 +27,18 @@
                                         <span class="fa fa-angle-down"></span>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="my-account.html">My Account</a></li>
-                                        <li><a href="order-history.html">Order History</a></li>
-                                        <li><a href="#">Transactions</a></li>
-                                        <li><a href="#">Downloads</a></li>
+                                        <li>
+                                            <router-link :to="{ name: 'cabinet' }">My AccountR</router-link>
+                                        </li>
+                                        <li>
+                                            <a href="order-history.html">Order History</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Transactions</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Downloads</a>
+                                        </li>
                                         <li class="checkout">
                                             <a href="checkout.html" class="btn-link" title="Checkout">
                                                 <span>Checkout </span>
@@ -103,8 +119,9 @@
             <div class="container">
                 <div class="row">
                     <div class="navbar-logo col-lg-3 col-md-12 col-xs-12">
-                        <a href="index6.php"><img src="/public/image/catalog/demo/logo/logo-home6.png" 
-                                title="Your Store - Layout 6" alt="Your Store - Layout 6"></a>
+                        <router-link :to="{ name: 'index' }">
+                            <img src="/public/image/catalog/demo/logo/logo-home6.png" title="Your Store - Layout 6" alt="Your Store - Layout 6">
+                        </router-link>
                     </div>
                     <div class="header-center-right col-lg-6 col-md-7 col-sm-7 col-xs-9">
                         <div class="header_search">

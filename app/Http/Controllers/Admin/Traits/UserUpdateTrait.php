@@ -30,6 +30,7 @@ trait UserUpdateTrait
             "name"      => "nullable|string|min:2",
             "last_name" => "nullable|string|min:2",
             "email"     => "required|email|unique:users,email,$user->id",
+            "status"    => "required|in:" . implode(",", User::ACCOUNT_STATUSES),
         ]);
 
         // Save Avatar
@@ -100,11 +101,11 @@ trait UserUpdateTrait
      * @param string $path
      * @return boolean
      */
-    private function removeAvatar(string $path, string $disk = "public") : bool
+    private function removeAvatar($path, string $disk = "public") : bool
     {
-        // if (Storage::disk($disk)->exists(Str::after($path, "storage")))
-        return Storage::disk($disk)->delete(Str::after($path, "/storage/"));
-        // return true;
+        if (Storage::disk($disk)->exists(Str::after($path, "storage")))
+            return Storage::disk($disk)->delete(Str::after($path, "/storage/"));
+        return true;
     }
 
 }

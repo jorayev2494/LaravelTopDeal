@@ -22,7 +22,7 @@
     <link rel="shortcut icon" type="image/png" href="ico/favicon-16x16.png" />
 
     <!-- Libs CSS ============================================ -->
-    <link rel="stylesheet" href="{{ asset('public') }}/css/bootstrap/css/bootstrap.min.css">
+    <link href="{{ asset('public') }}/css/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ asset('public') }}/css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="{{ asset('public') }}/js/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
     <link href="{{ asset('public') }}/js/owl-carousel/owl.carousel.css" rel="stylesheet">
@@ -32,13 +32,19 @@
     <link href="{{ asset('public') }}/js/slick-slider/slick.css" rel="stylesheet">
 
     <!-- Theme CSS ============================================ -->
+    <link href="{{ asset('public') }}/css/themecss/so_sociallogin.css" rel="stylesheet">
     <link href="{{ asset('public') }}/css/themecss/so_searchpro.css" rel="stylesheet">
     <link href="{{ asset('public') }}/css/themecss/so_megamenu.css" rel="stylesheet">
+    <link href="{{ asset('public') }}/css/themecss/so-categories.css" rel="stylesheet">
     <link href="{{ asset('public') }}/css/themecss/so-listing-tabs.css" rel="stylesheet">
+    <link href="{{ asset('public') }}/css/themecss/so-category-slider.css" rel="stylesheet">
     <link href="{{ asset('public') }}/css/themecss/so-newletter-popup.css" rel="stylesheet">
     <link href="{{ asset('public') }}/css/footer/footer3.css" rel="stylesheet">
     <link href="{{ asset('public') }}/css/header/header6.css" rel="stylesheet">
+    
+    {{--  <link id="color_scheme" href="{{ asset('public') }}/css/theme.css" rel="stylesheet">  --}}
     <link id="color_scheme" href="{{ asset('public') }}/css/home6.css" rel="stylesheet">
+
     <link href="{{ asset('public') }}/css/responsive.css" rel="stylesheet">
     <link href="{{ asset('public') }}/css/quickview/quickview.css" rel="stylesheet">
 

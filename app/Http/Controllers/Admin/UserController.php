@@ -66,7 +66,6 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user) : JsonResponse
     {
-        // dd($request->all());
         switch ($request->update) {
             case 'account':
                 $user = $this->updateAccount($request, $user);
@@ -99,7 +98,8 @@ class UserController extends Controller
         if (!$deleteUser) 
             return;
 
-        $isDeleted = $this->removeAvatar($deleteUser->avatar);    
+        $isDeleted = $this->removeAvatar($deleteUser->avatar);
+
         if ($isDeleted)
             $deleteUser->delete();
 

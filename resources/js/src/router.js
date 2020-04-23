@@ -219,7 +219,7 @@ const router = new Router({
                         requireAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
-                            { title: 'User' },
+                            { title: 'User', url: { name: 'admin-app-user-list' } },
                             { title: 'View', active: true },
                         ],
                         pageTitle: 'User View',
@@ -234,7 +234,7 @@ const router = new Router({
                         requireAuth: true,
                         breadcrumb: [
                             { title: 'Home', url: '/admin' },
-                            { title: 'User' },
+                            { title: 'User', url: { name: 'admin-app-user-list' } },
                             { title: 'Edit', active: true },
                         ],
                         pageTitle: 'User Edit',

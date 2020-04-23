@@ -13,11 +13,17 @@
                     <div class="col-sm-6">
                         <div class="well ">
                             <h2>New Customer</h2>
-                            <router-link to="/register">Register</router-link>
-                            <p><strong>Register Account</strong></p>
-                            <p>By creating an account you will be able to shop faster, be up to date on an order's
-                                status, and keep track of the orders you have previously made.</p>
-                            <a href="register.html" class="btn btn-primary">Continue</a>
+                            
+                            <p>
+                                <strong>
+                                    <router-link :to="{ name: 'register' }">Register Account</router-link>
+                                </strong>
+                            </p>
+                            <p>
+                                By creating an account you will be able to shop faster, be up to date on an order's
+                                status, and keep track of the orders you have previously made.
+                            </p>
+                            <router-link :to="{ name: 'register' }" class="btn btn-primary">Continue</router-link>
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -25,12 +31,15 @@
                         <div class="well col-sm-12">
 
                             <h2>Returning Customer</h2>
-                            <p><strong>I am a returning customer</strong></p>
+                            <p>
+                                <strong>I am a returning customer</strong>
+                            </p>
                             <form method="POST" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label class="control-label" for="input-email">E-Mail Address</label>
                                     <input type="text" name="email" v-model="form.email" placeholder="E-Mail Address" id="input-email" class="form-control">
                                 </div>
+                                
                                 <div class="form-group">
                                     <label class="control-label" for="input-password">Password</label>
                                     <input type="password" name="password" v-model="form.password" placeholder="Password" id="input-password" class="form-control">
@@ -71,7 +80,7 @@
         data() {
             return {
                 form: {
-                    email:      'user@mail.com',
+                    email:      'user1@mail.com',
                     password:   'laravel',
                 }
             }

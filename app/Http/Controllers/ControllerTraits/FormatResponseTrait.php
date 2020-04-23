@@ -11,12 +11,14 @@ trait FormatResponseTrait
 {
     public function jsonResponse($data, int $status = 200, string $message = "success") : JsonResponse
     {
-        return response()->json(compact('status', 'data', 'message'), $status);
+        // dd(compact($data["countries"]));
+        // return response()->json([$status, $data, $message], $status);
+        return response()->json(compact("status", "data", "message"), $status);
     }
 
     public function jsonErrorsResponse($errors, int $status = 400, string $message = "error") : JsonResponse
     {
-        return response()->json(compact('status', 'errors', 'message'), $status);
+        return response()->json(compact("status", "errors", "message"), $status);
     }
 
      /**

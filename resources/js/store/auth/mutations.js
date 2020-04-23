@@ -5,8 +5,8 @@ import axios from '../../src/axios.js'
  * @param {*} state 
  * @param {*} data 
  */
-export function SET_USER_INFO(state, data) {
-    window.localStorage.setItem("userInfo", JSON.stringify(data.authData));
+export function SET_USER_INFO(state, payload) {
+    window.localStorage.setItem("userInfo", JSON.stringify(payload));
 }
 
 /**
@@ -26,7 +26,7 @@ export function SET_REMOVE_USER_INFO(state, data) {
 export function SET_BEARER(state, data) {
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + data.data.accessToken;
     window.localStorage.setItem('accessToken', data.data.accessToken);
-    SET_USER_INFO(state, data.data);
+    SET_USER_INFO(state, data.data.authData);
     SET_AUTH_CHECK(state, true);
 }
 

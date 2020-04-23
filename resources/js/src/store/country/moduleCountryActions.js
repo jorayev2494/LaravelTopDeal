@@ -8,7 +8,7 @@ export default {
      */
     async fetchCountries({ commit }, payload) {
         await axios.get("/api/countries").then((response) => {
-            commit("SET_COUNTRIES", response.data);
+            commit("SET_COUNTRIES", response.data.data);
         }).catch((err) => { });
     }
 

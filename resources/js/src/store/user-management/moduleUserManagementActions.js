@@ -33,7 +33,6 @@ export default {
 
         return new Promise((resolve, reject) => {
             axios.get("/api/admin/users").then((response) => {
-                console.log('Success', response);
                 commit('SET_USERS', response.data.data);
                 resolve(response)
             })
@@ -76,9 +75,7 @@ export default {
     accountUpdate({commit}, user) {
         user.update = "account";
         delete user.avatar;
-        axios.put(`/api/admin/users/${user.id}`, user).then((response) => {
-            console.log("Server Response: ", response);
-        }).catch((err) => { });
+        axios.put(`/api/admin/users/${user.id}`, user).then((response) => {}).catch((err) => { });
     },
 
     /**
@@ -89,12 +86,11 @@ export default {
     accountUpdateFormData({commit}, data) {
         // user.update = "account";
         data.formData.set("update", "account");
+        window.console.log('dd', data);
         // Config Header ContentType
         var headers = {'Content-Type': 'multipart/form-data' };
         //  Send in Server: FormData
-        axios.post(`/api/admin/users/${data.user.id}`, data.formData, headers).then((response) => {
-            console.log("Server Response from Form Data: ", response);
-        }).catch((err) => { });
+        axios.post(`/api/admin/users/${data.user.id}`, data.formData, headers).then((response) => {}).catch((err) => { });
     },
 
     /**
@@ -103,11 +99,8 @@ export default {
      * @param {*} user 
      */
     informationUpdate({commit}, user) {
-        user.update = "information";
-        
-        axios.put(`/api/admin/users/${user.id}`, user).then((response) => {
-            console.log("User Information Updates: ", response.data);
-        }).catch((err) => { });
+        user.update = "information";        
+        axios.put(`/api/admin/users/${user.id}`, user).then((response) => {}).catch((err) => { });
     },
 
     /**
@@ -118,9 +111,7 @@ export default {
     socialUpdate({commit}, user) {
         user.update = "social";
         
-        axios.put(`/api/admin/users/${user.id}`, user).then((response) => {
-            console.log("User Information Social: ", response.data);
-        }).catch((err) => { });
+        axios.put(`/api/admin/users/${user.id}`, user).then((response) => {}).catch((err) => { });
     },
 
     removeRecord({commit}, userId) {

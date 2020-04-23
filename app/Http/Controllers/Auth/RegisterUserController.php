@@ -87,16 +87,35 @@ class RegisterUserController extends Controller
      */
     protected function create(array $data)
     {
+        $login = Str::before($data["email"], "@");
+
+        $social_links = [
+            "twitter"               => "https://twitter.com/{$login}",
+            "facebook"              => "https://www.facebook.com/{$login}",
+            "instagram"             => "https://www.instagram.com/{$login}",
+            "github"                => "https://github.com/{$login}",
+            "codepen"               => "https://codepen.io/{$login}",
+            "slack"                 => $login,
+        ];
+
         return $this->user_r->create([
-            'login'         => Str::before($data["email"], "@"),
-            'first_name'    => $data['first_name'],
-            'last_name'     => $data['last_name'],
-            'email'         => $data['email'],
-            'password'      => Hash::make($data['password']),
-            'phone'         => $data['phone'],
-            'fax'           => $data['fax'],
-            'role_id'       => 2,
-            // 'country_id'    => $data['country_id'],
+            'login'             => $login,
+            'first_name'        => $data['first_name'],
+            'last_name'         => $data['last_name'],
+            'email'             => $data['email'],
+            'password'          => Hash::make($data['password']),
+            'phone'             => $data['phone'],
+            'fax'               => $data['fax'],
+            'role_id'           => 2,
+            'location'          =>  [
+                "add_line_1"            =>  null,
+                "add_line_2"            =>  null,
+                "post_code"             =>  null,
+                "city"                  =>  null,
+                "state"                 =>  null
+            ],
+            'social_links'      => $social_links,
+            'country_id'        => 1,
         ]);
     }
 }

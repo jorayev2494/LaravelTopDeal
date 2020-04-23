@@ -61,6 +61,7 @@ $factory->define(User::class, function (Faker $faker) {
         'country_id'        =>  $activeCountries[rand(0, $activeCountries->count() - 1)],
         'email_verified_at' =>  $dateNow,
         "role_id"           =>  2,
+        "status"            =>  User::ACCOUNT_STATUSES[rand(0, 1)],
         "website"           =>  $faker->url,
         'location'          =>  [
             "add_line_1"            =>  $faker->address,
@@ -78,6 +79,7 @@ $factory->define(User::class, function (Faker $faker) {
             "slack"                 => $login,
         ],
         'fax'               =>  $faker->phoneNumber,
+        'is_verified'       =>  $faker->boolean,
         'password'          =>  bcrypt(User::DEFAULT_PASSWORD),
         'remember_token'    =>  Str::random(10),
     ];
