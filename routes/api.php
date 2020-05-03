@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 #region Public URL - s
 Route::get('/countries', ["uses" => "CountryController", "as" => "countries"]);
+Route::get('/categories', ["uses" => "CategoryController", "as" => "categories"]);
 #endregion
 
 

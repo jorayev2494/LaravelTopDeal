@@ -1886,7 +1886,7 @@
             authCheckComp() {
                 return this.$store.getters['auth/GET_AUTH_CHECK'];
             }
-        }
+        },
     }
 
 </script>

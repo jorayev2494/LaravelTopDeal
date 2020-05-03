@@ -23,7 +23,7 @@ class CategoryRepository extends Repository implements IRepository
         return $build;
     }
 
-    public function findById(int $id): \Illuminate\Database\Eloquent\Model
+    public function findById(int $id)
     {
         $build = $this->getModelClone()->select($this->getSelect())->find($id)->load(['childs', 'parents']);
 

@@ -46,9 +46,6 @@ class RegisterUserController extends Controller
 
     public function register(Request $request) : JsonResponse
     {
-
-        // dd($request->all());
-
         $validator = $this->validator($request->all());
 
         if ($validator->fails()) {
@@ -69,11 +66,11 @@ class RegisterUserController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'first_name'    => ['required', 'string', 'max:255'],
-            'last_name'     => ['required', 'string', 'max:255'],
+            'first_name'    => ['nullable', 'string', 'max:255'],
+            'last_name'     => ['nullable', 'string', 'max:255'],
             'email'         => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'password'      => ['required', 'string', 'min:6', 'confirmed'],
-            'phone'         => ['required', 'string'],
+            'phone'         => ['nullable', 'string'],
             'fax'           => ['nullable', 'string'],
             // "country_id"    => ['required', 'integer', 'exists:countries,id']
         ]);
@@ -100,12 +97,12 @@ class RegisterUserController extends Controller
 
         return $this->user_r->create([
             'login'             => $login,
-            'first_name'        => $data['first_name'],
-            'last_name'         => $data['last_name'],
+            'first_name'        => $data['first_name']  ?? null,
+            'last_name'         => $data['last_name']   ?? null,
             'email'             => $data['email'],
             'password'          => Hash::make($data['password']),
-            'phone'             => $data['phone'],
-            'fax'               => $data['fax'],
+            'phone'             => $data['phone']       ?? null,
+            'fax'               => $data['fax']         ?? null,
             'role_id'           => 2,
             'location'          =>  [
                 "add_line_1"            =>  null,
