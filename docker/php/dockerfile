@@ -18,8 +18,11 @@ RUN curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/ \
     && ln -s /usr/local/bin/composer.phar /usr/local/bin/composer
 
+
 COPY ./php.ini /usr/local/etc/php/conf.d/php.ini
 
 WORKDIR /var/project
 
+# CMD cd /var/project
+# CMD php artisan db:seed --class=StorageFilesSeeder
 # CMD php artisan migrate:fresh --seed

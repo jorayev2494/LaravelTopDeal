@@ -55,11 +55,6 @@
     import moduleUserManagement from '@/store/user-management/moduleUserManagement.js'
 
     export default {
-        components: {
-            UserEditTabAccount,
-            UserEditTabInformation,
-            UserEditTabSocial,
-        },
         data() {
             return {
                 user_data: null,
@@ -73,17 +68,11 @@
                 activeTab: 0,
             }
         },
-        watch: {
-            activeTab() {
-                this.fetch_user_data(this.$route.params.userId)
-            }
-        },
         methods: {
             fetch_user_data(userId) {
                 this.$store.dispatch("userManagement/fetchUser", userId).then(res => {
                     this.user_data = res.data.data;
-                })
-                .catch(err => {
+                }).catch(err => {
                     if (err.response.status === 404) {
                         this.user_not_found = true
                         return
@@ -92,13 +81,23 @@
                 })
             }
         },
+        components: {
+            UserEditTabAccount,
+            UserEditTabInformation,
+            UserEditTabSocial,
+        },
+        watch: {
+            activeTab() {
+                this.fetch_user_data(this.$route.params.userId)
+            }
+        },
         created() {
             // Register Module UserManagement Module
             if (!moduleUserManagement.isRegistered) {
                 this.$store.registerModule('userManagement', moduleUserManagement)
                 moduleUserManagement.isRegistered = true
             }
-            this.fetch_user_data(this.$route.params.userId)
+            this.fetch_user_data(this.$route.params.userId);
         }
     }
 </script>

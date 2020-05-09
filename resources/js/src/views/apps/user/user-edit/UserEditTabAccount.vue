@@ -24,7 +24,7 @@
                         <vs-button class="mr-4 mb-4" @click="update_avatar()">Change Avatar</vs-button>
                         <!-- <vs-button type="border" class="mr-4" @click="$refs.update_avatar_input.click()">Change Avatar</vs-button> -->
 
-                        <vs-button type="border" v-on:click="remove_avatar()" color="danger">Remove Avatar</vs-button>
+                        <vs-button type="border" v-if="isUploadedAvatar" v-on:click="remove_avatar()" color="danger">Remove Avatar</vs-button>
                     </div>
                 </div>
             </div>
@@ -149,10 +149,10 @@
                         label: "Blocked",
                         value: "blocked"
                     },
-                    {
-                        label: "Deactivated",
-                        value: "deactivated"
-                    },
+                    // {
+                    //     label: "Deactivated",
+                    //     value: "deactivated"
+                    // },
                 ],
                 roleOptions: [
                     {
@@ -188,21 +188,25 @@
                     this.formData.set("first_name", this.data_local.first_name);
                     this.formData.set("login", this.data_local.login);
                     this.formData.set("email", this.data_local.email);
+                    this.formData.set("status", this.data_local.status);
 
                     var params = {
                         user: this.data,
                         formData: this.formData,
                     };
 
-                    this.$store.dispatch("userManagement/accountUpdateFormData", params)
-                        .then(()   => { this.showUpdateSuccess() })
-                        .catch(err => { console.error(err)       })
+                    this.$store.dispatch("userManagement/accountUpdateFormData", params).then((response) => { 
+                        window.console.log(response);
+                        this.showUpdateSuccess();
+                    }).catch(err => { console.error(err) })
                 } 
                 else
                 {
-                    this.$store.dispatch("userManagement/accountUpdate", this.data_local)
-                        .then(()   => { this.showUpdateSuccess() })
-                        .catch(err => { console.error(err)       })
+                    window.console.log("dd", this.data_local);
+                    this.$store.dispatch("userManagement/accountUpdate", this.data_local).then(() => { 
+                        this.showUpdateSuccess() })
+                        .catch(err => { console.error(err)       
+                    })
                 }
 
                 // Here will go your API call for updating data
@@ -240,10 +244,10 @@
         computed: {
             status_local: {
                 get() {
-                    // return {
-                    //     label: this.capitalize(this.data_local.status),
-                    //     value: this.data_local.status
-                    // }
+                    return {
+                        label: this.capitalize(this.data_local.status),
+                        value: this.data_local.status
+                    }
                 },
                 set(obj) {
                     this.data_local.status = obj.value

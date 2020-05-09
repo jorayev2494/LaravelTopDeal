@@ -14,7 +14,7 @@
             <span>User record with id: {{ $route.params.userId }} not found. </span>
             <span>
                 <span>Check </span>
-                <router-link :to="{name:'page-user-list'}" class="text-inherit underline">All Users</router-link>
+                <router-link :to="{ name: 'page-user-list' }" class="text-inherit underline">All Users</router-link>
             </span>
         </vs-alert>
 
@@ -40,8 +40,8 @@
                                 <td>{{ user_data.login }}</td>
                             </tr>
                             <tr>
-                                <td class="font-semibold">Name</td>
-                                <td>{{ user_data.name }}</td>
+                                <td class="font-semibold">Full Name</td>
+                                <td>{{ user_data.full_name }}</td>
                             </tr>
                             <tr>
                                 <td class="font-semibold">Email</td>
@@ -67,10 +67,8 @@
                     </div>
                     <!-- /Information - Col 2 -->
                     <div class="vx-col w-full flex" id="account-manage-buttons">
-                        <vs-button icon-pack="feather" icon="icon-edit" class="mr-4"
-                            :to="{ name: 'admin-app-user-edit', params: { userId: $route.params.userId } }">Edit</vs-button>
-                        <vs-button type="border" color="danger" icon-pack="feather" icon="icon-trash"
-                            @click="confirmDeleteRecord">Delete</vs-button>
+                        <vs-button icon-pack="feather" icon="icon-edit" class="mr-4" :to="{ name: 'admin-app-user-edit', params: { userId: $route.params.userId } }">Edit</vs-button>
+                        <vs-button type="border" color="danger" icon-pack="feather" icon="icon-trash" @click="confirmDeleteRecord">Delete</vs-button>
                     </div>
 
                 </div>
@@ -203,15 +201,13 @@
             },
             deleteRecord() {
                 /* Below two lines are just for demo purpose */
-                this.$router.push({
-                    name: 'app-user-list'
-                });
-                // this.showDeleteSuccess()
+                this.$router.push({ name: 'app-user-list' });
 
                 /* UnComment below lines for enabling true flow if deleting user */
-                this.$store.dispatch("userManagement/removeRecord", this.user_data.id)
-                    .then(()   => { this.$router.push({ name: 'admin-app-user-list' }); this.showDeleteSuccess() })
-                    .catch(err => { console.error(err)       })
+                this.$store.dispatch("userManagement/removeRecord", this.user_data.id).then(() => { 
+                    this.$router.push({ name: 'admin-app-user-list' }); 
+                    this.showDeleteSuccess();
+                }).catch(err => { console.error(err) });
             },
             showDeleteSuccess() {
                 this.$vs.notify({
@@ -240,10 +236,10 @@
                 moduleUserManagement.isRegistered = true
             }
 
-            const userId = this.$route.params.userId
+            const userId = this.$route.params.userId;
             this.$store.dispatch("userManagement/fetchUser", userId).then(res => {
-                console.log("Get User: ", res);
-                this.user_data = res.data.data;
+                this.user_data              = res.data.data;
+                this.user_data.full_name    = `${res.data.data.first_name} ${res.data.data.last_name}`;
             }).catch(err => {
                 if (err.response.status === 404) {
                     this.user_not_found = true

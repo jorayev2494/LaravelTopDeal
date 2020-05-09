@@ -12,8 +12,14 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        for($i = 0; $i < 30; $i++) {
-            factory(User::class)->create(["email" => "user{$i}@mail.com"]);
+        // for($i = 0; $i < 30; $i++) {
+            // factory(User::class)->create(["email" => "user{$i}@mail.com"]);
+        for ($i = 1; $i < 13; $i++) { 
+            $numbers = ($i > 9) ? $i : "0{$i}";
+            factory(User::class)->create([
+                "email"  => "user{$i}@mail.com",
+                "avatar" => "/storage/images/profile/user-uploads/user-$numbers.jpg"
+            ]);
         }
     }
 }

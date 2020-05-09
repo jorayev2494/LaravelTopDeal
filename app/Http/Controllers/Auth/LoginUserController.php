@@ -66,7 +66,7 @@ class LoginUserController extends Controller
 
         $credentials = request()->only(['email', 'password']);
         if (!$token = auth()->attempt($credentials)) {
-            return $this->jsonErrorsResponse('the_provided_credentials_are_incorrect', 401);
+            return $this->jsonErrorsResponse('the_provided_credentials_are_incorrect', Response::HTTP_BAD_REQUEST);
         }
 
         return $this->jsonResponse($this->generateAuthToken($token, auth()->user()), Response::HTTP_OK);

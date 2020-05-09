@@ -12,6 +12,23 @@ class AdminsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Admin::class, 1)->create();
+        // Create One Admin
+        $number = rand(1, 9);
+        factory(Admin::class)->create([
+            "email"     => "admin@mail.com",
+            "avatar"    => "/storage/images/profile/user-uploads/user-0$number.jpg"
+        ]);
+
+        // Create Admins
+        for ($i = 1; $i < 13; $i++) {
+            
+            $numbers = ($i > 9) ? $i : "0{$i}";
+            $emailNumbers = intval($numbers);
+            
+            factory(Admin::class)->create([
+                "email" => "admin{$emailNumbers}@mail.com",
+                "avatar" => "/storage/images/profile/user-uploads/user-$numbers.jpg"
+            ]);
+        }
     }
 }

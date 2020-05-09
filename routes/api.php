@@ -19,13 +19,15 @@ Route::group(["prefix" => "auth", "as" => "auth."], function() {
 });
 
 // #region User Routes
-Route::group(['middleware' => 'auth:user', "as" => "user."], function() {
+// Route::group(['middleware' => 'auth', "as" => "user."], function() {
     // #region User Cabinet
     Route::group(["prefix" => "cabinet", "as" => "cabinet."], function() {
         Route::get("/", ["uses" => "UserController@me", "as" => "me"]);
+        Route::put("/personal", ["uses" => "UserController@personalUpdate", "as" => "personal_update"]);
+        Route::put("/password_change", ["uses" => "UserController@passwordChange", "as" => "password_change"]);
     });
     // #endregion
-});
+// });
 // #endregion
 
 // Admin Routes
@@ -43,8 +45,8 @@ Route::group(["prefix" => "admin", "as" => "admin."], function() {
     // Admin Authenticate Routes
     Route::group(['middleware' => 'auth:admin'], function() {
         Route::get("/me", ["uses" => "Admin\AdminController@me", "as" => "me"]);
-        Route::apiResource("/users", "Admin\UserController");
         Route::post("/users/{user}", ["uses" => "Admin\UserController@update", "as" => "user_account_avatar"]);
+        Route::apiResource("/users", "Admin\UserController");
     });
     
 });

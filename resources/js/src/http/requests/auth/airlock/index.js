@@ -83,7 +83,7 @@ export default {
             email, 
             password                : pwd, 
             password_confirmation   : conf_pwd,
-            token:                  "awdawdawdawdawda"
+            // token:                  "awdawdawdawdawda"
         })
     }
 }

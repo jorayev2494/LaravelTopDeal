@@ -34,6 +34,7 @@ class User extends Authenticatable implements JWTSubject
     // Passwords
     public const ADMIN_PASSWORD     = 476674;
     public const DEFAULT_PASSWORD   = "laravel";
+    public const ACCOUNT_STATUSES   = ["active", "blocked"];
 
     // 
 
@@ -51,12 +52,16 @@ class User extends Authenticatable implements JWTSubject
         'phone',
         'dob',
         'gender',
+        'company',
         'country_id',
         'contact_options',
         'location',
+        'social_links',
         'fax',
         'password',
         'role_id',
+        'status',
+        'is_verified',
     ];
 
     /**
@@ -85,11 +90,19 @@ class User extends Authenticatable implements JWTSubject
         "contact_options"   => JsonCast::class,
         "location"          => JsonCast::class,
         "social_links"      => "array",
+        "is_verified"       => "boolean",
+        "created_at"        => "date:d-m-Y h:m:s",
+        "updated_at"        => "date:d-m-Y h:m:s",
     ];
 
     protected $with = ["role", "country"];
 
-    #region RelationShips
+
+    // public function boot()
+    // {
+    //     $this->boot();
+    // }
+
     // public function role()
     // {
     //     return $this->hasOne('App\Models\Role', 'id', 'role_id');
@@ -115,7 +128,21 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
+    public function getFullNameAttribute() : string
+    {
+        return "{$this->first_name} {$this->last_name}";
+    }
 
+    public function getAvatarAttributes()
+    {
+        $build = $this->attributes["avatar"];
+
+        if ($build) $build = env("APP_URL") . $build;
+
+        return $build;
+    }
+
+    #region RelationShips
     public function role()
     {
         return $this->belongsTo('App\Models\Role', 'role_id', 'id');

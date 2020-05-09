@@ -561,9 +561,15 @@ export default {
   mounted() {
     this.wasSidebarOpen = this.$store.state.reduceButton;
     this.$store.commit('TOGGLE_REDUCE_BUTTON', true)
+
+    // My Code
+    this.user_info              = JSON.parse(window.localStorage.getItem('userInfo'));
+    this.user_info.profile_img  = this.user_info.avatar;
+    this.user_info.cover_img    = require("@assets/images/profile/user-uploads/cover.jpg");
+
   },
   beforeDestroy() {
-    if (!this.wasSidebarOpen) this.$store.commit('TOGGLE_REDUCE_BUTTON', false)
+    if (!this.wasSidebarOpen) this.$store.commit('TOGGLE_REDUCE_BUTTON', false);
   }
 }
 
