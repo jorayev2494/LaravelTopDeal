@@ -48,6 +48,9 @@ Route::group(["prefix" => "admin", "as" => "admin."], function() {
         Route::get("/me", ["uses" => "Admin\AdminController@me", "as" => "me"]);
         Route::post("/users/{user}", ["uses" => "Admin\UserController@update", "as" => "user_account_avatar"]);
         Route::apiResource("/users", "Admin\UserController");
+
+        // Categories
+        Route::apiResource("/categories", "Admin\CategoryController");
     });
     
 });
