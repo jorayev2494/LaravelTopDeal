@@ -70,7 +70,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $hidden = [
-        'avatar',
+        // 'avatar',
         'password',
         'remember_token',
         "country_id",
@@ -133,7 +133,7 @@ class User extends Authenticatable implements JWTSubject
         return "{$this->first_name} {$this->last_name}";
     }
 
-    public function getAvatarAttributes()
+    public function getAvatarAttribute()
     {
         $build = $this->attributes["avatar"];
 

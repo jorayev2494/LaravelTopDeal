@@ -18,6 +18,9 @@ trait FormatResponseTrait
 
     public function jsonErrorsResponse($errors, int $status = 400, string $message = "error") : JsonResponse
     {
+        $tempErrors = $errors;
+        unset($errors);
+        $errors = $tempErrors;
         return response()->json(compact("status", "errors", "message"), $status);
     }
 
