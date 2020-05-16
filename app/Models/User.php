@@ -137,7 +137,7 @@ class User extends Authenticatable implements JWTSubject
     {
         $build = $this->attributes["avatar"];
 
-        if ($build) $build = env("APP_URL") . $build;
+        // if ($build) $build = env("APP_URL") . $build;
 
         return $build;
     }

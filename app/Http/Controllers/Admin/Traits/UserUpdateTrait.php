@@ -23,6 +23,8 @@ trait UserUpdateTrait
     public function updateAccount(Request $request, User $user) : User
     {
 
+        \Log::info($request->all());
+
         # Data Validate
         $validated = $request->validate([
             "avatar"    => "nullable|file",
@@ -33,10 +35,15 @@ trait UserUpdateTrait
             "status"    => "required|in:" . implode(",", User::ACCOUNT_STATUSES),
         ]);
 
+        \Log::info([$request->hasFile("avatar")]);
+
         // Save Avatar
         $avatarPath = $user->avatar;
         if ($request->hasFile("avatar")) {
-            if ($this->removeAvatar($user->avatar)) $avatarPath = "/storage/" . $validated["avatar"]->store("/users/avatars", "public");
+            if ($this->removeAvatar($user->avatar)) {
+                $avatarPath = "/storage/" . $validated["avatar"]->store("/users/avatars", "public");
+                \Log::info($validated);
+            }
         }
 
         // Update User Properties
@@ -103,8 +110,13 @@ trait UserUpdateTrait
      */
     private function removeAvatar($path, string $disk = "public") : bool
     {
-        if (Storage::disk($disk)->exists(Str::after($path, "storage")))
-            return Storage::disk($disk)->delete(Str::after($path, "/storage/"));
+        \Log::info([$path, Str::after($path, "/storage/"), Storage::disk($disk)->exists(Str::after($path, "storage"))]);
+        if (Storage::disk($disk)->exists(Str::after($path, "storage"))) {
+
+            return Storage::disk($disk)->delete(Str::after($path, "storage"));
+        }
+        // else 
+            // return Storage::disk($disk)->delete($path);
         return true;
     }
 

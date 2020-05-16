@@ -32,7 +32,7 @@ class Category extends Model
     protected $guards = ["*"];
 
     protected $with = [
-        "trans",
+        // "trans",
         // "childs",
         // "parents",
     ];
@@ -47,6 +47,11 @@ class Category extends Model
         'updated_at',
     ];
 
+    // protected $relations = [
+    //     // 'childs',
+    //     // 'trans',
+    // ];
+
     #region Relationships
 
     /**
@@ -56,6 +61,9 @@ class Category extends Model
      */
     public function categories() : HasMany
     {
+        // $this->getRelations();
+        // $this->relations
+        // $this->relationsToArray();
         return $this->hasMany(self::class, 'parent_id', 'id');
     }
 

@@ -25,13 +25,16 @@ class CategoryRepository extends Repository implements IRepository
 
     public function findById(int $id)
     {
-        $build = $this->getModelClone()->select($this->getSelect())->find($id)->load(['childs', 'parents']);
-
+        $build = $this->getModelClone()->select($this->getSelect())->find($id); // ->with(['childs', 'parents'])->get();
         // if($build) {
-        //     if ($build->hasChildren())  $load[] = "childs";
-        //     if ($build->hasParent())    $load[] = "parents";
+        //     if ($build->hasChildren())  
+        //     $load[] = "childs";
+        //     if ($build->hasParent())    
+        //     $load[] = "parents";
+            
         //     $build->load($load);
         // }
+        // dd($build);
 
         return $build;
 
