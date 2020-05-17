@@ -7,6 +7,7 @@ Vue.use(Vuex);
     import authModule from './auth/index.js';
     import countryModule from './countries/index.js'
     import cabinetModule from './cabinet/index.js'
+    import categoryModule from './countries/index.js'
 
 // #endregion
 
@@ -15,5 +16,6 @@ export default new Vuex.Store({
         auth: authModule,
         country: countryModule,
         cabinet: cabinetModule,
+        category: categoryModule,
     }
 });

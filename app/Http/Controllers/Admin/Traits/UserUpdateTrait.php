@@ -110,13 +110,9 @@ trait UserUpdateTrait
      */
     private function removeAvatar($path, string $disk = "public") : bool
     {
-        \Log::info([$path, Str::after($path, "/storage/"), Storage::disk($disk)->exists(Str::after($path, "storage"))]);
         if (Storage::disk($disk)->exists(Str::after($path, "storage"))) {
-
             return Storage::disk($disk)->delete(Str::after($path, "storage"));
         }
-        // else 
-            // return Storage::disk($disk)->delete($path);
         return true;
     }
 
